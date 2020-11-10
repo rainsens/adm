@@ -1,10 +1,10 @@
 <?php
 namespace Rainsens\Adm\Http\Controllers;
 
-class MenusController extends AdmController
+class stub extends AdmController
 {
 	public function index()
 	{
-		echo 'Menus';
+		return view('adm::home.index');
 	}
 }

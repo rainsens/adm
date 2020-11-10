@@ -32,6 +32,7 @@ class AdmServiceProvider extends ServiceProvider
 			$this->migrations();
 		}
 		
+		$this->views();
 		$this->routes();
 	}
 	
@@ -39,6 +40,11 @@ class AdmServiceProvider extends ServiceProvider
 	{
 		$this->publishes([adm_base_path('config/adm.php') => config_path('adm.php')], 'config');
 		$this->publishes([adm_base_path('routes/web.php') => adm_path('routes/web.php')], 'route');
+	}
+	
+	protected function views()
+	{
+		$this->loadViewsFrom(adm_base_path('resources/views'), 'adm');
 	}
 	
 	protected function routes()

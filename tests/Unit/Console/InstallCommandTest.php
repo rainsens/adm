@@ -2,29 +2,23 @@
 namespace Rainsens\Adm\Tests\Unit\Console;
 
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\File;
 use Rainsens\Adm\Tests\TestCase;
+use Rainsens\Adm\Tests\TestTrait;
 
 class InstallCommandTest extends TestCase
 {
+	use TestTrait;
+	
 	/** @test */
 	public function test_install_command()
 	{
-		if (File::exists(config_path('adm.php'))) {
-			unlink(config_path('adm.php'));
-		}
+		$this->removeConfigFile();
 		$this->assertFileDoesNotExist(config_path('adm.php'));
 		
-		if (File::isDirectory(adm_path())) {
-			File::deleteDirectory(adm_path());
-		}
-		
+		$this->removeAdmDirectory();
 		$this->assertDirectoryDoesNotExist(adm_path());
 		
-		if (File::exists(adm_path('routes/web.php'))) {
-			unlink(adm_path('routes/web.php'));
-		}
-		
+		$this->removeRouteFile();
 		$this->assertFileDoesNotExist(adm_path('routes/web.php'));
 		
 		Artisan::call('adm:install');

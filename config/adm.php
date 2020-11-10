@@ -13,8 +13,8 @@ return [
 	
 	'route' => [
 		'prefix' => env('ADM_ROUTE_PREFIX', 'adm'),
-		'namespace' => 'Adm\\Controllers',
-		'middleware' => ['web', 'adm']
+		'namespace' => 'Adm\\Http\\Controllers',
+		'middleware' => ['web']
 	],
 	
 	'title' => 'Adm-Administration'
