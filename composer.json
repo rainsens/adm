@@ -1,0 +1,44 @@
+{
+    "name": "rainsens/adm",
+    "description": "A Laravel Administration",
+    "authors": [
+        {
+            "name": "Rainsen",
+            "email": "yusen@rainsen.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^9.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rainsens\\Adm\\": "src"
+        },
+        "files": [
+            "bootstrap/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rainsens\\Adm\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit",
+        "test-f": "./vendor/bin/phpunit --filter"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Rainsens\\Adm\\Providers\\AdmServiceProvider"
+            ],
+            "aliases": {
+                "AppAdmin": "Rainsens\\Adm\\Facades\\Adm"
+            }
+        }
+    }
+}
