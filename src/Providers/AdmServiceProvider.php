@@ -6,7 +6,6 @@ use Rainsens\Adm\Adm;
 use Illuminate\Support\ServiceProvider;
 use Rainsens\Adm\Console\AdmCommand;
 use Rainsens\Adm\Console\InstallCommand;
-use Rainsens\Adm\Exceptions\FileNotFoundException;
 
 class AdmServiceProvider extends ServiceProvider
 {
@@ -17,7 +16,11 @@ class AdmServiceProvider extends ServiceProvider
 	
 	public function register()
 	{
-		$this->binds();
+		$this->app->bind('adm', function ($app) {
+			return new Adm();
+		});
+		
+		$this->app->alias(Adm::class, 'adm');
 	}
 	
 	public function boot()
@@ -32,22 +35,15 @@ class AdmServiceProvider extends ServiceProvider
 		$this->routes();
 	}
 	
-	protected function binds()
-	{
-		$this->app->bind('adm', function ($app) {
-			return new Adm();
-		});
-	}
-	
 	protected function publishments()
 	{
 		$this->publishes([adm_base_path('config/adm.php') => config_path('adm.php')], 'config');
-		$this->publishes([adm_base_path('routes/webroutes.php') => adm_path('webroutes.php')], 'route');
+		$this->publishes([adm_base_path('routes/web.php') => adm_path('routes/web.php')], 'route');
 	}
 	
 	protected function routes()
 	{
-		if (file_exists($routes = adm_path('admweb.php'))) {
+		if (file_exists($routes = adm_path('routes/web.php'))) {
 			$this->loadRoutesFrom($routes);
 		}
 	}

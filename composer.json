@@ -37,7 +37,7 @@
                 "Rainsens\\Adm\\Providers\\AdmServiceProvider"
             ],
             "aliases": {
-                "AppAdmin": "Rainsens\\Adm\\Facades\\Adm"
+                "Adm": "Rainsens\\Adm\\Facades\\Adm"
             }
         }
     }

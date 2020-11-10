@@ -21,16 +21,16 @@ class InstallCommandTest extends TestCase
 		
 		$this->assertDirectoryDoesNotExist(adm_path());
 		
-		if (File::exists(adm_path('webroutes.php'))) {
-			unlink(adm_path('webroutes.php'));
+		if (File::exists(adm_path('routes/web.php'))) {
+			unlink(adm_path('routes/web.php'));
 		}
 		
-		$this->assertFileDoesNotExist(adm_path('webroutes.php'));
+		$this->assertFileDoesNotExist(adm_path('routes/web.php'));
 		
 		Artisan::call('adm:install');
 		
 		$this->assertFileExists(config_path('adm.php'));
-		$this->assertDirectoryExists(adm_path('Controllers'));
-		$this->assertFileExists(adm_path('webroutes.php'));
+		$this->assertDirectoryExists(adm_path('Http/Controllers'));
+		$this->assertFileExists(adm_path('routes/web.php'));
 	}
 }

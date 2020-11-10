@@ -1,6 +1,7 @@
 <?php
 namespace Rainsens\Adm\Tests;
 
+use Rainsens\Adm\Facades\Adm;
 use Rainsens\Adm\Providers\AdmServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
@@ -15,6 +16,13 @@ class TestCase extends \Orchestra\Testbench\TestCase
 	{
 		return [
 			AdmServiceProvider::class
+		];
+	}
+	
+	protected function getPackageAliases($app)
+	{
+		return [
+			'Adm' => Adm::class,
 		];
 	}
 	
