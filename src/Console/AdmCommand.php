@@ -14,10 +14,7 @@ class AdmCommand extends Command
 		$this->info('Installing Adm...');
 		$this->info('Publishing configuration...');
 		
-		$this->call('vendor:publish', [
-			'--provider' => "Rainsens\Adm\Providers\AdmServiceProvider",
-			'--tag' => "config"
-		]);
+		
 		
 		$this->info('Installed Adm');
 	}

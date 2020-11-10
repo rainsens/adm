@@ -5,11 +5,14 @@ namespace Rainsens\Adm\Providers;
 use Rainsens\Adm\Adm;
 use Illuminate\Support\ServiceProvider;
 use Rainsens\Adm\Console\AdmCommand;
+use Rainsens\Adm\Console\InstallCommand;
+use Rainsens\Adm\Exceptions\FileNotFoundException;
 
 class AdmServiceProvider extends ServiceProvider
 {
 	protected $commands = [
 		AdmCommand::class,
+		InstallCommand::class,
 	];
 	
 	public function register()
@@ -38,20 +41,19 @@ class AdmServiceProvider extends ServiceProvider
 	
 	protected function publishments()
 	{
-		$this->publishes([__DIR__ . '/../../config/adm.php' => config_path('adm.php')], 'config');
+		$this->publishes([adm_base_path('config/adm.php') => config_path('adm.php')], 'config');
+		$this->publishes([adm_base_path('routes/webroutes.php') => adm_path('webroutes.php')], 'route');
 	}
 	
 	protected function routes()
 	{
-		if (file_exists($routes = adm_path('routes.php'))) {
+		if (file_exists($routes = adm_path('admweb.php'))) {
 			$this->loadRoutesFrom($routes);
-		} else {
-			$this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
 		}
 	}
 	
 	protected function migrations()
 	{
-		$this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+		$this->loadMigrationsFrom(adm_base_path('database/migrations'));
 	}
 }
