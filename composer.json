@@ -16,8 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Rainsens\\Adm\\": "src",
-            "Adm\\": "adm/"
+            "Rainsens\\Adm\\": "src"
         },
         "files": [
             "bootstrap/helpers.php"

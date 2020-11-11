@@ -1,9 +1,7 @@
 <?php
 namespace Rainsens\Adm;
 
-use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
-use Rainsens\Adm\Http\Controllers\AuthController;
 use Rainsens\Adm\Http\Controllers\MenusController;
 
 class Adm

@@ -6,9 +6,16 @@ use Rainsens\Adm\Providers\AdmServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
+	use TestTrait;
+	
 	public function setUp(): void
 	{
 		parent::setUp();
+		
+		$this->removeConfigFile();
+		$this->removeAdmDirectory();
+		$this->removeRouteFile();
+		
 		$this->withFactories(__DIR__ . '/../database/factories');
 	}
 	

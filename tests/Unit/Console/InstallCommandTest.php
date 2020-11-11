@@ -12,13 +12,8 @@ class InstallCommandTest extends TestCase
 	/** @test */
 	public function test_install_command()
 	{
-		$this->removeConfigFile();
 		$this->assertFileDoesNotExist(config_path('adm.php'));
-		
-		$this->removeAdmDirectory();
 		$this->assertDirectoryDoesNotExist(adm_path());
-		
-		$this->removeRouteFile();
 		$this->assertFileDoesNotExist(adm_path('routes/web.php'));
 		
 		Artisan::call('adm:install');

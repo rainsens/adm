@@ -38,24 +38,37 @@ class AdmServiceProvider extends ServiceProvider
 	
 	protected function publishments()
 	{
-		$this->publishes([adm_base_path('config/adm.php') => config_path('adm.php')], 'config');
-		$this->publishes([adm_base_path('routes/web.php') => adm_path('routes/web.php')], 'route');
+		$this->publishes([
+			_config_path('adm.php') => config_path('adm.php')
+		], 'config');
+		
+		$this->publishes([
+			_stub_path('routes/web.php.stub') => adm_route_path('web.php')
+		], 'route');
+		
+		$this->publishes([
+			_stub_path('controllers/HomeController.php.stub') => adm_controller_path('HomeController.php')
+		], 'home-controller');
+		
+		$this->publishes([
+			_stub_path('controllers/ExampleController.php.stub') => adm_controller_path('ExampleController.php')
+		], 'example-controller');
 	}
 	
 	protected function views()
 	{
-		$this->loadViewsFrom(adm_base_path('resources/views'), 'adm');
+		$this->loadViewsFrom(_resource_path('views'), 'adm');
 	}
 	
 	protected function routes()
 	{
-		if (file_exists($routes = adm_path('routes/web.php'))) {
+		if (file_exists($routes = adm_route_path('web.php'))) {
 			$this->loadRoutesFrom($routes);
 		}
 	}
 	
 	protected function migrations()
 	{
-		$this->loadMigrationsFrom(adm_base_path('database/migrations'));
+		$this->loadMigrationsFrom(_database_path('migrations'));
 	}
 }
