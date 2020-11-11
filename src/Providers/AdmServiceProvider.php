@@ -2,10 +2,14 @@
 
 namespace Rainsens\Adm\Providers;
 
+use Illuminate\Console\Command;
+use Illuminate\Container\Container;
 use Rainsens\Adm\Adm;
 use Rainsens\Adm\Console\AdmCommand;
 use Illuminate\Support\ServiceProvider;
 use Rainsens\Adm\Console\InstallCommand;
+use Rainsens\Adm\Contracts\InstallInterface;
+use Rainsens\Adm\Support\Install;
 
 class AdmServiceProvider extends ServiceProvider
 {
@@ -17,6 +21,9 @@ class AdmServiceProvider extends ServiceProvider
 	public function register()
 	{
 		$this->app->bind('adm', function ($app) {return new Adm();});
+		$this->app->bind(InstallInterface::class, function (Container $app) {
+			return new Install($app->make(Command::class));
+		});
 		$this->app->register(RouteServiceProvider::class);
 	}
 	
@@ -31,11 +38,6 @@ class AdmServiceProvider extends ServiceProvider
 		
 		$this->views();
 		$this->routes();
-	}
-	
-	public function provides()
-	{
-		return parent::provides();
 	}
 	
 	protected function publishments()
