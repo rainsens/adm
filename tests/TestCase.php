@@ -12,9 +12,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
 	{
 		parent::setUp();
 		
-		$this->removeConfigFile();
-		$this->removeAdmDirectory();
-		$this->removeRouteFile();
+		$this->cleanTestEnvironment();
+		$this->createTestEnviroment();
 		
 		$this->withFactories(__DIR__ . '/../database/factories');
 	}

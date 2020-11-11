@@ -13,22 +13,16 @@ class InstallCommand extends Command
 	
 	public function handle()
 	{
-		$this->publishConfigFile();
-		$this->structureDirectories();
-		$this->publishRouteFile();
-		$this->initDatabase();
-	}
-	
-	protected function publishConfigFile()
-	{
-		if (File::exists(config_path('adm.php'))) {
-			throw new FileExistsException('The dependent config file adm.php already exists!');
-		}
 		
-		$this->call('vendor:publish', [
-			'--provider' => "Rainsens\Adm\Providers\AdmServiceProvider",
-			'--tag' => "config"
-		]);
+		$this->publishFile(config_path('adm.php'), 'config');
+		
+		$this->structureDirectories();
+		
+		$this->publishFile(adm_route_path('web.php'), 'route');
+		$this->publishFile(adm_controller_path('HomeController.php'), 'home-controller');
+		$this->publishFile(adm_controller_path('ExampleController.php'), 'example-controller');
+		
+		$this->initDatabase();
 	}
 	
 	protected function structureDirectories()
@@ -37,19 +31,20 @@ class InstallCommand extends Command
 			$this->line("<error>'adm_path()' directory already exists!</error>");
 			return;
 		}
-		// Create adm/Controllers folders at end user's project.
+		// Create adm/Http/Controllers folders at end user's project.
 		File::makeDirectory(adm_path('Http/Controllers'), 0755, true, true);
 		File::makeDirectory(adm_path('routes'), 0755, true, true);
 	}
 	
-	protected function publishRouteFile()
+	protected function publishFile($targetPath, $tag)
 	{
-		if (File::exists(adm_path('routes/web.php'))) {
-			throw new FileExistsException('The dependent route file routes/web.php already exists!');
+		if (File::exists($targetPath)) {
+			throw new FileExistsException('The dependent file already exists!');
 		}
+		
 		$this->call('vendor:publish', [
 			'--provider' => "Rainsens\Adm\Providers\AdmServiceProvider",
-			'--tag' => "route"
+			'--tag' => $tag
 		]);
 	}
 	

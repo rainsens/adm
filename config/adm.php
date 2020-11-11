@@ -7,7 +7,7 @@ return [
 	
 	'logo-mini' => '<b>ADM</b>',
 	
-	'dir' => base_path('adm'),
+	'dir' => 'adm',
 	
 	'bootstrap' => '',
 	

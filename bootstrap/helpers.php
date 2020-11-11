@@ -13,7 +13,7 @@ if (! function_exists('adm_path'))
 	 * @return string
 	 */
 	function adm_path($path = '') {
-		return config('adm.dir') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+		return base_path(config('adm.dir') ?? 'adm') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
 	}
 }
 
@@ -53,6 +53,7 @@ if (! function_exists('_base_path')) {
 	 * @return string
 	 */
 	function _base_path($path = '') {
+		$path = trim($path, DIRECTORY_SEPARATOR);
 		return __DIR__ . '/../' . ($path ? DIRECTORY_SEPARATOR . $path : $path);
 	}
 }
@@ -75,7 +76,7 @@ if (! function_exists('_console_path')) {
 	 * @return string
 	 */
 	function _console_path($path = '') {
-		return _base_path('src/Console/stubs') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+		return _base_path('src/Console') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
 	}
 }
 
