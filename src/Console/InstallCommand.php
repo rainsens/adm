@@ -3,7 +3,6 @@ namespace Rainsens\Adm\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Rainsens\Adm\Exceptions\FileExistsException;
 
 class InstallCommand extends Command
 {
@@ -13,12 +12,12 @@ class InstallCommand extends Command
 	
 	public function handle()
 	{
-		
 		$this->publishFile(config_path('adm.php'), 'config');
 		
 		$this->structureDirectories();
 		
-		$this->publishFile(adm_route_path('web.php'), 'route');
+		$this->publishFile(adm_route_path('web.php'), 'route-web');
+		$this->publishFile(adm_route_path('api.php'), 'route-api');
 		$this->publishFile(adm_controller_path('HomeController.php'), 'home-controller');
 		$this->publishFile(adm_controller_path('ExampleController.php'), 'example-controller');
 		

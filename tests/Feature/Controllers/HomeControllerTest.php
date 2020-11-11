@@ -10,7 +10,7 @@ class HomeControllerTest extends TestCase
 	{
 		$this->withoutExceptionHandling();
 		
-		//$this->initTestEnvironment();
+		$this->initTestEnvironment();
 		
 		$this->get(route('adm.home'))
 			->assertStatus(200);
