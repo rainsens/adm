@@ -28,7 +28,7 @@ class InstallCommand extends Command
 	protected function structureDirectories()
 	{
 		if (File::isDirectory(adm_path())) {
-			$this->line("<error>'adm_path()' directory already exists!</error>");
+			$this->error("'adm_path()' directory already exists!");
 			return;
 		}
 		// Create adm/Http/Controllers folders at end user's project.
@@ -39,7 +39,7 @@ class InstallCommand extends Command
 	protected function publishFile($targetPath, $tag)
 	{
 		if (File::exists($targetPath)) {
-			throw new FileExistsException('The dependent file already exists!');
+			$this->error('The dependent file already exists!');
 		}
 		
 		$this->call('vendor:publish', [

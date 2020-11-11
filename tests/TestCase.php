@@ -32,6 +32,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
 		];
 	}
 	
+	/**
+	 * @param \Illuminate\Foundation\Application $app
+	 */
 	protected function getEnvironmentSetUp($app)
 	{
 		// import the CreatePostsTable class from the migration
@@ -41,5 +44,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 		// run the up() method of that migration class
 		(new \CreatePostsTable)->up();
 		(new \CreateUsersTable)->up();*/
+		
+		
 	}
 }

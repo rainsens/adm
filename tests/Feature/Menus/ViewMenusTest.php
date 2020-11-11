@@ -8,8 +8,7 @@ class ViewMenusTest extends TestCase
 	/** @test */
 	public function can_see_all_menus()
 	{
-		$this->cleanTestEnvironment();
-		$this->createTestEnviroment();
+		$this->initTestEnvironment();
 		
 		$this->get(route('adm.menus.index'))
 			->assertStatus(200);

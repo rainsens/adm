@@ -16,7 +16,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Rainsens\\Adm\\": "src"
+            "Rainsens\\Adm\\": "src",
+            "Adm\\": "./vendor/orchestra/testbench-core/laravel/adm/"
         },
         "files": [
             "bootstrap/helpers.php"

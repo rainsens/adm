@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Artisan;
 
 trait TestTrait
 {
+	public function initTestEnvironment()
+	{
+		$this->cleanTestEnvironment();
+		$this->createTestEnviroment();
+	}
+	
 	public function cleanTestEnvironment()
 	{
 		$this->removeConfigFile();
