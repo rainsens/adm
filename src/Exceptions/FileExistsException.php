@@ -1,7 +1,7 @@
 <?php
 namespace Rainsens\Adm\Exceptions;
 
-class FileExistsException extends AdmException
+class FileExistsException extends AdmConsoleException
 {
 
 }

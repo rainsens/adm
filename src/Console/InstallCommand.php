@@ -16,6 +16,8 @@ class InstallCommand extends Command
 	{
 		$this->structureDirectories();
 		
+		$this->makeNameSpace();
+		
 		$this->publishFile(config_path('adm.php'), 'config');
 		$this->publishFile(adm_route_path('web.php'), 'route-web');
 		$this->publishFile(adm_route_path('api.php'), 'route-api');

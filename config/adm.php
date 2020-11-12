@@ -9,6 +9,11 @@ return [
 	
 	'dir' => 'adm',
 	
+	'namespace' => [
+		'name' => 'Adm',
+		'value' => 'adm/'
+	],
+	
 	'bootstrap' => '',
 	
 	'route' => [

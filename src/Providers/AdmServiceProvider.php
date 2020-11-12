@@ -19,7 +19,7 @@ class AdmServiceProvider extends ServiceProvider
 	public function register()
 	{
 		$this->app->register(RouteServiceProvider::class);
-		$this->app->bind('adm', function ($app) {return new Adm();});
+		$this->app->bind('adm', function () {return new Adm();});
 		$this->app->bind(ComposerInterface::class, Composer::class);
 	}
 	

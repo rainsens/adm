@@ -5,14 +5,14 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Rainsens\Adm\Contracts\ComposerInterface;
 use Rainsens\Adm\Exceptions\FileNotFoundException;
-use Rainsens\Adm\Exceptions\InvalidArgumentException;
+use Rainsens\Adm\Exceptions\NameSpaceExistsException;
 
 class Composer implements ComposerInterface
 {
 	public function setPsrFourItem($path, $key, $value): void
 	{
 		if ($this->hasPsrFourItem($path, $key)) {
-			throw new InvalidArgumentException("The item '$key' in Psr-4 already exists!");
+			throw new NameSpaceExistsException("The item '$key' in Psr-4 already exists!");
 		}
 		
 		$this->appendPsrItem($path, $key, $value);
