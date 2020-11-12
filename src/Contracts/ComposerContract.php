@@ -1,7 +1,7 @@
 <?php
 namespace Rainsens\Adm\Contracts;
 
-interface ComposerInterface
+interface ComposerContract
 {
 	/**
 	 * @param $path

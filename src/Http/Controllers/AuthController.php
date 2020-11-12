@@ -5,6 +5,11 @@ class AuthController extends AdmController
 {
 	public function login()
 	{
+		return view('adm::auth.login');
+	}
+	
+	public function store()
+	{
 	
 	}
 }

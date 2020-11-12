@@ -3,11 +3,11 @@ namespace Rainsens\Adm\Support;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Rainsens\Adm\Contracts\ComposerInterface;
+use Rainsens\Adm\Contracts\ComposerContract;
 use Rainsens\Adm\Exceptions\FileNotFoundException;
 use Rainsens\Adm\Exceptions\NameSpaceExistsException;
 
-class Composer implements ComposerInterface
+class Composer implements ComposerContract
 {
 	public function setPsrFourItem($path, $key, $value): void
 	{

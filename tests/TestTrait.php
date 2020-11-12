@@ -3,7 +3,7 @@ namespace Rainsens\Adm\Tests;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Artisan;
-use Rainsens\Adm\Contracts\ComposerInterface;
+use Rainsens\Adm\Contracts\ComposerContract;
 
 trait TestTrait
 {
@@ -33,7 +33,7 @@ trait TestTrait
 	public function createNamespace()
 	{
 		$path = _base_path('composer.json');
-		$composer = app(ComposerInterface::class);
+		$composer = app(ComposerContract::class);
 		$composer->removePsrFourItem($path, $this->admNameSpaceForTest);
 		$composer->setPsrFourItem($path, $this->admNameSpaceForTest, $this->admNameSpaceValueInPackage);
 		
@@ -44,7 +44,7 @@ trait TestTrait
 	
 	public function removeNamespace()
 	{
-		$composer = app(ComposerInterface::class);
+		$composer = app(ComposerContract::class);
 		
 		$path = _base_path('composer.json');
 		$composer->removePsrFourItem($path, $this->admNameSpaceForTest);

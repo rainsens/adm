@@ -2,7 +2,7 @@
 namespace Rainsens\Adm\Console;
 
 use Illuminate\Support\Facades\File;
-use Rainsens\Adm\Contracts\ComposerInterface;
+use Rainsens\Adm\Contracts\ComposerContract;
 use Rainsens\Adm\Exceptions\AdmConsoleException;
 use Rainsens\Adm\Exceptions\FileNotFoundException;
 use Rainsens\Adm\Exceptions\InvalidArgumentException;
@@ -15,7 +15,7 @@ trait CommandTrait
 			$path = base_path('composer.json');
 			$key = config('adm.namespace.name', 'Adm').'\\';
 			$value = trim(config('adm.namespace.value', 'adm/'), '/').'/';
-			app(ComposerInterface::class)->setPsrFourItem($path, $key, $value);
+			app(ComposerContract::class)->setPsrFourItem($path, $key, $value);
 			
 		} catch (AdmConsoleException $e) {
 			if ($e instanceof InvalidArgumentException) {
@@ -29,10 +29,20 @@ trait CommandTrait
 		}
 	}
 	
+	protected function makeDirectory($targetPath)
+	{
+		if (File::isDirectory($targetPath)) {
+			$this->error($targetPath.' directory already exists!');
+			return;
+		}
+		File::makeDirectory($targetPath, 0755, true, true);
+	}
+	
 	protected function publishFile($targetPath, $tag)
 	{
 		if (File::exists($targetPath)) {
 			$this->error('The dependent file already exists!');
+			return;
 		}
 		
 		$this->call('vendor:publish', [

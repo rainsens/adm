@@ -2,6 +2,7 @@
 namespace Rainsens\Adm;
 
 use Illuminate\Support\Facades\Route;
+use Rainsens\Adm\Http\Controllers\AuthController;
 use Rainsens\Adm\Http\Controllers\MenusController;
 
 class Adm
@@ -20,7 +21,12 @@ class Adm
 			->name(config('adm.route.prefix').'.')
 			->group(function () {
 				
-				Route::resource('menus', MenusController::class);
+				Route::group([], function () {
+					
+					Route::resource('menus', MenusController::class);
+				});
+				
+				Route::get('login', [AuthController::class, 'login'])->name('login');
 				
 			});
 	}

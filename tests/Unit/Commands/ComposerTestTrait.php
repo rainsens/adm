@@ -2,7 +2,7 @@
 namespace Rainsens\Adm\Tests\Unit\Commands;
 
 use Illuminate\Support\Facades\File;
-use Rainsens\Adm\Contracts\ComposerInterface;
+use Rainsens\Adm\Contracts\ComposerContract;
 
 trait ComposerTestTrait
 {
@@ -16,13 +16,13 @@ trait ComposerTestTrait
 	
 	public function removeTestPsrFourItem($path)
 	{
-		$composer = app(ComposerInterface::class);
+		$composer = app(ComposerContract::class);
 		$composer->removePsrFourItem($path, $this->key);
 	}
 	
 	public function setTestPsrFourItem($path)
 	{
-		$composer = app(ComposerInterface::class);
+		$composer = app(ComposerContract::class);
 		$composer->removePsrFourItem($path, $this->key);
 		$composer->setPsrFourItem($path, $this->key, $this->value);
 	}
