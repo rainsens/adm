@@ -12,8 +12,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 	{
 		parent::setUp();
 		
-		$this->cleanTestEnvironment();
-		$this->createTestEnviroment();
+		$this->initTestEnvironment();
 		
 		$this->withFactories(__DIR__ . '/../database/factories');
 	}
@@ -37,6 +36,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
 	 */
 	protected function getEnvironmentSetUp($app)
 	{
+		
+		
 		// import the CreatePostsTable class from the migration
 		/*include_once __DIR__ . '/../database/migrations/create_posts_table.php.stub';
 		include_once __DIR__ . '/../database/migrations/create_users_table.php.stub';

@@ -8,7 +8,8 @@
         }
     ],
     "require": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "ext-json": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.4",
@@ -17,7 +18,7 @@
     "autoload": {
         "psr-4": {
             "Rainsens\\Adm\\": "src",
-            "Adm\\": "./vendor/orchestra/testbench-core/laravel/adm/"
+            "Adm\\": "vendor/orchestra/testbench-core/laravel/adm/"
         },
         "files": [
             "bootstrap/helpers.php"
