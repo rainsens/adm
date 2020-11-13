@@ -21,7 +21,7 @@ trait CommandTrait
 			if ($e instanceof InvalidArgumentException) {
 				$this->error($e->getMessage());
 				/*if ($this->confirm('Would you like to overwrite it? Please handle it carefully!')) {
-					$this->call('adm:reinstall');
+					$this->call('adm:install -f');
 				}*/
 			} elseif ($e instanceof FileNotFoundException) {
 				$this->error($e->getMessage());
@@ -32,19 +32,14 @@ trait CommandTrait
 	protected function makeDirectory($targetPath)
 	{
 		if (File::isDirectory($targetPath)) {
-			$this->error($targetPath.' directory already exists!');
+			$this->error($targetPath." directory '$targetPath' already exists!");
 			return;
 		}
 		File::makeDirectory($targetPath, 0755, true, true);
 	}
 	
-	protected function publishFile($targetPath, $tag)
+	protected function publishFile($tag)
 	{
-		if (File::exists($targetPath)) {
-			$this->error('The dependent file already exists!');
-			return;
-		}
-		
 		$this->call('vendor:publish', [
 			'--provider' => "Rainsens\Adm\Providers\AdmServiceProvider",
 			'--tag' => $tag

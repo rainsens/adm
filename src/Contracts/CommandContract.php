@@ -1,7 +1,7 @@
 <?php
 namespace Rainsens\Adm\Contracts;
 
-interface CommandInterface
+interface CommandContract
 {
 	public function getCommands() : array ;
 }

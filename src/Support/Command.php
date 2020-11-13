@@ -3,9 +3,9 @@ namespace Rainsens\Adm\Support;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
-use Rainsens\Adm\Contracts\CommandInterface;
+use Rainsens\Adm\Contracts\CommandContract;
 
-class Command implements CommandInterface
+class Command implements CommandContract
 {
 	public function getCommands(): array
 	{

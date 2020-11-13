@@ -24,14 +24,16 @@ class InstallCommand extends Command
 		$this->makeDirectory(adm_path());
 		$this->makeDirectory(adm_path('Http/Controllers'));
 		$this->makeDirectory(adm_path('routes'));
-		$this->makeDirectory(public_path('vendor/adm/css'));
+		$this->makeDirectory(public_path('vendor/adm/css/fonts'));
 		
 		// Files.
-		$this->publishFile(config_path('adm.php'), 'config');
-		$this->publishFile(adm_route_path('web.php'), 'route-web');
-		$this->publishFile(adm_route_path('api.php'), 'route-api');
-		$this->publishFile(adm_controller_path('HomeController.php'), 'home-controller');
-		$this->publishFile(adm_controller_path('ExampleController.php'), 'example-controller');
+		$this->publishFile('config');
+		$this->publishFile('route-web');
+		$this->publishFile('route-api');
+		$this->publishFile('home-controller');
+		$this->publishFile('example-controller');
+		$this->publishFile('asset-css');
+		$this->publishFile('asset-js');
 	}
 	
 	protected function initDatabase()

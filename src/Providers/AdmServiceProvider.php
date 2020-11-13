@@ -39,10 +39,15 @@ class AdmServiceProvider extends ServiceProvider
 	protected function publishments()
 	{
 		$this->publishes([_config_path('adm.php') => config_path('adm.php')], 'config');
+		
 		$this->publishes([_stub_path('routes/web.stub') => adm_route_path('web.php')], 'route-web');
 		$this->publishes([_stub_path('routes/api.stub') => adm_route_path('api.php')], 'route-api');
 		$this->publishes([_stub_path('controllers/HomeController.stub') => adm_controller_path('HomeController.php')], 'home-controller');
 		$this->publishes([_stub_path('controllers/ExampleController.stub') => adm_controller_path('ExampleController.php')], 'example-controller');
+		$this->publishes([_stub_path('controllers/ExampleController.stub') => adm_controller_path('ExampleController.php')], 'example-controller');
+		
+		$this->publishes([_resource_path('css') => public_path('vendor/adm/css')], 'asset-css');
+		$this->publishes([_resource_path('js') => public_path('vendor/adm/js')], 'asset-js');
 	}
 	
 	protected function views()
