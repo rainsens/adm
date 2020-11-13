@@ -32,8 +32,10 @@ class AdmServiceProvider extends ServiceProvider
 			$this->publishments();
 			$this->migrations();
 		}
+		
 		$this->views();
 		$this->routes();
+		$this->migrations();
 		
 		app('router')->aliasMiddleware('adm.auth', Authenticate::class);
 	}

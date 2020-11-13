@@ -1,5 +1,5 @@
 <?php
-namespace Rainsens\Adm\Tests\Models;
+namespace Rainsens\Adm\Tests\Dummy\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

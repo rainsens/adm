@@ -112,3 +112,15 @@ if (! function_exists('_database_path')) {
 		return _base_path('database') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
 	}
 }
+
+
+if (! function_exists('_test_path')) {
+	/**
+	 * Get the path to tests folder.
+	 * @param string $path
+	 * @return string
+	 */
+	function _test_path($path = '') {
+		return _base_path('tests') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+	}
+}
