@@ -1,7 +1,7 @@
 <?php
 namespace Rainsens\Adm\Http\Controllers;
 
-class AuthController extends AdmController
+class AuthController extends Controller
 {
 	public function login()
 	{

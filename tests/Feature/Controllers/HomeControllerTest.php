@@ -6,13 +6,14 @@ use Rainsens\Adm\Tests\TestCase;
 class HomeControllerTest extends TestCase
 {
 	/** @test */
-	public function can_see_home_controller()
+	public function guest_cannot_see_home_controller()
 	{
 		$this->withoutExceptionHandling();
 		
 		$this->initTestEnvironment();
 		
 		$this->get(route('adm.home'))
-			->assertStatus(200);
+			->assertRedirect(route('adm.login'))
+			->assertStatus(302);
 	}
 }

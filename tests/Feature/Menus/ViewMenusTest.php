@@ -6,11 +6,12 @@ use Rainsens\Adm\Tests\TestCase;
 class ViewMenusTest extends TestCase
 {
 	/** @test */
-	public function can_see_all_menus()
+	public function guest_cannot_see_menus()
 	{
 		$this->initTestEnvironment();
 		
 		$this->get(route('adm.menus.index'))
-			->assertStatus(200);
+			->assertRedirect(route('adm.login'))
+			->assertStatus(302);
 	}
 }

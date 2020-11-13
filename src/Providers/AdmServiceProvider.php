@@ -7,6 +7,7 @@ use Rainsens\Adm\Console\AdmCommand;
 use Illuminate\Support\ServiceProvider;
 use Rainsens\Adm\Console\InstallCommand;
 use Rainsens\Adm\Contracts\ComposerContract;
+use Rainsens\Adm\Http\Middleware\Authenticate;
 use Rainsens\Adm\Support\Composer;
 
 class AdmServiceProvider extends ServiceProvider
@@ -31,9 +32,10 @@ class AdmServiceProvider extends ServiceProvider
 			$this->publishments();
 			$this->migrations();
 		}
-		
 		$this->views();
 		$this->routes();
+		
+		app('router')->aliasMiddleware('adm.auth', Authenticate::class);
 	}
 	
 	protected function publishments()

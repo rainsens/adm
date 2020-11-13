@@ -22,5 +22,6 @@ return [
 		'middleware' => ['web']
 	],
 	
-	'title' => 'Adm-Administration'
+	'title' => 'Adm-Administration',
+	
 ];
