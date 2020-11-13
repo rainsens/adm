@@ -10,6 +10,6 @@ class AuthController extends Controller
 	
 	public function store()
 	{
-	
+		return redirect(route('adm.home'))->with('success', '欢迎回来!');
 	}
 }

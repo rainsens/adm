@@ -7,7 +7,7 @@ class InstallCommand extends Command
 {
 	use CommandTrait;
 	
-	protected $signature = 'adm:install';
+	protected $signature = 'adm:install {--db}';
 	
 	protected $description = 'Install the Adm package.';
 	
@@ -15,7 +15,11 @@ class InstallCommand extends Command
 	{
 		$this->makeNameSpace();
 		$this->structureFileSystem();
-		$this->initDatabase();
+		
+		// According to what end user input.
+		if ($this->option('db')) {
+			$this->initDatabase();
+		}
 	}
 	
 	protected function structureFileSystem()
@@ -38,6 +42,10 @@ class InstallCommand extends Command
 	
 	protected function initDatabase()
 	{
-	
+		if ($this->confirm("Adm will run 'php artisan migrate', Do you agree this operation? [yes/no]")) {
+			$this->call('migrate');
+		}
+		$this->info('The instalation aborted.');
+		return;
 	}
 }

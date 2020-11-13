@@ -1,5 +1,5 @@
 <?php
-namespace Rainsens\Adm\Tests\Unit\Commands;
+namespace Rainsens\Adm\Tests\Unit\Console;
 
 use Illuminate\Support\Arr;
 use Rainsens\Adm\Tests\TestCase;

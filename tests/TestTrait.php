@@ -27,6 +27,7 @@ trait TestTrait
 	
 	public function runInstall()
 	{
+		// without database.
 		Artisan::call('adm:install');
 	}
 	
@@ -64,6 +65,7 @@ trait TestTrait
 	{
 		if (File::isDirectory(adm_path())) {
 			File::deleteDirectory(adm_path());
+			File::deleteDirectory(public_path('vendor/adm'));
 		}
 	}
 }
