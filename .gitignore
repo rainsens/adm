@@ -1,5 +1,7 @@
-/vendor/
+/vendor
 .phpunit.result.cache
+/node_modules
 /.idea
 .phpstorm.meta.php
 _ide_helper.php
+mix-manifest.json

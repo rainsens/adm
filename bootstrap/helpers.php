@@ -53,8 +53,7 @@ if (! function_exists('_base_path')) {
 	 * @return string
 	 */
 	function _base_path($path = '') {
-		$path = trim($path, DIRECTORY_SEPARATOR);
-		return __DIR__ . '/../' . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+		return __DIR__ . '/../' . $path;
 	}
 }
 
@@ -99,6 +98,17 @@ if (! function_exists('_resource_path')) {
 	 */
 	function _resource_path($path = '') {
 		return _base_path('resources') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+	}
+}
+
+if (! function_exists('_public_path')) {
+	/**
+	 * Get the path to public folder.
+	 * @param string $path
+	 * @return string
+	 */
+	function _public_path($path = '') {
+		return _base_path('public') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
 	}
 }
 

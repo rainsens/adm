@@ -50,8 +50,8 @@ class AdmServiceProvider extends ServiceProvider
 		$this->publishes([_stub_path('controllers/ExampleController.stub') => adm_controller_path('ExampleController.php')], 'example-controller');
 		$this->publishes([_stub_path('controllers/ExampleController.stub') => adm_controller_path('ExampleController.php')], 'example-controller');
 		
-		$this->publishes([_resource_path('css') => public_path('vendor/adm/css')], 'asset-css');
-		$this->publishes([_resource_path('js') => public_path('vendor/adm/js')], 'asset-js');
+		$this->publishes([_public_path('js') => public_path('vendor/adm/js')], 'asset-js');
+		$this->publishes([_public_path('css') => public_path('vendor/adm/css')], 'asset-css');
 	}
 	
 	protected function views()

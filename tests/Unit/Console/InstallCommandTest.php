@@ -19,7 +19,6 @@ class InstallCommandTest extends TestCase
 		
 		$this->assertTrue(File::isDirectory(adm_controller_path()));
 		$this->assertTrue(File::isDirectory(adm_route_path()));
-		$this->assertTrue(File::isDirectory(public_path('vendor/adm')));
 		$this->assertTrue(File::exists(adm_route_path('web.php')));
 		
 	}

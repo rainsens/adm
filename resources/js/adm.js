@@ -1,8 +1,11 @@
+window._ = require('lodash');
+window.axios = require('axios');
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+window.Vue = require('vue');
 
-new Vue({
-	el: '#app',
-	data: function() {
-		return { visible: false }
-	}
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
+const adm = new Vue({
+	el: '#adm',
 });

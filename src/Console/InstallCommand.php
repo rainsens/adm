@@ -2,6 +2,7 @@
 namespace Rainsens\Adm\Console;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class InstallCommand extends Command
 {
@@ -15,9 +16,10 @@ class InstallCommand extends Command
 	{
 		$this->makeNameSpace();
 		$this->structureFileSystem();
+		$this->mixAssets();
 		
-		// According to what end user input.
 		if ($this->option('db')) {
+			// According to what end user types.
 			$this->initDatabase();
 		}
 	}
@@ -28,7 +30,6 @@ class InstallCommand extends Command
 		$this->makeDirectory(adm_path());
 		$this->makeDirectory(adm_path('Http/Controllers'));
 		$this->makeDirectory(adm_path('routes'));
-		$this->makeDirectory(public_path('vendor/adm/css/fonts'));
 		
 		// Files.
 		$this->publishFile('config');
@@ -36,8 +37,34 @@ class InstallCommand extends Command
 		$this->publishFile('route-api');
 		$this->publishFile('home-controller');
 		$this->publishFile('example-controller');
-		$this->publishFile('asset-css');
-		$this->publishFile('asset-js');
+	}
+	
+	protected function mixAssets()
+	{
+		try {
+			$symbolDir = readlink(base_path('vendor/rainsens/adm'));
+			
+			if ($symbolDir) {
+				// On test environment.
+				if (File::exists(public_path('vendor/adm/js/adm.js'))) {
+					
+					File::delete(public_path('vendor/adm/js/adm.js'));
+					File::delete(public_path('vendor/adm/css/adm.css'));
+					
+					symlink(_public_path('js/adm.js'), public_path('vendor/adm/js/adm.js'));
+					symlink(_public_path('css/adm.css'), public_path('vendor/adm/css/adm.css'));
+					
+				} else {
+					$this->publishFile('asset-js');
+					$this->publishFile('asset-css');
+				}
+			} else {
+				// On production environment.
+				$this->publishFile('asset-js');
+				$this->publishFile('asset-css');
+			}
+		} catch (\Exception $e) {}
+		
 	}
 	
 	protected function initDatabase()
