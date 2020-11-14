@@ -2,10 +2,15 @@ window._ = require('lodash');
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-window.Vue = require('vue');
+window.AdmVue = require('vue');
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+import ElementUI from 'element-ui';
+import './../theme/index.css';
 
-const adm = new Vue({
-	el: '#adm',
+AdmVue.use(ElementUI);
+
+AdmVue.component('login', require('./components/login.vue').default);
+
+const adm = new AdmVue({
+	el: '#adm'
 });

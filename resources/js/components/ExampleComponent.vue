@@ -6,7 +6,7 @@
                     <div class="card-header">Example Component</div>
 
                     <div class="card-body">
-                        I'm an example component. Yes it is. ok.
+                        I'm an example component. Yes it is. ok. Okay.
                         {{ number }}
                         <button @click="plus">加2</button>
                     </div>
