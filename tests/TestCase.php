@@ -1,7 +1,6 @@
 <?php
 namespace Rainsens\Adm\Tests;
 
-use Illuminate\Support\Facades\File;
 use Rainsens\Adm\Facades\Adm;
 use Rainsens\Adm\Providers\AdmServiceProvider;
 use Rainsens\Adm\Providers\RouteServiceProvider;

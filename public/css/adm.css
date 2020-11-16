@@ -32694,3 +32694,13 @@ a.text-muted:hover {
   color: #ffffff;
 }
 
+.btn-primary {
+  background-color: #37BC9B;
+  border-color: #37BC9B;
+}
+
+.btn-primary:hover {
+  background-color: #64C8AE;
+  border-color: #64C8AE;
+}
+

@@ -2,6 +2,7 @@
 
 namespace Rainsens\Adm\Providers;
 
+use Illuminate\Support\Facades\App;
 use Rainsens\Adm\Adm;
 use Rainsens\Adm\Support\Composer;
 use Illuminate\Support\Facades\Route;
@@ -28,20 +29,45 @@ class AdmServiceProvider extends ServiceProvider
 	
 	public function boot()
 	{
+		$this->app->setLocale(config('app.locale') ?? 'zh-CN');
+		
 		if ($this->app->runningInConsole()) {
-			
 			$this->commands($this->commands);
-			$this->publishments();
-			$this->migrations();
 		}
 		
 		$this->migrations();
 		
+		$this->translations();
 		$this->routes();
 		$this->middleware();
+		$this->publishments();
 		
 		$this->views();
 		$this->composerShare();
+	}
+	
+	protected function migrations()
+	{
+		$this->loadMigrationsFrom(_database_path('migrations'));
+	}
+	
+	protected function translations()
+	{
+		$this->loadTranslationsFrom(_resource_path('lang'), 'adm');
+	}
+	
+	protected function routes()
+	{
+		if (file_exists(adm_route_path('web.php'))) {
+			$this->loadRoutesFrom(adm_route_path('web.php'));
+		} else {
+			$this->loadRoutesFrom(_stub_path('routes/web.stub'));
+		}
+	}
+	
+	protected function middleware()
+	{
+		app('router')->aliasMiddleware('adm.auth', Authenticate::class);
 	}
 	
 	protected function publishments()
@@ -61,25 +87,6 @@ class AdmServiceProvider extends ServiceProvider
 	protected function views()
 	{
 		$this->loadViewsFrom(_resource_path('views'), 'adm');
-	}
-	
-	protected function routes()
-	{
-		if (file_exists(adm_route_path('web.php'))) {
-			$this->loadRoutesFrom(adm_route_path('web.php'));
-		} else {
-			$this->loadRoutesFrom(_stub_path('routes/web.stub'));
-		}
-	}
-	
-	protected function middleware()
-	{
-		app('router')->aliasMiddleware('adm.auth', Authenticate::class);
-	}
-	
-	protected function migrations()
-	{
-		$this->loadMigrationsFrom(_database_path('migrations'));
 	}
 	
 	protected function composerShare()
