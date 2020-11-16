@@ -10,8 +10,6 @@ class HomeControllerTest extends TestCase
 	{
 		$this->withoutExceptionHandling();
 		
-		$this->initTestEnvironment();
-		
 		$this->get(route('adm.home'))
 			->assertRedirect(route('adm.login'))
 			->assertStatus(302);

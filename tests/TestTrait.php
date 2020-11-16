@@ -13,25 +13,25 @@ trait TestTrait
 	
 	public function initTestEnvironment()
 	{
-		$this->cleanTestEnvironment();
-		$this->createNamespace();
-		$this->runInstall();
+		if (! File::exists(adm_route_path('web.php'))) {
+			$this->createNamespace();
+			$this->runInstall();
+			exit("================================ ADM TEST ===============================\nPrepared test environment. Please run 'phpunit' or 'composer test' again!\n-------------------------------------------------------------------------\n");
+		} else {
+			$this->cleanTestEnvironment();
+			$this->createNamespace();
+			$this->runInstall();
+		}
 	}
 	
-	public function cleanTestEnvironment()
+	private function cleanTestEnvironment()
 	{
 		$this->removeNamespace();
 		$this->removeConfigFile();
 		$this->removeAdmDirectory();
 	}
 	
-	public function runInstall()
-	{
-		// without database.
-		Artisan::call('adm:install');
-	}
-	
-	public function createNamespace()
+	private function createNamespace()
 	{
 		$path = _base_path('composer.json');
 		$composer = app(ComposerContract::class);
@@ -43,7 +43,17 @@ trait TestTrait
 		$composer->setPsrFourItem($path, $this->admNameSpaceForTest, $this->admNameSpaceValueInTestLaravel);
 	}
 	
-	public function removeNamespace()
+	private function runInstall()
+	{
+		/**
+		 * Command adm:install, install adm without database.
+		 * because on environment uses the memory database for test.
+		 * on production environment uses: adm:install --db
+		 */
+		Artisan::call('adm:install');
+	}
+	
+	private function removeNamespace()
 	{
 		$composer = app(ComposerContract::class);
 		
@@ -54,14 +64,14 @@ trait TestTrait
 		$composer->removePsrFourItem($path, $this->admNameSpaceForTest);
 	}
 	
-	public function removeConfigFile()
+	private function removeConfigFile()
 	{
 		if (File::exists(config_path('adm.php'))) {
 			File::delete(config_path('adm.php'));
 		}
 	}
 	
-	public function removeAdmDirectory()
+	private function removeAdmDirectory()
 	{
 		if (File::isDirectory(adm_path())) {
 			File::deleteDirectory(adm_path());

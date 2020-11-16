@@ -2,15 +2,15 @@
 
 namespace Rainsens\Adm\Providers;
 
+use Rainsens\Adm\Adm;
+use Rainsens\Adm\Support\Composer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
-use Rainsens\Adm\Adm;
 use Rainsens\Adm\Console\AdmCommand;
 use Illuminate\Support\ServiceProvider;
 use Rainsens\Adm\Console\InstallCommand;
 use Rainsens\Adm\Contracts\ComposerContract;
 use Rainsens\Adm\Http\Middleware\Authenticate;
-use Rainsens\Adm\Support\Composer;
 
 class AdmServiceProvider extends ServiceProvider
 {
@@ -21,9 +21,9 @@ class AdmServiceProvider extends ServiceProvider
 	
 	public function register()
 	{
-		$this->app->register(RouteServiceProvider::class);
 		$this->app->bind('adm', function () {return new Adm();});
 		$this->app->bind(ComposerContract::class, Composer::class);
+		$this->app->register(RouteServiceProvider::class);
 	}
 	
 	public function boot()
@@ -65,8 +65,10 @@ class AdmServiceProvider extends ServiceProvider
 	
 	protected function routes()
 	{
-		if (file_exists($routes = adm_route_path('web.php'))) {
-			$this->loadRoutesFrom($routes);
+		if (file_exists(adm_route_path('web.php'))) {
+			$this->loadRoutesFrom(adm_route_path('web.php'));
+		} else {
+			$this->loadRoutesFrom(_stub_path('routes/web.stub'));
 		}
 	}
 	

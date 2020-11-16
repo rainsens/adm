@@ -1,8 +1,10 @@
 <?php
 namespace Rainsens\Adm\Tests;
 
+use Illuminate\Support\Facades\File;
 use Rainsens\Adm\Facades\Adm;
 use Rainsens\Adm\Providers\AdmServiceProvider;
+use Rainsens\Adm\Providers\RouteServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -20,7 +22,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
 	protected function getPackageProviders($app)
 	{
 		return [
-			AdmServiceProvider::class
+			AdmServiceProvider::class,
+			RouteServiceProvider::class,
 		];
 	}
 	
@@ -36,7 +39,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 	 */
 	protected function getEnvironmentSetUp($app)
 	{
-		// Include migration.
+		// Include test migration.
 		include_once __DIR__ . '/Dummy/Database/migrations/create_users_table.php.stub';
 		
 		// Create users_table.

@@ -10,7 +10,7 @@ class InstallCommand extends Command
 	
 	protected $signature = 'adm:install {--db}';
 	
-	protected $description = 'Install the Adm package.';
+	protected $description = 'Install Adm package.';
 	
 	public function handle()
 	{
