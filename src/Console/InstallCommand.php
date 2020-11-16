@@ -42,6 +42,7 @@ class InstallCommand extends Command
 	protected function mixAssets()
 	{
 		try {
+			// Wether or not a test composer package.
 			$symbolDir = readlink(base_path('vendor/rainsens/adm'));
 			
 			if ($symbolDir) {
