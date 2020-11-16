@@ -2,6 +2,8 @@
 
 namespace Rainsens\Adm\Providers;
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Rainsens\Adm\Adm;
 use Rainsens\Adm\Console\AdmCommand;
 use Illuminate\Support\ServiceProvider;
@@ -33,11 +35,13 @@ class AdmServiceProvider extends ServiceProvider
 			$this->migrations();
 		}
 		
-		$this->views();
-		$this->routes();
 		$this->migrations();
 		
-		app('router')->aliasMiddleware('adm.auth', Authenticate::class);
+		$this->routes();
+		$this->middleware();
+		
+		$this->views();
+		$this->composerShare();
 	}
 	
 	protected function publishments()
@@ -66,8 +70,32 @@ class AdmServiceProvider extends ServiceProvider
 		}
 	}
 	
+	protected function middleware()
+	{
+		app('router')->aliasMiddleware('adm.auth', Authenticate::class);
+	}
+	
 	protected function migrations()
 	{
 		$this->loadMigrationsFrom(_database_path('migrations'));
+	}
+	
+	protected function composerShare()
+	{
+		View::composer('*', function (\Illuminate\View\View $view) {
+			switch (Route::currentRouteName()) {
+				case 'login':
+					$bodyClass = 'login-page';
+					$bodyStyle = '';
+					break;
+				default:
+					$bodyClass = '';
+					$bodyStyle = '';
+			}
+			$view->with('bodyAttributes', [
+				'class' => $bodyClass,
+				'style' => $bodyStyle,
+			]);
+		});
 	}
 }

@@ -7,7 +7,7 @@
     <title>{{ config('app.name') }}</title>
     <link href="{{ mix('vendor/adm/css/adm.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="hold-transition login-page">
     <div id="adm">
         @yield('content')
     </div>
