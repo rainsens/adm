@@ -8,7 +8,7 @@ class Authenticate
 {
 	public function handle($request, Closure $next)
 	{
-		if (Auth::guard()) {
+		if (Auth::guest()) {
 			return redirect(route('adm.login'));
 		}
 		if (Auth::user()->type === 'normal') {

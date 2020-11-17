@@ -93,18 +93,24 @@ class AdmServiceProvider extends ServiceProvider
 	{
 		View::composer('*', function (\Illuminate\View\View $view) {
 			switch (Route::currentRouteName()) {
-				case 'login':
-					$bodyClass = 'login-page';
+				case 'adm.login':
+					$bodyClass = 'hold-transition login-page';
+					$bodyStyle = '';
+					break;
+				case 'adm.home':
+					$bodyClass = 'sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed';
 					$bodyStyle = '';
 					break;
 				default:
 					$bodyClass = '';
 					$bodyStyle = '';
 			}
-			$view->with('bodyAttributes', [
+			
+			$view->with('admBodyAttributes', [
 				'class' => $bodyClass,
 				'style' => $bodyStyle,
 			]);
+			
 		});
 	}
 }

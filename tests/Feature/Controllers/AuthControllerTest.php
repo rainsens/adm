@@ -1,11 +1,14 @@
 <?php
 namespace Rainsens\Adm\Tests\Feature\Controllers;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Rainsens\Adm\Tests\Dummy\Models\User;
 use Rainsens\Adm\Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
+	use RefreshDatabase;
+	
 	/** @test */
 	public function guest_can_see_login_page()
 	{
@@ -40,6 +43,12 @@ class AuthControllerTest extends TestCase
 	/** @test */
 	public function login_password_is_required()
 	{
-		
+		$this->post(route('adm.store'), [
+			'name' => 'rainsen',
+			'password' => null,
+		])
+			->assertRedirect()
+			->assertStatus(302)
+			->assertSessionHasErrors('password');
 	}
 }

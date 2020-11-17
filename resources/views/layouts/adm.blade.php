@@ -7,7 +7,7 @@
     <title>{{ config('app.name') }}</title>
     <link href="{{ asset('vendor/adm/css/adm.css') }}" rel="stylesheet">
 </head>
-<body class="hold-transition login-page">
+<body class="{{ $admBodyAttributes['class'] }}" style="{{ $admBodyAttributes['style'] }}">
     <div id="adm">
         @yield('content')
     </div>
