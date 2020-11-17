@@ -17,8 +17,11 @@ class AuthController extends Controller
 	{
 		$credentials = $this->validate(request(), [
 			'name' => 'required',
-			'password' => 'required'
+			'password' => 'required',
 		]);
+		
+		// Identity.
+		$credentials[config('adm.auth.fields.identity')] = 'adm';
 		
 		if (Auth::attempt($credentials, request('remember'))) {
 			session()->flash('success', '欢迎回来');

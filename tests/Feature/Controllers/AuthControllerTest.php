@@ -51,4 +51,46 @@ class AuthControllerTest extends TestCase
 			->assertStatus(302)
 			->assertSessionHasErrors('password');
 	}
+	
+	/** @test */
+	public function guest_cannot_login_in()
+	{
+		$this->withoutExceptionHandling();
+		
+		$authkind = 'normal';
+		$name = 'Wood';
+		
+		$guest = factory(User::class)->create([
+			'authkind' => $authkind,
+			'name' => $name,
+		]);
+		
+		$this->post(route('adm.login'), [
+			'name' => $guest->name,
+			'password' => 'admin',
+		])
+			->assertRedirect()
+			->assertStatus(302)
+			->assertSessionHas('danger');
+	}
+	
+	/** @test */
+	public function administrator_can_login_in()
+	{
+		$authkind = 'adm';
+		$name = 'Wood';
+		
+		$guest = factory(User::class)->create([
+			'authkind' => $authkind,
+			'name' => $name,
+		]);
+		
+		$this->post(route('adm.login'), [
+			'name' => $guest->name,
+			'password' => 'admin',
+		])
+			->assertRedirect(route('adm.home'))
+			->assertStatus(302)
+			->assertSessionHas('success');
+	}
 }

@@ -4,6 +4,7 @@ namespace Rainsens\Adm\Tests;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Artisan;
 use Rainsens\Adm\Contracts\ComposerContract;
+use Rainsens\Adm\Tests\Dummy\Models\User;
 
 trait TestTrait
 {
@@ -13,6 +14,8 @@ trait TestTrait
 	
 	public function initTestEnvironment()
 	{
+		$this->app['config']->set('auth.providers.users.model', User::class);
+		
 		if (! File::exists(adm_route_path('web.php'))) {
 			
 			$this->createTestNamespace();
