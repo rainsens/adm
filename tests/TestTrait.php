@@ -14,24 +14,25 @@ trait TestTrait
 	public function initTestEnvironment()
 	{
 		if (! File::exists(adm_route_path('web.php'))) {
-			$this->createNamespace();
-			$this->runInstall();
+			
+			$this->createTestNamespace();
+			
+			Artisan::call('adm:publish');
+			
 			exit("================================ ADM TEST ===============================\nPrepared test environment. Please run 'phpunit' or 'composer test' again!\n-------------------------------------------------------------------------\n");
+		
 		} else {
-			$this->cleanTestEnvironment();
-			$this->createNamespace();
-			$this->runInstall();
+			
+			Artisan::call('adm:uninstall');
+			
+			$this->removeTestNamespace();
+			$this->createTestNamespace();
+			
+			Artisan::call('adm:publish');
 		}
 	}
 	
-	private function cleanTestEnvironment()
-	{
-		$this->removeNamespace();
-		$this->removeConfigFile();
-		$this->removeAdmDirectory();
-	}
-	
-	private function createNamespace()
+	private function createTestNamespace()
 	{
 		$path = _base_path('composer.json');
 		$composer = app(ComposerContract::class);
@@ -43,17 +44,7 @@ trait TestTrait
 		$composer->setPsrFourItem($path, $this->admNameSpaceForTest, $this->admNameSpaceValueInTestLaravel);
 	}
 	
-	private function runInstall()
-	{
-		/**
-		 * Command adm:install, install adm without database.
-		 * because on environment uses the memory database for test.
-		 * on production environment uses: adm:install --db
-		 */
-		Artisan::call('adm:install');
-	}
-	
-	private function removeNamespace()
+	private function removeTestNamespace()
 	{
 		$composer = app(ComposerContract::class);
 		
@@ -62,20 +53,5 @@ trait TestTrait
 		
 		$path = base_path('composer.json');
 		$composer->removePsrFourItem($path, $this->admNameSpaceForTest);
-	}
-	
-	private function removeConfigFile()
-	{
-		if (File::exists(config_path('adm.php'))) {
-			File::delete(config_path('adm.php'));
-		}
-	}
-	
-	private function removeAdmDirectory()
-	{
-		if (File::isDirectory(adm_path())) {
-			File::deleteDirectory(adm_path());
-			File::deleteDirectory(public_path('vendor/adm'));
-		}
 	}
 }

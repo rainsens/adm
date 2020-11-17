@@ -3,77 +3,53 @@ namespace Rainsens\Adm\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
+use Rainsens\Adm\Support\AdmSeeder;
 
 class InstallCommand extends Command
 {
-	use CommandTrait;
-	
-	protected $signature = 'adm:install {--db}';
+	protected $signature = 'adm:install';
 	
 	protected $description = 'Install Adm package.';
 	
 	public function handle()
 	{
-		$this->makeNameSpace();
-		$this->structureFileSystem();
-		$this->mixAssets();
+		$this->check();
 		
-		if ($this->option('db')) {
-			// According to what end user types.
-			$this->initDatabase();
+		$this->initDatabase();
+	}
+	
+	protected function check()
+	{
+		// Check wether published.
+		if (! File::exists(adm_route_path('web.php'))) {
+			$errorNote = "Please run: 'php artisan adm:publish' first.\n";
+			$this->error($errorNote);
+			exit($errorNote);
 		}
-	}
-	
-	protected function structureFileSystem()
-	{
-		// Directories.
-		$this->makeDirectory(adm_path());
-		$this->makeDirectory(adm_path('Http/Controllers'));
-		$this->makeDirectory(adm_path('routes'));
 		
-		// Files.
-		$this->publishFile('config');
-		$this->publishFile('route-web');
-		$this->publishFile('route-api');
-		$this->publishFile('home-controller');
-		$this->publishFile('example-controller');
-	}
-	
-	protected function mixAssets()
-	{
-		try {
-			// Wether or not a test composer package.
-			$symbolDir = readlink(base_path('vendor/rainsens/adm'));
-			
-			if ($symbolDir) {
-				// On test environment.
-				if (File::exists(public_path('vendor/adm/js/adm.js'))) {
-					
-					File::delete(public_path('vendor/adm/js/adm.js'));
-					File::delete(public_path('vendor/adm/css/adm.css'));
-					
-					symlink(_public_path('js/adm.js'), public_path('vendor/adm/js/adm.js'));
-					symlink(_public_path('css/adm.css'), public_path('vendor/adm/css/adm.css'));
-					
-				} else {
-					$this->publishFile('asset-js');
-					$this->publishFile('asset-css');
-				}
-			} else {
-				// On production environment.
-				$this->publishFile('asset-js');
-				$this->publishFile('asset-css');
-			}
-		} catch (\Exception $e) {}
+		// Check wether add field to database.
+		$authIdentity = config('adm.auth.fields.identity', 'authkind');
+		$authModel = app(config('adm.auth.model', 'App\\Models\\User'));
 		
+		$connectionName = $authModel->getConnection()->getDriverName();
+		$tableName = $authModel->getTable();
+		
+		if (!Schema::connection($connectionName)->hasColumn($tableName, $authIdentity)) {
+			$errorNote = "Please add field '$authIdentity' to users table.";
+			$this->error($errorNote);
+			exit($errorNote);
+		}
 	}
 	
 	protected function initDatabase()
 	{
-		if ($this->confirm("Adm will run 'php artisan migrate', Do you agree this operation? [yes/no]")) {
+		if ($this->confirm("Adm will run 'php artisan migrate' and 'php artisan db:seed', Do you agree this operation? [yes/no]")) {
 			$this->call('migrate');
+			$this->call('db:seed', ['--class' => AdmSeeder::class]);
+			
+		} else {
+			$this->info('The installation aborted.');
 		}
-		$this->info('The instalation aborted.');
-		return;
 	}
 }

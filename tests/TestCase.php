@@ -3,7 +3,6 @@ namespace Rainsens\Adm\Tests;
 
 use Rainsens\Adm\Facades\Adm;
 use Rainsens\Adm\Providers\AdmServiceProvider;
-use Rainsens\Adm\Providers\RouteServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -21,8 +20,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 	protected function getPackageProviders($app)
 	{
 		return [
-			AdmServiceProvider::class,
-			RouteServiceProvider::class,
+			AdmServiceProvider::class
 		];
 	}
 	

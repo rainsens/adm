@@ -2,13 +2,14 @@
 
 namespace Rainsens\Adm\Providers;
 
-use Illuminate\Support\Facades\App;
 use Rainsens\Adm\Adm;
+use Rainsens\Adm\Console\UninstallCommand;
 use Rainsens\Adm\Support\Composer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Rainsens\Adm\Console\AdmCommand;
 use Illuminate\Support\ServiceProvider;
+use Rainsens\Adm\Console\PublishCommand;
 use Rainsens\Adm\Console\InstallCommand;
 use Rainsens\Adm\Contracts\ComposerContract;
 use Rainsens\Adm\Http\Middleware\Authenticate;
@@ -17,7 +18,9 @@ class AdmServiceProvider extends ServiceProvider
 {
 	protected $commands = [
 		AdmCommand::class,
+		PublishCommand::class,
 		InstallCommand::class,
+		UninstallCommand::class,
 	];
 	
 	public function register()

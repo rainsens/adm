@@ -1,5 +1,5 @@
 <?php
-namespace Rainsens\Adm\Tests\Unit\Console;
+namespace Rainsens\Adm\Tests\Unit\Supports;
 
 use Illuminate\Support\Facades\File;
 use Rainsens\Adm\Contracts\ComposerContract;

@@ -16,9 +16,7 @@ class Adm
 	
 	public function routes()
 	{
-		Route::prefix(config('adm.route.prefix'))
-			->middleware(config('adm.route.middleware'))
-			->name(config('adm.route.prefix').'.')
+		Route::prefix('adm')->middleware('web')->name('adm.')
 			->group(function () {
 				
 				Route::group([], function () {

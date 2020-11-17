@@ -1,3 +1,6 @@
+@extends('adm::layouts.adm')
+
+@section('content')
 <div class="wrapper">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -1543,3 +1546,4 @@
     </footer>
     <div id="sidebar-overlay"></div>
 </div>
+@stop

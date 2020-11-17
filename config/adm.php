@@ -7,32 +7,14 @@ return [
 	
 	'logo-mini' => '<b>ADM</b>',
 	
-	/*
-    |--------------------------------------------------------------------------
-    | Adm Locale Configuration
-    |--------------------------------------------------------------------------
-    |
-    | The application locale determines the default locale that will be used
-    | by the translation service provider. You are free to set this value
-    | to any of the locales which will be supported by the application.
-    |
-    */
+	'title' => 'Administration - Adm',
 	
-	'dir' => 'adm',
-	
-	'namespace' => [
-		'name' => 'Adm',
-		'value' => 'adm/'
-	],
-	
-	'bootstrap' => '',
-	
-	'route' => [
-		'prefix' => env('ADM_ROUTE_PREFIX', 'adm'),
-		'namespace' => 'Adm\\Http\\Controllers',
-		'middleware' => ['web']
-	],
-	
-	'title' => 'Adm-Administration',
-	
+	'auth' => [
+		'model' => 'App\\Models\\User',
+		'fields' => [
+			'account' => 'name',        // name field in table
+			'password' => 'password',   // password field in table
+			'identity' => 'authkind',   // identity field in table
+		],
+	]
 ];
