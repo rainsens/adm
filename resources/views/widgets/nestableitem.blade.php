@@ -1,8 +1,8 @@
-@inject('nestableSvc', 'App\Services\NestableSvc')
+@inject('nestable', 'Rainsens\Adm\Support\Nestable')
 
 @if(isset($data) && isset($datum))
     
-    @if($children = $nestableSvc->children($data, $datum->id))
+    @if($children = $nestable->children($data, $datum->id))
         
         {{-- If has children, keep searching. --}}
         
@@ -16,10 +16,10 @@
             </div>
             
             <div style="position: absolute; top: 8px; right: 10px; z-index: 1">
-                <a href="{{ isset($nestableSvc::$params['urlDelete']) ? route($nestableSvc::$params['urlDelete'], $datum->id) : '' }}" class="pull-right">
+                <a href="{{ isset($nestable::$params['urlDelete']) ? route($nestable::$params['urlDelete'], $datum->id) : '' }}" class="pull-right">
                     <span class="fa fa-trash"></span>
                 </a>
-                <a href="{{ isset($nestableSvc::$params['urlDelete']) ? route($nestableSvc::$params['urlEdit'], $datum->id) : '' }}" class="pull-right" style="margin: 1px 3px 0 0">
+                <a href="{{ isset($nestable::$params['urlDelete']) ? route($nestable::$params['urlEdit'], $datum->id) : '' }}" class="pull-right" style="margin: 1px 3px 0 0">
                     <span class="fa fa-edit"></span>
                 </a>
             </div>
@@ -28,7 +28,7 @@
         
         </li>
         
-    @elseif(!in_array($datum->id, $nestableSvc::$settled))
+    @elseif(!in_array($datum->id, $nestable::$settled))
         
         {{-- If it does not have children, stop and show it. --}}
         
@@ -41,17 +41,17 @@
             </div>
             
             <div style="position: absolute; top: 8px; right: 10px; z-index: 1">
-                <a href="{{ isset($nestableSvc::$params['urlDelete']) ? route($nestableSvc::$params['urlDelete'], $datum->id) : '' }}" class="pull-right">
+                <a href="{{ isset($nestable::$params['urlDelete']) ? route($nestable::$params['urlDelete'], $datum->id) : '' }}" class="pull-right">
                     <span class="fa fa-trash"></span>
                 </a>
-                <a href="{{ isset($nestableSvc::$params['urlEdit']) ? route($nestableSvc::$params['urlEdit'], $datum->id) : '' }}" class="pull-right" style="margin: 1px 3px 0 0">
+                <a href="{{ isset($nestable::$params['urlEdit']) ? route($nestable::$params['urlEdit'], $datum->id) : '' }}" class="pull-right" style="margin: 1px 3px 0 0">
                     <span class="fa fa-edit"></span>
                 </a>
             </div>
             
         </li>
         
-        @php $nestableSvc::$settled[] = $datum->id @endphp
+        @php $nestable::$settled[] = $datum->id @endphp
         
     @endif
     

@@ -3,7 +3,7 @@
         
         @foreach($data as $datum)
             
-            @component('widget.nestableitem', ['data' => $data, 'datum' => $datum])@endcomponent
+            @component('adm::widgets.nestableitem', ['data' => $data, 'datum' => $datum])@endcomponent
             
         @endforeach
         

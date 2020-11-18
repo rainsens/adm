@@ -12,16 +12,9 @@
         <section id="content_wrapper">
             
             @component('adm::partials.topbarmenu')@endcomponent
-            @component('adm::partials.breadcrumb')@endcomponent
-            
-            
-            <section id="content" class="animated fadeIn">
-                @yield('content')
-            </section>
-            
-            
+            @yield('content')
             @component('adm::partials.footer')@endcomponent
-        
+            
         </section>
         
         @component('adm::partials.rightsidebar')@endcomponent

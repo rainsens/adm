@@ -1,12 +1,9 @@
 <aside id="sidebar_left" class="nano nano-light affix">
     
-    <!-- Start: Sidebar Left Content -->
     <div class="sidebar-left-content nano-content">
         
-        <!-- Start: Sidebar Header -->
         <header class="sidebar-header">
             
-            <!-- Sidebar Widget - Author -->
             <div class="sidebar-widget author-widget">
                 <div class="media">
                     <a class="media-left" href="#">
@@ -14,15 +11,16 @@
                     </a>
                     <div class="media-body">
                         <div class="media-links">
-                            <a href="#" class="sidebar-menu-toggle">Dandelion -</a>
-                            @component('adm::partials.logout')安全退出@endcomponent
+                            <a href="#" class="sidebar-menu-toggle">Adm -</a>
+                            @component('adm::partials.logout')
+                                Logout
+                            @endcomponent
                         </div>
                         <div class="media-author">{{ auth()->user()->name }}</div>
                     </div>
                 </div>
             </div>
             
-            <!-- Sidebar Widget - Menu (slidedown) -->
             <div class="sidebar-widget menu-widget">
                 <div class="row text-center mbn">
                     <div class="col-xs-4">
@@ -58,7 +56,6 @@
                 </div>
             </div>
             
-            <!-- Sidebar Widget - Search (hidden) -->
             <div class="sidebar-widget search-widget">
                 <div class="input-group">
               <span class="input-group-addon">
@@ -69,9 +66,7 @@
             </div>
         
         </header>
-        <!-- End: Sidebar Header -->
         
-        <!-- Start: Sidebar Menu -->
         <ul class="nav sidebar-menu">
             <li class="sidebar-label pt20">Menu</li>
             <li class="active">
@@ -486,17 +481,13 @@
                 </ul>
             </li>
         </ul>
-        <!-- End: Sidebar Menu -->
         
-        <!-- Start: Sidebar Collapse Button -->
         <div class="sidebar-toggle-mini">
             <a href="#">
                 <span class="fa fa-sign-out"></span>
             </a>
         </div>
-        <!-- End: Sidebar Collapse Button -->
     
     </div>
-    <!-- End: Sidebar Left Content -->
 
 </aside>

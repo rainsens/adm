@@ -1,3 +1,8 @@
+@push('cssfiles')
+    <link href="{{ asset('vendor/adm/skin/css/select2.css') }}" rel="stylesheet">
+@endpush
+
+
 @if(isset($label) && $name)
     <div class="form-group">
         <label for="{{ $name }}" class="col-md-3 control-label {{ $errors->has('url') ? 'has-error' : '' }}">
@@ -18,7 +23,12 @@
     </div>
 @endif
 
-@push('foot')
+
+@push('scriptfiles')
+    <script src="{{ asset('vendor/adm/skin/js/select2.min.js') }}"></script>
+@endpush
+
+@push('scripts')
     <script>
         let dropdownData = {!! json_encode($data) !!}
         

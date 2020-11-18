@@ -15,11 +15,11 @@
     @component('widget.nestable', [
         'params' => [
             'data' => $nestableData,
-            'urlCreate' => 'menu.create',
-            'urlOrder' => 'menu.order',
-            'urlEdit' => 'menu.edit',
-            'urlDelete' => 'menu.destroy',
-            'urlRefresh' => 'menu.index',
+            'urlCreate' => 'adm.menus.create',
+            'urlOrder' => 'adm.menus.order',
+            'urlEdit' => 'adm.menus.edit',
+            'urlDelete' => 'adm.menus.destroy',
+            'urlRefresh' => 'adm.menus.index',
         ]
     ])
     @endcomponent
@@ -30,7 +30,11 @@
     
 ------------------------------------------------------------------------------------------------------------------- --}}
 
-@inject('nestableSvc', 'App\Services\NestableSvc')
+@push('cssfiles')
+    <link href="{{ asset('vendor/adm/skin/css/nestable.css') }}" rel="stylesheet">
+@endpush
+
+@inject('nestable', 'Rainsens\Adm\Support\Nestable')
 
 @if(isset($params))
     <div class="row table-layout">
@@ -67,18 +71,22 @@
         <div class="col-md-12">
             <div class="dd mb35" id="nestable">
                 
-                @php $nestableSvc::$params = $params @endphp
+                @php $nestable::$params = $params @endphp
                 
-                @component('widget.nestablerow', [
-                    'data' => isset($nestableSvc::$params['data']) ? $nestableSvc::$params['data'] : []
+                @component('adm::widgets.nestablerow', [
+                    'data' => isset($nestable::$params['data']) ? $nestable::$params['data'] : []
                 ])
                 @endcomponent
                 
             </div>
         </div>
     </div>
+    
+    @push('scriptfiles')
+        <script src="{{ asset('vendor/adm/skin/js/jquery.nestable.js') }}"></script>
+    @endpush
 
-    @push('foot')
+    @push('scripts')
         <script>
             jQuery(document).ready(function() {
             
@@ -120,10 +128,10 @@
                 });*/
             
                 $('.menu-create').click(function () {
-                    location.href = '{{ isset($nestableSvc::$params['urlCreate']) ? route($nestableSvc::$params['urlCreate']) : '' }}';
+                    location.href = '{{ isset($nestable::$params['urlCreate']) ? route($nestable::$params['urlCreate']) : '' }}';
                 });
                 $('.menu-refresh').click(function () {
-                    location.href = '{{ isset($nestableSvc::$params['urlRefresh']) ? route($nestableSvc::$params['urlRefresh']) : '' }}';
+                    location.href = '{{ isset($nestable::$params['urlRefresh']) ? route($nestable::$params['urlRefresh']) : '' }}';
                 });
             });
         </script>

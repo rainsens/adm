@@ -7,6 +7,9 @@
     <title>{{ config('app.name') }}</title>
     <link href="{{ asset('vendor/adm/skin/css/theme.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/adm/skin/css/admin-form.css') }}" rel="stylesheet">
+    
+    @stack('cssfiles')
+    
     <link href="{{ asset('vendor/adm/css/adm.css') }}" rel="stylesheet">
     
     <link rel="shortcut icon" href="vendor/adm/skin/img/favicon.ico">
@@ -15,6 +18,8 @@
     <script src="{{ asset('vendor/adm/skin/js/html5shiv.js') }}"></script>
     <script src="{{ asset('vendor/adm/skin/js/respond.js') }}"></script>
     <![endif]-->
+    
+    @stack('styles')
     
 </head>
 
@@ -28,6 +33,9 @@
 <script src="{{ asset('vendor/adm/skin/js/jquery-ui.js') }}"></script>
 <script src="{{ asset('vendor/adm/skin/js/canvasbg.js') }}"></script>
 <script src="{{ asset('vendor/adm/skin/js/utility.js') }}"></script>
+
+@stack('scriptfiles')
+
 <script src="{{ asset('vendor/adm/skin/js/adm.js') }}"></script>
 <script src="{{ asset('vendor/adm/skin/js/main.js') }}"></script>
 <script src="{{ asset('vendor/adm/js/adm.js') }}"></script>
@@ -40,7 +48,7 @@
     });
 </script>
 
-@stack('foot')
+@stack('scripts')
 @yield('scripts')
 
 </html>

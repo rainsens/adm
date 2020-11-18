@@ -1,5 +1,5 @@
-@if(Auth::user()->avatar)
-    <img src="{{ Storage::url(Auth::user()->avatar) }}" class="{{ (isset($class) && $class) ? $class : '' }}" alt>
+@if(auth()->user()->avatar)
+    <img src="{{ auth()->user()->avatar }}" class="{{ (isset($class) && $class) ? $class : '' }}" alt>
 @else
-    <img src="{{ asset('theme/assets/img/logos/logo_dandelion_bg_white.png') }}" class="{{ (isset($class) && $class) ? $class : '' }}" alt>
+    <img src="{{ asset('vendor/adm/skin/img/avatars/3.jpg') }}" class="{{ (isset($class) && $class) ? $class : '' }}" alt>
 @endif
