@@ -3,11 +3,11 @@
 return [
 	'name' => 'Adm',
 	
-	'logo' => '<b>ADM</b> Administration',
+	'logo' => '<b>Rainsen</b> Adm',
 	
 	'logo-mini' => '<b>ADM</b>',
 	
-	'title' => 'Administration - Adm',
+	'title' => 'Rainsen - Adm',
 	
 	'auth' => [
 		'model' => 'App\\Models\\User',
