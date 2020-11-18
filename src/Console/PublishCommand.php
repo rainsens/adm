@@ -46,16 +46,20 @@ class PublishCommand extends Command
 					
 					File::delete(public_path('vendor/adm/js/adm.js'));
 					File::delete(public_path('vendor/adm/css/adm.css'));
+					File::deleteDirectory(public_path('vendor/adm/skin'));
 					
+					$this->publishFile('asset-skin');
 					symlink(_public_path('js/adm.js'), public_path('vendor/adm/js/adm.js'));
 					symlink(_public_path('css/adm.css'), public_path('vendor/adm/css/adm.css'));
 					
 				} else {
+					$this->publishFile('asset-skin');
 					$this->publishFile('asset-js');
 					$this->publishFile('asset-css');
 				}
 			} else {
 				// On production environment.
+				$this->publishFile('asset-skin');
 				$this->publishFile('asset-js');
 				$this->publishFile('asset-css');
 			}

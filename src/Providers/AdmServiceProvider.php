@@ -83,6 +83,7 @@ class AdmServiceProvider extends ServiceProvider
 		$this->publishes([_stub_path('controllers/ExampleController.stub') => adm_controller_path('ExampleController.php')], 'example-controller');
 		$this->publishes([_stub_path('controllers/ExampleController.stub') => adm_controller_path('ExampleController.php')], 'example-controller');
 		
+		$this->publishes([_public_path('skin') => public_path('vendor/adm/skin')], 'asset-skin');
 		$this->publishes([_public_path('js') => public_path('vendor/adm/js')], 'asset-js');
 		$this->publishes([_public_path('css') => public_path('vendor/adm/css')], 'asset-css');
 	}
@@ -97,21 +98,25 @@ class AdmServiceProvider extends ServiceProvider
 		View::composer('*', function (\Illuminate\View\View $view) {
 			switch (Route::currentRouteName()) {
 				case 'adm.login':
-					$bodyClass = 'hold-transition login-page';
-					$bodyStyle = '';
+					$admBodyClass = 'external-page sb-l-c sb-r-c';
+					$admBodyStyle = '';
+					$admDivClass = 'animated fadeIn';
 					break;
 				case 'adm.home':
-					$bodyClass = 'sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed';
-					$bodyStyle = '';
+					$admBodyClass = 'sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed';
+					$admBodyStyle = '';
+					$admDivClass = '';
 					break;
 				default:
-					$bodyClass = '';
-					$bodyStyle = '';
+					$admBodyClass = '';
+					$admBodyStyle = '';
+					$admDivClass = '';
 			}
 			
-			$view->with('admBodyAttributes', [
-				'class' => $bodyClass,
-				'style' => $bodyStyle,
+			$view->with('admAttributes', [
+				'adm.body.class' => $admBodyClass,
+				'adm.body.style' => $admBodyStyle,
+				'adm.div.class' => $admDivClass,
 			]);
 			
 		});

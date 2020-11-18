@@ -10,7 +10,7 @@ class AuthController extends Controller
 		if (auth()->check()) {
 			return redirect()->intended(route('adm.home'));
 		}
-		return view('adm::auth.login');
+		return view('adm::pages.auth.login');
 	}
 	
 	public function store()

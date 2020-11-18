@@ -7,6 +7,6 @@ class HomeController extends AdmController
 {
 	public function index()
 	{
-		return view('adm::home.index');
+		return view('adm::pages.home.index');
 	}
 }

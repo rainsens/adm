@@ -14,3 +14,5 @@ const mix = require('laravel-mix');
 mix.setPublicPath(path.resolve('./'))
    .js('resources/js/adm.js', 'public/js').version()
    .sass('resources/sass/adm.scss', 'public/css').version();
+
+mix.copyDirectory('resources/skin', 'public/skin');
