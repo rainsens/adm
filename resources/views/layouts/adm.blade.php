@@ -20,7 +20,7 @@
 
 <body class="{{ $admAttributes['adm.body.class'] }}" style="{{ $admAttributes['adm.body.style'] }}">
     <div id="adm" class="{{ $admAttributes['adm.div.class'] }}">
-        @yield('content')
+        @yield('main-content')
     </div>
 </body>
 
