@@ -26,6 +26,7 @@ class Adm
 				
 				Route::get('login', [AuthController::class, 'login'])->name('login');
 				Route::post('login', [AuthController::class, 'store'])->name('login.store');
+				Route::delete('logout', [AuthController::class, 'logout'])->name('logout');
 			});
 	}
 

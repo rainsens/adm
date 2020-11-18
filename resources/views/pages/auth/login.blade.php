@@ -1,6 +1,7 @@
 @extends('adm::layouts.adm')
 
-@section('content')
+@section('main-content')
+    
     <section id="content_wrapper">
         
         <div id="canvas-wrapper">
@@ -105,6 +106,7 @@
         </section>
     
     </section>
+    
 @stop
 
 @section('scripts')
