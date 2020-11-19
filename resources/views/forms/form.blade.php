@@ -10,7 +10,7 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-11">
-                    <div class="row">
+                    <div class="row" style="margin-right: -5px">
                         <div class="col-md-6">
                             <span class="panel-title">
                                 <b>{{ isset($title) ? $title : 'Form Title' }}</b>
@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-md-6 text-right">
                             <a href="{{ route('adm.menus.index') }}" type="button" class="btn btn-default btn-sm ph25">列表</a>
-                            <button type="submit" class="btn btn-system btn-sm ph25">导出</button>
+                            <a type="button" class="btn btn-info btn-sm ph25">导出</a>
                         </div>
                     </div>
                 </div>
