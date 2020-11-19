@@ -31,7 +31,7 @@ class AuthTest extends TestCase
 	/** @test  */
 	public function login_name_is_required()
 	{
-		$this->post(route('adm.store'), [
+		$this->post(route('adm.login.store'), [
 			'name' => null,
 			'password' => '12345'
 		])
@@ -43,7 +43,7 @@ class AuthTest extends TestCase
 	/** @test */
 	public function login_password_is_required()
 	{
-		$this->post(route('adm.store'), [
+		$this->post(route('adm.login.store'), [
 			'name' => 'rainsen',
 			'password' => null,
 		])
@@ -80,17 +80,33 @@ class AuthTest extends TestCase
 		$authkind = 'adm';
 		$name = 'Wood';
 		
-		$guest = factory(User::class)->create([
+		$admin = factory(User::class)->create([
 			'authkind' => $authkind,
 			'name' => $name,
 		]);
 		
 		$this->post(route('adm.login'), [
-			'name' => $guest->name,
+			'name' => $admin->name,
 			'password' => 'admin',
 		])
 			->assertRedirect(route('adm.home'))
 			->assertStatus(302)
 			->assertSessionHas('success');
+	}
+	
+	/** @test */
+	public function administrator_can_logout()
+	{
+		$authkind = 'adm';
+		$name = 'Wood';
+		
+		$admin = factory(User::class)->create([
+			'authkind' => $authkind,
+			'name' => $name,
+		]);
+		
+		$this->actingAs($admin)
+			->delete(route('adm.logout'))
+			->assertRedirect(route('adm.login'));
 	}
 }
