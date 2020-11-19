@@ -17,7 +17,7 @@ $start: int
         <label for="{{ $name }}" class="col-md-2 control-label">
             @if(isset($required))<span class="text-danger">*</span> @endif {{ $label ?? '' }}
         </label>
-        <div class="col-md-7">
+        <div class="col-md-9">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></span>
                 <input type="number"

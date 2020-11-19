@@ -1,5 +1,5 @@
 <?php
-namespace Rainsens\Adm\Support;
+namespace Rainsens\Adm\Widgets;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;

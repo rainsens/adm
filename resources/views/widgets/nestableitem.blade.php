@@ -1,4 +1,4 @@
-@inject('nestable', 'Rainsens\Adm\Support\Nestable')
+@inject('nestable', 'Rainsens\Adm\Widgets\Nestable')
 
 @if(isset($data) && isset($datum))
     
@@ -11,7 +11,6 @@
             <div class="dd-handle">
                 
                 <i class="fa {{ $datum->icon }}"></i> {{ $datum->name }}
-                
                 
             </div>
             

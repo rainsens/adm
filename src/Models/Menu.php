@@ -4,13 +4,13 @@ namespace Rainsens\Adm\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Rainsens\Adm\Support\Nestable;
-use Rainsens\Adm\Models\Traits\Nestable as NestableTrait;
-use Rainsens\Adm\Models\Traits\Select2;
+use Rainsens\Adm\Widgets\Nestable;
+use Rainsens\Adm\Widgets\Traits\NestableTrait;
+use Rainsens\Adm\Widgets\Traits\Select2Trait;
 
 class Menu extends Model
 {
-	use NestableTrait, Select2;
+	use NestableTrait, Select2Trait;
 	
     protected $guarded = ['id'];
     

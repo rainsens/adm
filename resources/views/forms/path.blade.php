@@ -3,7 +3,7 @@
         <label for="{{ $name }}" class="col-md-2 control-label">
             @if(isset($required))<span class="text-danger">*</span> @endif {{ $label }}
         </label>
-        <div class="col-md-7">
+        <div class="col-md-9">
             <input type="text"
                    id="{{ $name }}"
                    name="{{ $name }}"

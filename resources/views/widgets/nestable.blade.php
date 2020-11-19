@@ -34,7 +34,7 @@
     <link href="{{ asset('vendor/adm/skin/css/nestable.css') }}" rel="stylesheet">
 @endpush
 
-@inject('nestable', 'Rainsens\Adm\Support\Nestable')
+@inject('nestable', 'Rainsens\Adm\Widgets\Nestable')
 
 @if(isset($params))
     <div class="row table-layout">

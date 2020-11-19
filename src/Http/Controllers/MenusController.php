@@ -2,7 +2,6 @@
 namespace Rainsens\Adm\Http\Controllers;
 
 use Rainsens\Adm\Models\Menu;
-use Rainsens\Adm\Support\Nestable;
 
 class MenusController extends AdmController
 {

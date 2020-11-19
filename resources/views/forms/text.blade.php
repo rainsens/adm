@@ -8,7 +8,7 @@
             
         </label>
         
-        <div class="col-md-7">
+        <div class="col-md-9">
             
             <input type="text"
                    id="{{ $name }}"
