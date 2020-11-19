@@ -4,7 +4,7 @@ namespace Rainsens\Adm\Tests\Feature\Menus;
 use Rainsens\Adm\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ViewMenusTest extends TestCase
+class MenusTest extends TestCase
 {
 	use RefreshDatabase;
 	
@@ -28,6 +28,18 @@ class ViewMenusTest extends TestCase
 		
 		$this->get(route('adm.menus.index'))
 			->assertStatus(200);
+	}
+	
+	/** @test */
+	public function can_update_menus_order()
+	{
+		$admUser = createAdmUser();
+		$this->actingAs($admUser);
+		
+		$this->post(route('adm.menus.order'), [
+			'data' => '[{"id":1},{"id":2,"children":[{"id":3},{"id":4},{"id":5},{"id":6},{"id":7}]}]'
+		])
+			->assertStatus(201);
 	}
 	
 }

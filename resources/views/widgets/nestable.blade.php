@@ -49,15 +49,15 @@
                         <input data-action="collapse-all" type="radio" name="options" id="option2" autocomplete="off">
                         <span class="fa fa-minus-square-o"></span> 收起
                     </label>
-                    <label class="btn btn-success btn-sm ml5 menu-create">
+                    <label class="btn btn-success btn-sm ml5 data-create">
                         <input type="radio" name="options" id="option3" autocomplete="off">
                         <span class="fa fa-plus"></span> 新增
                     </label>
-                    <label class="btn btn-info btn-sm menu-order">
+                    <label class="btn btn-info btn-sm data-save">
                         <input type="radio" name="options" id="option4" autocomplete="off">
                         <span class="fa fa-save"></span> 保存
                     </label>
-                    <label class="btn btn-info btn-sm menu-refresh">
+                    <label class="btn btn-info btn-sm data-refresh">
                         <input type="radio" name="options" id="option5" autocomplete="off">
                         <span class="fa fa-refresh"></span> 刷新
                     </label>
@@ -90,12 +90,12 @@
         <script>
             jQuery(document).ready(function() {
             
-                let menus = [];
+                let items = [];
                 let updateOutput = function(e) {
                     let list = e.length ? e : $(e.target),
                         output = list.data('output');
                     if (window.JSON) {
-                        menus = (list.nestable('serialize'));
+                        items = (list.nestable('serialize'));
                         output.val(window.JSON.stringify(list.nestable('serialize')));
                     }
                 };
@@ -118,19 +118,19 @@
                     }
                 });
             
-                /*$('.menus-save').click(function () {
-                    axios.post('', {menus: menus})
+                $('.data-save').click(function () {
+                    axios.post('{{ route($params['urlOrder']) }}', {data: items})
                     .then(function (res) {
                         console.log(res);
                     }, function (err) {
                     
                     });
-                });*/
+                });
             
-                $('.menu-create').click(function () {
+                $('.data-create').click(function () {
                     location.href = '{{ isset($nestable::$params['urlCreate']) ? route($nestable::$params['urlCreate']) : '' }}';
                 });
-                $('.menu-refresh').click(function () {
+                $('.data-refresh').click(function () {
                     location.href = '{{ isset($nestable::$params['urlRefresh']) ? route($nestable::$params['urlRefresh']) : '' }}';
                 });
             });

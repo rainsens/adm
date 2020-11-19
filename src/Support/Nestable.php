@@ -1,13 +1,16 @@
 <?php
 namespace Rainsens\Adm\Support;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class Nestable
 {
 	/**
-	 * @var array
 	 * Already displayed menus in nestable tree.
+	 * put it in this array, and do not show it again on tree.
+	 *
+	 * @var array
 	 */
 	static public $settled = [];
 	
@@ -32,5 +35,61 @@ class Nestable
 	 * ]
 	 */
 	static public $params = [];
+	
+	/**
+	 *
+	 * Handle the ordered data, make it easy to update to database.
+	 *
+	 * @param array $data
+	 * @param int $parentId
+	 * @return array
+	 *
+	 * process this format:
+	 * array:2 [
+	 *      0 => array:2 [
+	 *          "id" => 2
+	 *          "children" => array:5 [
+	 *              0 => array:1 ["id" => 3]
+	 *              0 => array:1 ["id" => 4]
+	 *              0 => array:1 ["id" => 5]
+	 *              0 => array:1 ["id" => 6]
+	 *              0 => array:1 ["id" => 7]
+	 *          ]
+	 *      ]
+	 *      1 => array:1 [
+	 *          "id" => 1
+	 *      ]
+	 * ]
+	 *
+	 *
+	 * to format below:
+	 *
+	 * array:7 [
+	 *      0 => array:2 [
+	 *          "id" => 2,
+	 *          "order" => 1
+	 *      ]
+	 *      0 => array:2 [
+	 *          "id" => 3,
+	 *          "order" => 2
+	 *      ]
+	 * ]
+	 *
+	 */
+	public function recursive(array $data, $parentId = 0)
+	{
+		static $result = [];
+		foreach ($data as $key => $value) {
+			$result[] = [
+				'id' => $value['id'],
+				'parent_id' => $parentId,
+				'order' => $key+1,
+			];
+			if (Arr::has($value, 'children')) {
+				$this->recursive($value['children'], $value['id']);
+			}
+		}
+		return $result;
+	}
 
 }

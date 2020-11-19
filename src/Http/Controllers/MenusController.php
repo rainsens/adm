@@ -2,6 +2,7 @@
 namespace Rainsens\Adm\Http\Controllers;
 
 use Rainsens\Adm\Models\Menu;
+use Rainsens\Adm\Support\Nestable;
 
 class MenusController extends AdmController
 {
@@ -50,7 +51,21 @@ class MenusController extends AdmController
 	
 	public function order()
 	{
-	
+		$this->validate(request(), [
+			'data' => 'required|array'
+		]);
+		
+		$data = app(Nestable::class)->recursive(request('data'));
+		
+		foreach ($data as $value) {
+			Menu::where('id', $value['id'])
+				->update([
+					'parent_id' => $value['parent_id'],
+					'order' => $value['order'],
+				]);
+		}
+		
+		return response([], 201);
 	}
 	
 	public function destroy(Menu $menu)
