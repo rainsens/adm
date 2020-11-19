@@ -1,10 +1,10 @@
 <?php
-namespace Rainsens\Adm\Tests\Feature\Controllers;
+namespace Rainsens\Adm\Tests\Feature\Dashboard;
 
 use Rainsens\Adm\Tests\Dummy\Models\User;
 use Rainsens\Adm\Tests\TestCase;
 
-class HomeControllerTest extends TestCase
+class DashboardTest extends TestCase
 {
 	/** @test */
 	public function guest_cannot_see_dashboard()

@@ -1,11 +1,11 @@
 <?php
-namespace Rainsens\Adm\Tests\Feature\Controllers;
+namespace Rainsens\Adm\Tests\Feature\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Rainsens\Adm\Tests\Dummy\Models\User;
 use Rainsens\Adm\Tests\TestCase;
 
-class AuthControllerTest extends TestCase
+class AuthTest extends TestCase
 {
 	use RefreshDatabase;
 	
