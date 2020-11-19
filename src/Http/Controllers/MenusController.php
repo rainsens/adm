@@ -8,10 +8,10 @@ class MenusController extends AdmController
 {
 	protected $title = '菜单管理';
 	
-	public function index()
+	public function index(Menu $menu)
 	{
-		$nestableMenus = Menu::nestable('order');
-		$select2Menus = Menu::select2data('name');
+		$nestableMenus = $menu->nestable('order');
+		$select2Menus = $menu->select2data('name');
 		
 		return view('adm::pages.menus.index', compact('select2Menus', 'nestableMenus'));
 	}
@@ -49,21 +49,13 @@ class MenusController extends AdmController
 		return redirect()->route('menu.index')->with('system', '修改成功');
 	}
 	
-	public function order()
+	public function order(Menu $menu)
 	{
 		$this->validate(request(), [
 			'data' => 'required|array'
 		]);
 		
-		$data = app(Nestable::class)->recursive(request('data'));
-		
-		foreach ($data as $value) {
-			Menu::where('id', $value['id'])
-				->update([
-					'parent_id' => $value['parent_id'],
-					'order' => $value['order'],
-				]);
-		}
+		$menu->orderMenus(request('data'));
 		
 		return response([], 201);
 	}

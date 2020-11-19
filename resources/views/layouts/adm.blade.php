@@ -33,6 +33,7 @@
 <script src="{{ asset('vendor/adm/skin/js/jquery-ui.js') }}"></script>
 <script src="{{ asset('vendor/adm/skin/js/canvasbg.js') }}"></script>
 <script src="{{ asset('vendor/adm/skin/js/utility.js') }}"></script>
+<script src="{{ asset('vendor/adm/skin/js/pnotify.js') }}"></script>
 
 @stack('scriptfiles')
 
@@ -41,11 +42,23 @@
 <script src="{{ asset('vendor/adm/js/adm.js') }}"></script>
 
 <script>
+    
     $(function () {
         "use strict";
         Core.init();
         Adm.init();
     });
+    
+    function admNotify(style, text) {
+	    new PNotify({
+		    title: 'System Notification',
+		    text: text,
+		    shadow: true,
+		    type: style,
+            width: '25%',
+		    delay: 1500
+	    });
+    }
 </script>
 
 @stack('scripts')

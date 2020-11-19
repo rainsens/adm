@@ -4,12 +4,13 @@ namespace Rainsens\Adm\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Rainsens\Adm\Models\Traits\Nestable;
+use Rainsens\Adm\Support\Nestable;
+use Rainsens\Adm\Models\Traits\Nestable as NestableTrait;
 use Rainsens\Adm\Models\Traits\Select2;
 
 class Menu extends Model
 {
-	use Nestable, Select2;
+	use NestableTrait, Select2;
 	
     protected $guarded = ['id'];
     
@@ -21,5 +22,18 @@ class Menu extends Model
     public function scopeNestable(Builder $builder)
     {
     	return $builder->order()->get();
+    }
+    
+    public function orderMenus(array $data)
+    {
+	    $data = app(Nestable::class)->recursive($data);
+	    
+	    foreach ($data as $value) {
+		    $this->where('id', $value['id'])
+			    ->update([
+				    'parent_id' => $value['parent_id'],
+				    'order' => $value['order'],
+			    ]);
+	    }
     }
 }

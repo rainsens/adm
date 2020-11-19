@@ -50,22 +50,20 @@
                         <span class="fa fa-minus-square-o"></span> 收起
                     </label>
                     <label class="btn btn-success btn-sm ml5 data-create">
-                        <input type="radio" name="options" id="option3" autocomplete="off">
                         <span class="fa fa-plus"></span> 新增
                     </label>
                     <label class="btn btn-info btn-sm data-save">
-                        <input type="radio" name="options" id="option4" autocomplete="off">
                         <span class="fa fa-save"></span> 保存
                     </label>
                     <label class="btn btn-info btn-sm data-refresh">
-                        <input type="radio" name="options" id="option5" autocomplete="off">
                         <span class="fa fa-refresh"></span> 刷新
                     </label>
                 </div>
             </menu>
         </div>
     </div>
-    <textarea id="nestable-output" class="form-control"></textarea>
+    
+    {{-- For test. <textarea id="nestable-output" class="form-control"></textarea>--}}
     
     <div class="row mt5">
         <div class="col-md-12">
@@ -96,7 +94,9 @@
                         output = list.data('output');
                     if (window.JSON) {
                         items = (list.nestable('serialize'));
-                        output.val(window.JSON.stringify(list.nestable('serialize')));
+                        
+                        // For test.
+                        //output.val(window.JSON.stringify(list.nestable('serialize')));
                     }
                 };
             
@@ -105,7 +105,8 @@
                     group: 1
                 }).on('change', updateOutput);
             
-                updateOutput(nestable.data('output', $('#nestable-output')));
+                // For test
+                //updateOutput(nestable.data('output', $('#nestable-output')));
             
                 $('#nestable-menu').on('change', function(e) {
                     let target = $(e.target),
@@ -119,9 +120,16 @@
                 });
             
                 $('.data-save').click(function () {
+                	
+                	if (!items.length) {
+                        return  false;
+                    }
+                	
                     axios.post('{{ route($params['urlOrder']) }}', {data: items})
                     .then(function (res) {
-                        console.log(res);
+	
+	                    admNotify('system', 'Saved Successfully')
+                    	
                     }, function (err) {
                     
                     });
