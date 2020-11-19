@@ -5,16 +5,20 @@ use Rainsens\Adm\Models\Menu;
 
 class MenusController extends AdmController
 {
+	protected $title = '菜单管理';
+	
 	public function index()
 	{
-		$select2Menus = [];
-		$nestableMenus = [];
+		$nestableMenus = Menu::nestable('order');
+		$select2Menus = Menu::select2data('name');
+		
 		return view('adm::pages.menus.index', compact('select2Menus', 'nestableMenus'));
 	}
 	
 	public function create()
 	{
-		return view('adm::pages.menus.createdit');
+		$select2Menus = Menu::select2data('name');
+		return view('adm::pages.menus.createdit', compact('select2Menus'));
 	}
 	
 	public function store(Menu $menu)
@@ -34,7 +38,8 @@ class MenusController extends AdmController
 	
 	public function edit(Menu $menu)
 	{
-		return view('adm::pages.menus.createdit', compact('menu'));
+		$select2Menus = Menu::select2data('name');
+		return view('adm::pages.menus.createdit', compact('menu', 'select2Menus'));
 	}
 	
 	public function update(Menu $menu)

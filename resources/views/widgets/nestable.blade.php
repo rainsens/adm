@@ -12,7 +12,7 @@
     
     For instance, class Services/MenuSvc provides the data $nestableData.
     
-    @component('widget.nestable', [
+    @component('adm::widgets.nestable', [
         'params' => [
             'data' => $nestableData,
             'urlCreate' => 'adm.menus.create',

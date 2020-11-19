@@ -1,8 +1,46 @@
 <?php
 
+if (! function_exists('recursive_order')) {
+	
+	function recursive_order(array $data, $parentField, $parentId = 0, $level = 0) {
+		static $orderedData = [];
+		foreach ($data as $key => $value) {
+			if ($value[$parentField] === $parentId) {
+				$value['level'] = $level;
+				$orderedData[] = $value;
+				unset($data[$key]);
+				recursive_order($data, $parentField, $value['id'], $level+1);
+			}
+		}
+		return $orderedData;
+	}
+}
+
+if (! function_exists('select2data')) {
+	
+	function select2data(\Illuminate\Support\Collection $collection, string $textField) {
+		
+		$originalData = recursive_order($collection->toArray(), 'parent_id');
+		
+		$data[0] = ['id' => 0, 'text' => 'ROOT', 'html' => '┝ ROOT', 'title' => ''];
+		
+		foreach ($originalData as $value) {
+			$prefix = '';
+			for ($i = $value['level']; $i > 0; $i--) {
+				$prefix .= '&nbsp;&nbsp;&nbsp;&nbsp;';
+			}
+			$text = $value[$textField];
+			$html = $prefix.'┝ '.$text;
+			$data[] = ['id' => $value['id'], 'text' => $text, 'html' => $html, 'title' => ''];
+		}
+		return $data;
+	}
+}
+
+
 /**
  * ---------------------------------------------------------------------------------------------------------------------
- * For end user.
+ * Path for end user.
  * ---------------------------------------------------------------------------------------------------------------------
  */
 if (! function_exists('adm_path'))
@@ -42,7 +80,7 @@ if (! function_exists('adm_route_path')) {
 
 /**
  * ---------------------------------------------------------------------------------------------------------------------
- * For vendor below.
+ * Path for vendor below.
  * ---------------------------------------------------------------------------------------------------------------------
  */
 

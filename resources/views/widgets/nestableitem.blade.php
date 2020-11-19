@@ -24,7 +24,7 @@
                 </a>
             </div>
             
-            @component('widget.nestablerow', ['data' => $children])@endcomponent
+            @component('adm::widgets.nestablerow', ['data' => $children])@endcomponent
         
         </li>
         

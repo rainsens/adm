@@ -14,10 +14,10 @@ $start: int
 --}}
 @if(isset($label) && isset($name))
     <div class="form-group {{ $errors->has($name) ? 'has-error' : '' }}">
-        <label for="{{ $name }}" class="col-md-3 control-label">
+        <label for="{{ $name }}" class="col-md-2 control-label">
             @if(isset($required))<span class="text-danger">*</span> @endif {{ $label ?? '' }}
         </label>
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></span>
                 <input type="number"

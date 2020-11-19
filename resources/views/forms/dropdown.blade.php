@@ -5,10 +5,10 @@
 
 @if(isset($label) && $name)
     <div class="form-group">
-        <label for="{{ $name }}" class="col-md-3 control-label {{ $errors->has('url') ? 'has-error' : '' }}">
+        <label for="{{ $name }}" class="col-md-2 control-label {{ $errors->has('url') ? 'has-error' : '' }}">
             @if(isset($required))<span class="text-danger">*</span> @endif {{ $label }}
         </label>
-        <div class="col-md-8">
+        <div class="col-md-7">
             <select name="{{ $name }}" class="select2-single form-control select2dropdown"></select>
             @if($errors->has($name))
                 <span class="append-icon right"><i class="fa fa-remove"></i></span>

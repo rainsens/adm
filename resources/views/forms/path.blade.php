@@ -1,9 +1,9 @@
 @if(isset($label) && isset($name))
     <div class="form-group {{ $errors->has('url') ? 'has-error' : '' }}">
-        <label for="{{ $name }}" class="col-md-3 control-label">
+        <label for="{{ $name }}" class="col-md-2 control-label">
             @if(isset($required))<span class="text-danger">*</span> @endif {{ $label }}
         </label>
-        <div class="col-md-8">
+        <div class="col-md-7">
             <input type="text"
                    id="{{ $name }}"
                    name="{{ $name }}"

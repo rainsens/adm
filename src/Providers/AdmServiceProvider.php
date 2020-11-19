@@ -2,6 +2,7 @@
 
 namespace Rainsens\Adm\Providers;
 
+use Illuminate\Support\Collection;
 use Rainsens\Adm\Adm;
 use Rainsens\Adm\Console\UninstallCommand;
 use Rainsens\Adm\Support\Composer;

@@ -34,7 +34,7 @@
                     @component('adm::forms.text', ['label' => '菜单标题', 'name' => 'name', 'placeholder' => '输入菜单标题', 'required' => true])@endcomponent
                     @component('adm::forms.text', [
                         'label' => '菜单图标', 'name' => 'icon', 'placeholder' => '输入菜单图标', 'required' => true,
-                        'help' => 'For more icons please see <a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>'
+                        'help' => '<a href="http://fontawesome.io/icons" target="_blank">http://fontawesome.io/icons</a>'
                     ])@endcomponent
                     @component('adm::forms.path', ['label' => '访问路径', 'name' => 'url', 'placeholder' => '输入访问路径'])@endcomponent
                     @component('adm::forms.number', ['label' => '显示顺序', 'name' => 'order', 'start' => 1])@endcomponent

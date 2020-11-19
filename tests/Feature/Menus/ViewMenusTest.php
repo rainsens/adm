@@ -1,9 +1,8 @@
 <?php
 namespace Rainsens\Adm\Tests\Feature\Menus;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Rainsens\Adm\Models\Menu;
 use Rainsens\Adm\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ViewMenusTest extends TestCase
 {
