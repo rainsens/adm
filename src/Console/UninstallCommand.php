@@ -38,7 +38,7 @@ class UninstallCommand extends Command
 	{
 		if (File::isDirectory(adm_path())) {
 			File::deleteDirectory(adm_path());
-			File::deleteDirectory(public_path('vendor/adm'));
+			File::deleteDirectory(adm_public_path());
 		}
 	}
 }

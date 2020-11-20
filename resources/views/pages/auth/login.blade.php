@@ -29,7 +29,7 @@
                         <span class="panel-title hidden"><i class="fa fa-sign-in"></i></span>
                         <div class="section row mn">
                             <div class="col-sm-12 text-center">
-                                <img src="{{ asset('vendor/adm/skin/img/logos/logo_red.png') }}" height="50" alt="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <img src="{{ adm_asset('skin/img/logos/logo_red.png') }}" height="50" alt="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                         </div>
                     </div>

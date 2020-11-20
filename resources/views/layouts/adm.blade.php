@@ -5,18 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }}</title>
-    <link href="{{ asset('vendor/adm/skin/css/theme.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/adm/skin/css/admin-form.css') }}" rel="stylesheet">
+    <link href="{{ adm_asset('skin/css/theme.css') }}" rel="stylesheet">
+    <link href="{{ adm_asset('skin/css/admin-form.css') }}" rel="stylesheet">
     
     @stack('cssfiles')
     
-    <link href="{{ asset('vendor/adm/css/adm.css') }}" rel="stylesheet">
-    
-    <link rel="shortcut icon" href="vendor/adm/skin/img/favicon.ico">
+    <link rel="shortcut icon" href="{{ adm_asset('adm/skin/img/favicon.ico') }}">
     
     <!--[if lt IE 9]>
-    <script src="{{ asset('vendor/adm/skin/js/html5shiv.js') }}"></script>
-    <script src="{{ asset('vendor/adm/skin/js/respond.js') }}"></script>
+    <script src="{{ adm_asset('skin/js/html5shiv.js') }}"></script>
+    <script src="{{ adm_asset('skin/js/respond.js') }}"></script>
     <![endif]-->
     
     @stack('styles')
@@ -35,17 +33,17 @@
 
 </body>
 
-<script src="{{ asset('vendor/adm/skin/js/jquery.js') }}"></script>
-<script src="{{ asset('vendor/adm/skin/js/jquery-ui.js') }}"></script>
-<script src="{{ asset('vendor/adm/skin/js/canvasbg.js') }}"></script>
-<script src="{{ asset('vendor/adm/skin/js/utility.js') }}"></script>
-<script src="{{ asset('vendor/adm/skin/js/pnotify.js') }}"></script>
+<script src="{{ adm_asset('skin/js/jquery.js') }}"></script>
+<script src="{{ adm_asset('skin/js/jquery-ui.js') }}"></script>
+<script src="{{ adm_asset('skin/js/canvasbg.js') }}"></script>
+<script src="{{ adm_asset('skin/js/utility.js') }}"></script>
+<script src="{{ adm_asset('skin/js/pnotify.js') }}"></script>
 
 @stack('scriptfiles')
 
-<script src="{{ asset('vendor/adm/skin/js/adm.js') }}"></script>
-<script src="{{ asset('vendor/adm/skin/js/main.js') }}"></script>
-<script src="{{ asset('vendor/adm/js/adm.js') }}"></script>
+<script src="{{ adm_asset('skin/js/adm.js') }}"></script>
+<script src="{{ adm_asset('skin/js/main.js') }}"></script>
+<script src="{{ adm_asset('js/adm.js') }}"></script>
 
 <script>
     

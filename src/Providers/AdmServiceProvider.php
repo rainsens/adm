@@ -3,15 +3,14 @@
 namespace Rainsens\Adm\Providers;
 
 use Rainsens\Adm\Adm;
-use Rainsens\Adm\Console\UninstallCommand;
-use Rainsens\Adm\Models\AdmUser;
 use Rainsens\Adm\Support\Composer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Rainsens\Adm\Console\AdmCommand;
 use Illuminate\Support\ServiceProvider;
-use Rainsens\Adm\Console\PublishCommand;
+use Rainsens\Adm\Console\ConfigCommand;
 use Rainsens\Adm\Console\InstallCommand;
+use Rainsens\Adm\Console\UninstallCommand;
 use Rainsens\Adm\Contracts\ComposerContract;
 use Rainsens\Adm\Http\Middleware\Authenticate;
 
@@ -19,7 +18,7 @@ class AdmServiceProvider extends ServiceProvider
 {
 	protected $commands = [
 		AdmCommand::class,
-		PublishCommand::class,
+		ConfigCommand::class,
 		InstallCommand::class,
 		UninstallCommand::class,
 	];
@@ -49,30 +48,30 @@ class AdmServiceProvider extends ServiceProvider
 			$this->commands($this->commands);
 		}
 		
-		$this->migrations();
+		$this->admMigrations();
 		
-		$this->translations();
-		$this->routes();
-		$this->middleware();
-		$this->publishments();
+		$this->admTranslations();
+		$this->admRoutes();
+		$this->admMiddleware();
+		$this->admPublishs();
 		
-		$this->views();
-		$this->composerShare();
+		$this->admViews();
+		$this->admComposerShare();
 		
-		$this->guards();
+		$this->admGuards();
 	}
 	
-	protected function migrations()
+	protected function admMigrations()
 	{
 		$this->loadMigrationsFrom(_database_path('migrations'));
 	}
 	
-	protected function translations()
+	protected function admTranslations()
 	{
 		$this->loadTranslationsFrom(_resource_path('lang'), 'adm');
 	}
 	
-	protected function routes()
+	protected function admRoutes()
 	{
 		if (file_exists(adm_route_path('web.php'))) {
 			$this->loadRoutesFrom(adm_route_path('web.php'));
@@ -81,7 +80,7 @@ class AdmServiceProvider extends ServiceProvider
 		}
 	}
 	
-	protected function middleware()
+	protected function admMiddleware()
 	{
 		foreach ($this->routeMiddlewares as $key => $middleware) {
 			app('router')->aliasMiddleware($key, $middleware);
@@ -92,7 +91,7 @@ class AdmServiceProvider extends ServiceProvider
 		}
 	}
 	
-	protected function publishments()
+	protected function admPublishs()
 	{
 		$this->publishes([_config_path('adm.php') => config_path('adm.php')], 'config');
 		
@@ -102,17 +101,17 @@ class AdmServiceProvider extends ServiceProvider
 		$this->publishes([_stub_path('controllers/ExampleController.stub') => adm_controller_path('ExampleController.php')], 'example-controller');
 		$this->publishes([_stub_path('controllers/ExampleController.stub') => adm_controller_path('ExampleController.php')], 'example-controller');
 		
-		$this->publishes([_public_path('skin') => public_path('vendor/adm/skin')], 'asset-skin');
-		$this->publishes([_public_path('js') => public_path('vendor/adm/js')], 'asset-js');
-		$this->publishes([_public_path('css') => public_path('vendor/adm/css')], 'asset-css');
+		$this->publishes([_public_path('skin') => adm_public_path('skin')], 'asset-skin');
+		$this->publishes([_public_path('js') => adm_public_path('js')], 'asset-js');
+		$this->publishes([_public_path('css') => adm_public_path('css')], 'asset-css');
 	}
 	
-	protected function views()
+	protected function admViews()
 	{
 		$this->loadViewsFrom(_resource_path('views'), 'adm');
 	}
 	
-	protected function composerShare()
+	protected function admComposerShare()
 	{
 		View::composer('*', function (\Illuminate\View\View $view) {
 			switch (Route::currentRouteName()) {
@@ -141,27 +140,10 @@ class AdmServiceProvider extends ServiceProvider
 		});
 	}
 	
-	protected function guards()
+	protected function admGuards()
 	{
-		config([
-			'auth.guards.adm' => [
-				'driver' => 'session',
-				'provider' => 'adm',
-			]
-		]);
-		config([
-			'auth.providers.adm' => [
-				'driver' => 'eloquent',
-				'model' => AdmUser::class,
-			]
-		]);
-		config([
-			'auth.passwords.adm' => [
-				'provider' => 'adm',
-				'table' => 'password_resets',
-				'expire' => 60,
-				"throttle" => 60,
-			]
-		]);
+		config(["auth.guards.adm" => config('adm.auth.guards.adm')]);
+		config(['auth.providers.adm' => config('adm.auth.providers.adm')]);
+		config(['auth.passwords.adm' => config('adm.auth.passwords.adm')]);
 	}
 }

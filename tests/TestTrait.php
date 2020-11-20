@@ -1,7 +1,6 @@
 <?php
 namespace Rainsens\Adm\Tests;
 
-use Rainsens\Adm\Models\AdmUser;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Artisan;
 use Rainsens\Adm\Contracts\ComposerContract;
@@ -18,10 +17,12 @@ trait TestTrait
 			
 			$this->createTestNamespace();
 			
-			Artisan::call('adm:publish');
+			Artisan::call('adm:config');
 			
-			exit("================================ ADM TEST ===============================\nPrepared test environment. Please run 'phpunit' or 'composer test' again!\n-------------------------------------------------------------------------\n");
-		
+			$this->setConfig();
+			
+			Artisan::call('adm:install');
+			
 		} else {
 			
 			Artisan::call('adm:uninstall');
@@ -29,8 +30,23 @@ trait TestTrait
 			$this->removeTestNamespace();
 			$this->createTestNamespace();
 			
-			Artisan::call('adm:publish');
+			Artisan::call('adm:config');
+			
+			$this->setConfig();
+			
+			Artisan::call('adm:install');
 		}
+	}
+	
+	private function setConfig()
+	{
+		$admConfig = require _config_path('adm.php');
+		
+		$this->app['config']->set('adm', $admConfig);
+		
+		config(["auth.guards.adm" => config('adm.auth.guards.adm')]);
+		config(['auth.providers.adm' => config('adm.auth.providers.adm')]);
+		config(['auth.passwords.adm' => config('adm.auth.passwords.adm')]);
 	}
 	
 	private function createTestNamespace()

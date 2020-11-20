@@ -29,7 +29,7 @@ if (! function_exists('adm_path'))
 	 * @return string
 	 */
 	function adm_path($path = '') {
-		return base_path(config('adm.dir') ?? 'adm') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+		return config('adm.adm_path', base_path('adm')) . ($path ? DIRECTORY_SEPARATOR . $path : $path);
 	}
 }
 
@@ -52,6 +52,30 @@ if (! function_exists('adm_route_path')) {
 	 */
 	function adm_route_path($path = '') {
 		return adm_path('routes') . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+	}
+}
+
+if (! function_exists('adm_public_path')) {
+	/**
+	 * Get the path to /public/vendor/adm
+	 * @param string $path
+	 * @return string
+	 */
+	function adm_public_path($path = '') {
+		return config('adm.adm_public_path', public_path('vendor/adm')) . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+	}
+}
+
+if (! function_exists('adm_asset')) {
+	/**
+	 * Get the http path to /public/vendor/adm
+	 * @param $path
+	 * @param null $secure
+	 * @return mixed
+	 */
+	function adm_asset($path, $secure = null)
+	{
+		return app('url')->asset('vendor/adm' . $path, $secure);
 	}
 }
 
