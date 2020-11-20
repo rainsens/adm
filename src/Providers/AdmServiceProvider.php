@@ -2,9 +2,9 @@
 
 namespace Rainsens\Adm\Providers;
 
-use Illuminate\Support\Collection;
 use Rainsens\Adm\Adm;
 use Rainsens\Adm\Console\UninstallCommand;
+use Rainsens\Adm\Models\AdmUser;
 use Rainsens\Adm\Support\Composer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -22,6 +22,16 @@ class AdmServiceProvider extends ServiceProvider
 		PublishCommand::class,
 		InstallCommand::class,
 		UninstallCommand::class,
+	];
+	
+	protected $routeMiddlewares = [
+		'adm.auth'       => Authenticate::class,
+	];
+	
+	protected $middlewareGroups = [
+		'adm' => [
+			'adm.auth',
+		],
 	];
 	
 	public function register()
@@ -48,6 +58,8 @@ class AdmServiceProvider extends ServiceProvider
 		
 		$this->views();
 		$this->composerShare();
+		
+		$this->guards();
 	}
 	
 	protected function migrations()
@@ -71,7 +83,13 @@ class AdmServiceProvider extends ServiceProvider
 	
 	protected function middleware()
 	{
-		app('router')->aliasMiddleware('adm.auth', Authenticate::class);
+		foreach ($this->routeMiddlewares as $key => $middleware) {
+			app('router')->aliasMiddleware($key, $middleware);
+		}
+		
+		foreach ($this->middlewareGroups as $key => $middleware) {
+			app('router')->middlewareGroup($key, $middleware);
+		}
 	}
 	
 	protected function publishments()
@@ -121,5 +139,29 @@ class AdmServiceProvider extends ServiceProvider
 			]);
 			
 		});
+	}
+	
+	protected function guards()
+	{
+		config([
+			'auth.guards.adm' => [
+				'driver' => 'session',
+				'provider' => 'adm',
+			]
+		]);
+		config([
+			'auth.providers.adm' => [
+				'driver' => 'eloquent',
+				'model' => AdmUser::class,
+			]
+		]);
+		config([
+			'auth.passwords.adm' => [
+				'provider' => 'adm',
+				'table' => 'password_resets',
+				'expire' => 60,
+				"throttle" => 60,
+			]
+		]);
 	}
 }

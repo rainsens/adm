@@ -2,22 +2,19 @@
 namespace Rainsens\Adm\Support;
 
 use Illuminate\Database\Seeder;
+use Rainsens\Adm\Models\AdmUser;
 use Rainsens\Adm\Models\Menu;
 
 class AdmSeeder extends Seeder
 {
 	public function run()
 	{
-		// Initialize first adm user.
-		$userModel = app(config('adm.auth.model'));
-		$userAccountField = config('adm.auth.fields.account');
-		$userPasswordField = config('adm.auth.fields.password');
-		$userIdentityField = config('adm.auth.fields.identity');
-		
-		$userModel->$userAccountField = 'adm';
-		$userModel->$userPasswordField = '$2y$10$GFcriy03N2TRsW0mRid/p.aoDtgAfZTIbXs69PBo3e4t7WhZM.TyK';
-		$userModel->$userIdentityField = 'adm';
-		$userModel->save();
+		// Initialize the first adm user.
+		AdmUser::create([
+			'name' => 'adm',
+			'password' => '$2y$10$GFcriy03N2TRsW0mRid/p.aoDtgAfZTIbXs69PBo3e4t7WhZM.TyK',
+			'nickname' => 'Rainsen',
+		]);
 		
 		// Menus.
 		Menu::insert([
@@ -31,7 +28,7 @@ class AdmSeeder extends Seeder
 			[
 				'parent_id' => 0,
 				'order'     => 2,
-				'name'      => 'Adm',
+				'name'      => 'Adm System',
 				'icon'      => 'fa-tasks',
 				'url'       => '',
 			],

@@ -2,9 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use Rainsens\Adm\Tests\Dummy\Models\User;
-use Faker\Generator as Faker;
 use Illuminate\Support\Str;
+use Faker\Generator as Faker;
+use Rainsens\Adm\Models\AdmUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +17,9 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(AdmUser::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'authkind' => 'adm',
         'password' => '$2y$10$GFcriy03N2TRsW0mRid/p.aoDtgAfZTIbXs69PBo3e4t7WhZM.TyK', // password
         'remember_token' => Str::random(10),
     ];

@@ -22,7 +22,6 @@ class Adm
 				Route::group([], function () {
 					
 					Route::resources([
-						'users' => config('adm.auth.model'),
 						'menus' => MenusController::class,
 					]);
 					

@@ -8,12 +8,10 @@ class Authenticate
 {
 	public function handle($request, Closure $next)
 	{
-		if (Auth::guest()) {
+		if (Auth::guard('adm')->guest()) {
 			return redirect(route('adm.login'));
 		}
-		if (Auth::user()->type === 'normal') {
-			return redirect(route('adm.login'));
-		}
+		
 		return $next($request);
 	}
 }

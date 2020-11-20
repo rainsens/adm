@@ -1,8 +1,6 @@
 <?php
 
-use Rainsens\Adm\Tests\Dummy\Models\User;
-
-function createAdmUser($attributes = [], $times = null)
+function create($model, $attributes = [], $times = null)
 {
-	return factory(User::class, $times)->create($attributes);
+	return factory($model, $times)->create($attributes);
 }

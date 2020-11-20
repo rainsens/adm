@@ -1,9 +1,9 @@
 <?php
 namespace Rainsens\Adm\Tests\Feature\Auth;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Rainsens\Adm\Tests\Dummy\Models\User;
+use Rainsens\Adm\Models\AdmUser;
 use Rainsens\Adm\Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AuthTest extends TestCase
 {
@@ -21,9 +21,9 @@ class AuthTest extends TestCase
 	/** @test */
 	public function authenticated_user_cannot_see_login_page()
 	{
-		$user = factory(User::class)->create();
+		$this->login();
 		
-		$this->actingAs($user)->get(route('adm.login'))
+		$this->get(route('adm.login'))
 			->assertRedirect(route('adm.home'))
 			->assertStatus(302);
 	}
@@ -57,17 +57,9 @@ class AuthTest extends TestCase
 	{
 		$this->withoutExceptionHandling();
 		
-		$authkind = 'normal';
-		$name = 'Wood';
-		
-		$guest = factory(User::class)->create([
-			'authkind' => $authkind,
-			'name' => $name,
-		]);
-		
 		$this->post(route('adm.login'), [
-			'name' => $guest->name,
-			'password' => 'admin',
+			'name' => 'guest',
+			'password' => 'guest',
 		])
 			->assertRedirect()
 			->assertStatus(302)
@@ -77,16 +69,12 @@ class AuthTest extends TestCase
 	/** @test */
 	public function administrator_can_login_in()
 	{
-		$authkind = 'adm';
-		$name = 'Wood';
-		
-		$admin = factory(User::class)->create([
-			'authkind' => $authkind,
-			'name' => $name,
+		$adm = factory(AdmUser::class)->create([
+			'name' => 'adm',
 		]);
 		
 		$this->post(route('adm.login'), [
-			'name' => $admin->name,
+			'name' => $adm->name,
 			'password' => 'admin',
 		])
 			->assertRedirect(route('adm.home'))
@@ -97,16 +85,8 @@ class AuthTest extends TestCase
 	/** @test */
 	public function administrator_can_logout()
 	{
-		$authkind = 'adm';
-		$name = 'Wood';
-		
-		$admin = factory(User::class)->create([
-			'authkind' => $authkind,
-			'name' => $name,
-		]);
-		
-		$this->actingAs($admin)
-			->delete(route('adm.logout'))
+		$this->login();
+		$this->delete(route('adm.logout'))
 			->assertRedirect(route('adm.login'));
 	}
 }

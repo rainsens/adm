@@ -10,11 +10,21 @@ return [
 	'title' => 'Rainsen - Adm',
 	
 	'auth' => [
-		'model' => 'App\\Models\\User',
-		'fields' => [
-			'account' => 'name',        // name field in table
-			'password' => 'password',   // password field in table
-			'identity' => 'authkind',   // identity field in table
+		
+		'default_guard' => 'adm',
+		
+		'guards' => [
+			'adm' => [
+				'driver' => 'session',
+				'provider' => 'adm',
+			]
 		],
+		
+		'providers' => [
+			'adm' => [
+				'driver' => 'eloquent',
+				'model' => \Rainsens\Adm\Models\AdmUser::class,
+			]
+		]
 	]
 ];

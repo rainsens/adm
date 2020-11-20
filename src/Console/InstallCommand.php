@@ -3,7 +3,6 @@ namespace Rainsens\Adm\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
 use Rainsens\Adm\Support\AdmSeeder;
 
 class InstallCommand extends Command
@@ -24,19 +23,6 @@ class InstallCommand extends Command
 		// Check wether published.
 		if (! File::exists(adm_route_path('web.php'))) {
 			$errorNote = "Please run: 'php artisan adm:publish' first.\n";
-			$this->error($errorNote);
-			exit($errorNote);
-		}
-		
-		// Check wether add field to database.
-		$authIdentity = config('adm.auth.fields.identity', 'authkind');
-		$authModel = app(config('adm.auth.model', 'App\\Models\\User'));
-		
-		$connectionName = $authModel->getConnection()->getDriverName();
-		$tableName = $authModel->getTable();
-		
-		if (!Schema::connection($connectionName)->hasColumn($tableName, $authIdentity)) {
-			$errorNote = "Please add field '$authIdentity' to users table.";
 			$this->error($errorNote);
 			exit($errorNote);
 		}

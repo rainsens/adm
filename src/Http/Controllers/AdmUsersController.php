@@ -1,16 +1,16 @@
 <?php
 namespace Rainsens\Adm\Http\Controllers;
 
-class UsersController extends AdmController
+class AdmUsersController extends AdmController
 {
 	public function index()
 	{
-		return view('adm::pages.users.index');
+		return view('adm::pages.admusers.index');
 	}
 	
 	/*public function create()
 	{
-		return view('adm::pages.users.createdit');
+		return view('adm::pages.admusers.createdit');
 	}
 	
 	public function store(Menu $menu)
@@ -30,7 +30,7 @@ class UsersController extends AdmController
 	
 	public function edit(Menu $menu)
 	{
-		return view('adm::pages.users.createdit');
+		return view('adm::pages.admusers.createdit');
 	}
 	
 	public function update(Menu $menu)

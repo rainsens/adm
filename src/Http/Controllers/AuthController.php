@@ -7,7 +7,7 @@ class AuthController extends Controller
 {
 	public function login()
 	{
-		if (auth()->check()) {
+		if (Auth::guard('adm')->check()) {
 			return redirect()->intended(route('adm.home'));
 		}
 		return view('adm::pages.auth.login');
@@ -20,10 +20,7 @@ class AuthController extends Controller
 			'password' => 'required',
 		]);
 		
-		// Identity.
-		$credentials[config('adm.auth.fields.identity')] = 'adm';
-		
-		if (Auth::attempt($credentials, request('remember'))) {
+		if (Auth::guard('adm')->attempt($credentials, request('remember'))) {
 			session()->flash('success', '欢迎回来');
 			return redirect(route('adm.home'));
 		} else {

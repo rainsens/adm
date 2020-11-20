@@ -7,6 +7,6 @@ class AdmController extends Controller
 	
 	public function __construct()
 	{
-		$this->middleware('adm.auth');
+		$this->middleware('adm');
 	}
 }

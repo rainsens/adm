@@ -3,9 +3,14 @@ namespace Rainsens\Adm\Http\Controllers;
 
 use Rainsens\Adm\Models\Menu;
 
-class MenusController extends AdmController
+class MenusController extends Controller
 {
 	protected $title = '菜单管理';
+	
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 	
 	public function index(Menu $menu)
 	{

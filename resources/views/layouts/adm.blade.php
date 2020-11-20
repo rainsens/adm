@@ -23,10 +23,16 @@
     
 </head>
 
-<body class="{{ $admAttributes['adm.body.class'] }}" style="{{ $admAttributes['adm.body.style'] }}">
+<body
+    class="{{ $admAttributes['adm.body.class'] }}"
+    style="{{ $admAttributes['adm.body.style'] }}"
+>
+
     <div id="adm" class="{{ $admAttributes['adm.div.class'] }}">
         @yield('main-content')
+        <vue-progress-bar></vue-progress-bar>
     </div>
+
 </body>
 
 <script src="{{ asset('vendor/adm/skin/js/jquery.js') }}"></script>
