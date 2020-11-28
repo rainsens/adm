@@ -21,7 +21,7 @@ class InstallCommand extends Command
 		$this->structureFileSystem();
 		$this->mixAssets();
 		
-		//$this->initDatabase();
+		$this->initDatabase();
 	}
 	
 	protected function check()
@@ -30,7 +30,7 @@ class InstallCommand extends Command
 		if (!config('adm.name')) {
 			$errorNote = "Please run: 'php artisan adm:config' first.\n";
 			$this->error($errorNote);
-			exit('Publish the config file and try it again.');
+			exit("ublish the config file and try it again.\n");
 		}
 	}
 	

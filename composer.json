@@ -10,7 +10,8 @@
     "require": {
         "php": ">=7.1",
         "ext-json": "*",
-        "spatie/laravel-permission": "^3.17"
+        "spatie/laravel-permission": "^3.17",
+        "rainsens/rbac": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.4",
@@ -46,5 +47,7 @@
                 "Adm": "Rainsens\\Adm\\Facades\\Adm"
             }
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

@@ -69,13 +69,11 @@ class AuthTest extends TestCase
 	/** @test */
 	public function administrator_can_login_in()
 	{
-		$adm = factory(AdmUser::class)->create([
-			'name' => 'adm',
-		]);
+		$adm = createAdmUser(['name' => 'Susan']);
 		
 		$this->post(route('adm.login'), [
 			'name' => $adm->name,
-			'password' => 'admin',
+			'password' => 'adm',
 		])
 			->assertRedirect(route('adm.home'))
 			->assertStatus(302)

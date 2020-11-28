@@ -24,7 +24,7 @@ class AdmServiceProvider extends ServiceProvider
 	];
 	
 	protected $routeMiddlewares = [
-		'adm.auth'       => Authenticate::class,
+		'adm.auth' => Authenticate::class,
 	];
 	
 	protected $middlewareGroups = [
@@ -35,23 +35,22 @@ class AdmServiceProvider extends ServiceProvider
 	
 	public function register()
 	{
+		$this->app->register(RouteServiceProvider::class);
 		$this->app->bind('adm', function () {return new Adm();});
 		$this->app->bind(ComposerContract::class, Composer::class);
-		$this->app->register(RouteServiceProvider::class);
 	}
 	
 	public function boot()
 	{
 		$this->app->setLocale(config('app.locale') ?? 'zh-CN');
 		
-		if ($this->app->runningInConsole()) {
-			$this->commands($this->commands);
-		}
+		$this->admRoutes();
+		
+		$this->commands($this->commands);
 		
 		$this->admMigrations();
 		
 		$this->admTranslations();
-		$this->admRoutes();
 		$this->admMiddleware();
 		$this->admPublishs();
 		
@@ -76,7 +75,7 @@ class AdmServiceProvider extends ServiceProvider
 		if (file_exists(adm_route_path('web.php'))) {
 			$this->loadRoutesFrom(adm_route_path('web.php'));
 		} else {
-			$this->loadRoutesFrom(_stub_path('routes/web.stub'));
+			$this->loadRoutesFrom(_stub_path('routes/web.php'));
 		}
 	}
 	
@@ -95,11 +94,11 @@ class AdmServiceProvider extends ServiceProvider
 	{
 		$this->publishes([_config_path('adm.php') => config_path('adm.php')], 'config');
 		
-		$this->publishes([_stub_path('routes/web.stub') => adm_route_path('web.php')], 'route-web');
-		$this->publishes([_stub_path('routes/api.stub') => adm_route_path('api.php')], 'route-api');
-		$this->publishes([_stub_path('controllers/HomeController.stub') => adm_controller_path('HomeController.php')], 'home-controller');
-		$this->publishes([_stub_path('controllers/ExampleController.stub') => adm_controller_path('ExampleController.php')], 'example-controller');
-		$this->publishes([_stub_path('controllers/ExampleController.stub') => adm_controller_path('ExampleController.php')], 'example-controller');
+		$this->publishes([_stub_path('routes/web.php') => adm_route_path('web.php')], 'route-web');
+		$this->publishes([_stub_path('routes/api.php') => adm_route_path('api.php')], 'route-api');
+		$this->publishes([_stub_path('controllers/HomeController.php') => adm_controller_path('HomeController.php')], 'home-controller');
+		$this->publishes([_stub_path('controllers/ExampleController.php') => adm_controller_path('ExampleController.php')], 'example-controller');
+		$this->publishes([_stub_path('controllers/ExampleController.php') => adm_controller_path('ExampleController.php')], 'example-controller');
 		
 		$this->publishes([_public_path('skin') => adm_public_path('skin')], 'asset-skin');
 		$this->publishes([_public_path('js') => adm_public_path('js')], 'asset-js');

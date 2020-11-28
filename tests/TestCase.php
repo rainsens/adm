@@ -12,24 +12,18 @@ class TestCase extends \Orchestra\Testbench\TestCase
 	public function setUp(): void
 	{
 		parent::setUp();
-		
-		$this->initTestEnvironment();
-		
+		$this->initTestData();
 		$this->withFactories(_database_path('factories'));
 	}
 	
 	protected function getPackageProviders($app)
 	{
-		return [
-			AdmServiceProvider::class
-		];
+		return [AdmServiceProvider::class];
 	}
 	
 	protected function getPackageAliases($app)
 	{
-		return [
-			'Adm' => Adm::class,
-		];
+		return ['Adm' => Adm::class];
 	}
 	
 	/**
@@ -37,6 +31,12 @@ class TestCase extends \Orchestra\Testbench\TestCase
 	 */
 	protected function getEnvironmentSetUp($app)
 	{
+		/*$admConfig = require _config_path('adm.php');
+		
+		$app['config']->set('adm', $admConfig);*/
+		config(["auth.guards.adm" => config('adm.auth.guards.adm')]);
+		config(['auth.providers.adm' => config('adm.auth.providers.adm')]);
+		config(['auth.passwords.adm' => config('adm.auth.passwords.adm')]);
 	}
 	
 	protected function login($admUser = null)

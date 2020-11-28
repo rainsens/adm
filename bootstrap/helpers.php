@@ -75,7 +75,8 @@ if (! function_exists('adm_asset')) {
 	 */
 	function adm_asset($path, $secure = null)
 	{
-		return app('url')->asset('vendor/adm' . $path, $secure);
+		$path = trim(trim($path), '/');
+		return app('url')->asset('vendor/adm/' . $path, $secure);
 	}
 }
 
@@ -93,7 +94,7 @@ if (! function_exists('_base_path')) {
 	 * @return string
 	 */
 	function _base_path($path = '') {
-		return __DIR__ . '/../' . $path;
+		return dirname(__DIR__) . ($path ? DIRECTORY_SEPARATOR . $path : $path);
 	}
 }
 
