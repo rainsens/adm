@@ -17,7 +17,7 @@ class CreateAdmUsersTable extends Migration
 	        $table->bigIncrements('id');
 	        $table->string('name')->unique();
 	        $table->string('password');
-	        $table->string('nickname')->default('Adm User');
+	        $table->string('nickname')->default('AdmUser');
 	        $table->string('avatar')->nullable();
 	        $table->rememberToken();
 	        $table->timestamps();

@@ -12,7 +12,9 @@ trait TestTrait
 	
 	public function initTestData()
 	{
+		Artisan::call('adm:uninstall');
 		$this->removeTestNamespace();
+		
 		$this->createTestNamespace();
 		Artisan::call('adm:config');
 		Artisan::call('adm:install');

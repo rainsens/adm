@@ -2,13 +2,14 @@
 namespace Rainsens\Adm\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Rainsens\Adm\Facades\AdmAuth;
 
 class Authenticate
 {
-	public function handle($request, Closure $next)
+	public function handle(Request $request, Closure $next)
 	{
-		if (Auth::guard('adm')->guest()) {
+		if (AdmAuth::guest()) {
 			return redirect(route('adm.login'));
 		}
 		

@@ -17,6 +17,8 @@ return [
 	
 	'auth' => [
 		
+		'guard' => 'adm',
+		
 		'guards' => [
 			'adm' => [
 				'driver' => 'session',
@@ -27,7 +29,7 @@ return [
 		'providers' => [
 			'adm' => [
 				'driver' => 'eloquent',
-				'model' => \Rainsens\Adm\Models\AdmUser::class,
+				'model' => Rainsens\Adm\Models\AdmUser::class,
 			]
 		],
 		
@@ -38,7 +40,7 @@ return [
 				'expire' => 60,
 				'throttle' => 60,
 			],
-		],
+		]
 	],
 	
 	'adm_path' => base_path('adm'),

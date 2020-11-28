@@ -7,6 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class AdmUser extends Authenticatable
 {
+	use Notifiable;
+	
+	protected $guard = 'adm';
+	
 	protected $fillable = [
 		'name', 'password', 'nickname', 'avatar'
 	];

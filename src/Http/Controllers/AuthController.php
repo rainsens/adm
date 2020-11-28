@@ -1,13 +1,11 @@
 <?php
 namespace Rainsens\Adm\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-
 class AuthController extends Controller
 {
 	public function login()
 	{
-		if (Auth::guard('adm')->check()) {
+		if (admauth()->check()) {
 			return redirect()->intended(route('adm.home'));
 		}
 		return view('adm::pages.auth.login');
@@ -20,7 +18,7 @@ class AuthController extends Controller
 			'password' => 'required',
 		]);
 		
-		if (Auth::guard('adm')->attempt($credentials, request('remember'))) {
+		if (admauth()->attempt($credentials, request('remember'))) {
 			session()->flash('success', '欢迎回来');
 			return redirect(route('adm.home'));
 		} else {
@@ -31,7 +29,7 @@ class AuthController extends Controller
 	
 	public function logout()
 	{
-		Auth::logout();
+		admauth()->logout();
 		return redirect(route('adm.login'));
 	}
 }

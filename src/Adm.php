@@ -4,6 +4,7 @@ namespace Rainsens\Adm;
 use Illuminate\Support\Facades\Route;
 use Rainsens\Adm\Http\Controllers\AuthController;
 use Rainsens\Adm\Http\Controllers\MenusController;
+use Rainsens\Adm\Support\AdmAuth;
 
 class Adm
 {
@@ -12,6 +13,11 @@ class Adm
 	public function version()
 	{
 		return sprintf('ADM <comment>version</comment> <info>%s</info>', self::VERSION);
+	}
+	
+	public function auth($guard = null)
+	{
+		return app(AdmAuth::class)->guard($guard);
 	}
 	
 	public function routes()

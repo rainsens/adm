@@ -2,6 +2,7 @@
 namespace Rainsens\Adm\Tests;
 
 use Rainsens\Adm\Facades\Adm;
+use Rainsens\Adm\Facades\AdmAuth;
 use Rainsens\Adm\Models\AdmUser;
 use Rainsens\Adm\Providers\AdmServiceProvider;
 
@@ -23,7 +24,10 @@ class TestCase extends \Orchestra\Testbench\TestCase
 	
 	protected function getPackageAliases($app)
 	{
-		return ['Adm' => Adm::class];
+		return [
+			'Adm' => Adm::class,
+			'AdmAuth' => AdmAuth::class
+		];
 	}
 	
 	/**
@@ -34,7 +38,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 		/*$admConfig = require _config_path('adm.php');
 		
 		$app['config']->set('adm', $admConfig);*/
-		config(["auth.guards.adm" => config('adm.auth.guards.adm')]);
+		config(["auth.guards.adm" => config('adm.auth.guards.adm', 'adm')]);
 		config(['auth.providers.adm' => config('adm.auth.providers.adm')]);
 		config(['auth.passwords.adm' => config('adm.auth.passwords.adm')]);
 	}

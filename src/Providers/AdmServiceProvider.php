@@ -3,6 +3,7 @@
 namespace Rainsens\Adm\Providers;
 
 use Rainsens\Adm\Adm;
+use Rainsens\Adm\Support\AdmAuth;
 use Rainsens\Adm\Support\Composer;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -37,27 +38,25 @@ class AdmServiceProvider extends ServiceProvider
 	{
 		$this->app->register(RouteServiceProvider::class);
 		$this->app->bind('adm', function () {return new Adm();});
+		$this->app->bind('admauth', function () {return new AdmAuth();});
 		$this->app->bind(ComposerContract::class, Composer::class);
 	}
 	
 	public function boot()
 	{
 		$this->app->setLocale(config('app.locale') ?? 'zh-CN');
-		
-		$this->admRoutes();
-		
-		$this->commands($this->commands);
+		$this->admTranslations();
 		
 		$this->admMigrations();
 		
-		$this->admTranslations();
+		$this->admRoutes();
 		$this->admMiddleware();
 		$this->admPublishs();
-		
 		$this->admViews();
 		$this->admComposerShare();
 		
 		$this->admGuards();
+		$this->commands($this->commands);
 	}
 	
 	protected function admMigrations()
@@ -141,7 +140,7 @@ class AdmServiceProvider extends ServiceProvider
 	
 	protected function admGuards()
 	{
-		config(["auth.guards.adm" => config('adm.auth.guards.adm')]);
+		config(["auth.guards.adm" => config('adm.auth.guards.adm', 'adm')]);
 		config(['auth.providers.adm' => config('adm.auth.providers.adm')]);
 		config(['auth.passwords.adm' => config('adm.auth.passwords.adm')]);
 	}

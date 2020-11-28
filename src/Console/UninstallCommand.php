@@ -3,7 +3,6 @@ namespace Rainsens\Adm\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
 use Rainsens\Adm\Contracts\ComposerContract;
 
 class UninstallCommand extends Command

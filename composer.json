@@ -44,7 +44,8 @@
                 "Rainsens\\Adm\\Providers\\AdmServiceProvider"
             ],
             "aliases": {
-                "Adm": "Rainsens\\Adm\\Facades\\Adm"
+                "Adm": "Rainsens\\Adm\\Facades\\Adm",
+                "AdmAuth": "Rainsens\\Adm\\Facades\\AdmAuth"
             }
         }
     },

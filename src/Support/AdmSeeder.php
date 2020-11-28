@@ -12,7 +12,7 @@ class AdmSeeder extends Seeder
 		// Initialize the first adm user.
 		AdmUser::create([
 			'name' => 'adm',
-			'password' => '$2y$10$GFcriy03N2TRsW0mRid/p.aoDtgAfZTIbXs69PBo3e4t7WhZM.TyK',
+			'password' => bcrypt('adm'),
 			'nickname' => 'Rainsen',
 		]);
 		

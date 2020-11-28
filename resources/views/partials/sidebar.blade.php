@@ -16,7 +16,7 @@
                                 Logout
                             @endcomponent
                         </div>
-                        <div class="media-author">{{ auth()->user()->name }}</div>
+                        <div class="media-author">{{ admauth()->user()->name }}</div>
                     </div>
                 </div>
             </div>

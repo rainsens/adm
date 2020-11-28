@@ -1,7 +1,6 @@
 <?php
 namespace Rainsens\Adm\Tests\Feature\Auth;
 
-use Rainsens\Adm\Models\AdmUser;
 use Rainsens\Adm\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

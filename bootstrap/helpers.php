@@ -1,5 +1,20 @@
 <?php
 
+use Rainsens\Adm\Facades\Adm;
+use Illuminate\Contracts\Auth\Factory as AuthFactory;
+
+if (! function_exists('admauth')) {
+	/**
+	 * Get the available auth instance.
+	 * @param null $guard
+	 * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard
+	 */
+	function admauth($guard = null)
+	{
+		return app(\Rainsens\Adm\Support\AdmAuth::class)->guard($guard);
+	}
+}
+
 if (! function_exists('recursive_order')) {
 	
 	function recursive_order(array $data, $parentField, $parentId = 0, $level = 0) {
