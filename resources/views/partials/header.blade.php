@@ -302,7 +302,7 @@
                                     <div class="media">
                                         <div class="media-left">
                                             <a href="#">
-                                                <img class="media-object" alt="64x64" src="{{ asset(adm_public_path('skin/img/avatars/3.jpg')) }}">
+                                                <img class="media-object" alt="64x64" src="{{ adm_asset('skin/img/avatars/3.jpg') }}">
                                             </a>
                                         </div>
                                         <div class="media-body">
@@ -321,7 +321,7 @@
                                         </div>
                                         <div class="media-right">
                                             <a href="#">
-                                                <img class="media-object" alt="64x64" src="{{ asset(adm_public_path('skin/img/avatars/1.jpg')) }}">
+                                                <img class="media-object" alt="64x64" src="{{ adm_asset('skin/img/avatars/1.jpg') }}">
                                             </a>
                                         </div>
                                     </div>
@@ -550,7 +550,7 @@
         <li class="dropdown menu-merge">
             <a href="#" class="dropdown-toggle fw600 p15" data-toggle="dropdown">
                 @component('adm::partials.avatar', ['class' => 'mw30 br64'])@endcomponent
-                <span class="hidden-xs pl15"> {{ admauth()->user()->name }} </span>
+                <span class="hidden-xs pl15"> {{ adm_auth()->user()->nickname }} </span>
                 <span class="caret caret-tp hidden-xs"></span>
             </a>
             <ul class="dropdown-menu list-group dropdown-persist w250" role="menu">

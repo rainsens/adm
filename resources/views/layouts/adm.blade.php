@@ -27,7 +27,7 @@
 >
 
     <div id="adm" class="{{ $admAttributes['adm.div.class'] }}">
-        @yield('main-content')
+        @yield('main')
         <vue-progress-bar></vue-progress-bar>
     </div>
 

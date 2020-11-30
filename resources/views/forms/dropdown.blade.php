@@ -1,5 +1,5 @@
 @push('cssfiles')
-    <link href="{{ asset(adm_public_path('skin/css/select2.css')) }}" rel="stylesheet">
+    <link href="{{ adm_asset('skin/css/select2.css') }}" rel="stylesheet">
 @endpush
 
 
@@ -25,7 +25,7 @@
 
 
 @push('scriptfiles')
-    <script src="{{ asset(adm_public_path('skin/js/select2.min.js')) }}"></script>
+    <script src="{{ adm_asset('skin/js/select2.min.js') }}"></script>
 @endpush
 
 @push('scripts')

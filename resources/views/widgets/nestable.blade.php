@@ -31,7 +31,7 @@
 ------------------------------------------------------------------------------------------------------------------- --}}
 
 @push('cssfiles')
-    <link href="{{ asset(adm_public_path('skin/css/nestable.css')) }}" rel="stylesheet">
+    <link href="{{ adm_asset('skin/css/nestable.css') }}" rel="stylesheet">
 @endpush
 
 @inject('nestable', 'Rainsens\Adm\Widgets\Nestable')
@@ -81,7 +81,7 @@
     </div>
     
     @push('scriptfiles')
-        <script src="{{ asset(adm_public_path('skin/js/jquery.nestable.js')) }}"></script>
+        <script src="{{ adm_asset('skin/js/jquery.nestable.js') }}"></script>
     @endpush
 
     @push('scripts')

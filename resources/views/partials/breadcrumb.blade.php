@@ -4,7 +4,7 @@
             <li class="crumb-active"><a href="{{ route('adm.home') }}">Dashboard</a></li>
             <li class="crumb-icon"><a href="{{ route('adm.home') }}"><span class="glyphicon glyphicon-home"></span></a></li>
             <li class="crumb-link"><a href="{{ route('adm.home') }}">Home</a></li>
-            @if(isset($current) && $current) <li class="crumb-trail">{{ $current }}</li>@endif
+            @if(isset($title) && $title) <li class="crumb-trail">{{ $title }}</li>@endif
         </ol>
     </div>
     <div class="topbar-right">

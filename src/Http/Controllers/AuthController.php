@@ -5,7 +5,7 @@ class AuthController extends Controller
 {
 	public function login()
 	{
-		if (admauth()->check()) {
+		if (adm_auth()->check()) {
 			return redirect()->intended(route('adm.home'));
 		}
 		return view('adm::pages.auth.login');
@@ -18,7 +18,7 @@ class AuthController extends Controller
 			'password' => 'required',
 		]);
 		
-		if (admauth()->attempt($credentials, request('remember'))) {
+		if (adm_auth()->attempt($credentials, request('remember'))) {
 			session()->flash('success', '欢迎回来');
 			return redirect(route('adm.home'));
 		} else {
@@ -29,7 +29,7 @@ class AuthController extends Controller
 	
 	public function logout()
 	{
-		admauth()->logout();
+		adm_auth()->logout();
 		return redirect(route('adm.login'));
 	}
 }

@@ -1,17 +1,24 @@
 <?php
 namespace Rainsens\Adm\Exceptions;
 
+use Exception;
+use Throwable;
+
 class AdmException extends Exception
 {
-	public function render()
+	protected $message;
+	protected $code;
+	protected $line;
+	protected $file;
+	protected $trace;
+	
+	public function __construct($message = "", $code = 0, Throwable $previous = null)
 	{
-		$exception = [
-			'message' => $this->getMessage(),
-			'code' => $this->getCode(),
-			'file' => $this->getFile(),
-			'line' => $this->getLine(),
-			'trace' => $this->getTraceAsString(),
-		];
-		session()->flash('exception', $exception);
+		parent::__construct($message, $code, $previous);
+	}
+	
+	public function __get($name)
+	{
+		return $this->$name ?? null;
 	}
 }

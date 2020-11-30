@@ -1,12 +1,15 @@
 <?php
 namespace Rainsens\Adm\Http\Controllers;
 
+use Rainsens\Adm\Facades\AdmAuth;
+
 class AdmController extends Controller
 {
 	protected $title = 'Adm Title';
 	
 	public function __construct()
 	{
-		$this->middleware('adm');
+		$guard = AdmAuth::guardName();
+		$this->middleware(['adm', "permits:{$guard}"]);
 	}
 }

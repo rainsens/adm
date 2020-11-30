@@ -33,4 +33,9 @@ class AdmAuth
 	{
 		return $this->guard()->guest();
 	}
+	
+	public function guardName()
+	{
+		return $this->guard;
+	}
 }

@@ -4,12 +4,12 @@ namespace Rainsens\Adm\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Rainsens\Rbac\Traits\RbacTrait;
 
 class AdmUser extends Authenticatable
 {
 	use Notifiable;
-	
-	protected $guard = 'adm';
+	use RbacTrait;
 	
 	protected $fillable = [
 		'name', 'password', 'nickname', 'avatar'

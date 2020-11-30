@@ -3,9 +3,9 @@
 return [
 	'name' => 'Adm',
 	
-	'logo' => '<b>Rainsen</b> Adm',
+	'logo' => '<b>Rainsen</b> LaraAdm',
 	
-	'logo-mini' => '<b>ADM</b>',
+	'logo-mini' => '<b>LaraAdm</b>',
 	
 	'title' => 'Rainsen - Adm',
 	

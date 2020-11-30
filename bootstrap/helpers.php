@@ -1,15 +1,12 @@
 <?php
 
-use Rainsens\Adm\Facades\Adm;
-use Illuminate\Contracts\Auth\Factory as AuthFactory;
-
-if (! function_exists('admauth')) {
+if (! function_exists('adm_auth')) {
 	/**
 	 * Get the available auth instance.
 	 * @param null $guard
 	 * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard
 	 */
-	function admauth($guard = null)
+	function adm_auth($guard = null)
 	{
 		return app(\Rainsens\Adm\Support\AdmAuth::class)->guard($guard);
 	}

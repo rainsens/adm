@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard guard()
  * @method static \Illuminate\Contracts\Auth\Guard user()
  * @method static \Illuminate\Contracts\Auth\Guard guest()
+ * @method static \Illuminate\Contracts\Auth\Guard guardName()
  */
 class AdmAuth extends Facade
 {

@@ -12,7 +12,11 @@ class MenusController extends AdmController
 		$nestableMenus = $menu->nestable('order');
 		$select2Menus = $menu->select2data('name');
 		
-		return view('adm::pages.menus.index', compact('select2Menus', 'nestableMenus'));
+		return view('adm::pages.menus.index', [
+			'select2Menus' => $select2Menus,
+			'nestableMenus' => $nestableMenus,
+			'title' => $this->title
+		]);
 	}
 	
 	public function create()

@@ -1,6 +1,6 @@
 @extends('adm::layouts.adm')
 
-@section('main-content')
+@section('main')
     
     @component('adm::partials.skin')@endcomponent
     
@@ -12,7 +12,9 @@
         <section id="content_wrapper">
             
             @component('adm::partials.topbarmenu')@endcomponent
-            @yield('content')
+            
+                @yield('body')
+                
             @component('adm::partials.footer')@endcomponent
             
         </section>

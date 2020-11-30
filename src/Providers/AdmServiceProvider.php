@@ -3,6 +3,8 @@
 namespace Rainsens\Adm\Providers;
 
 use Rainsens\Adm\Adm;
+use Rainsens\Adm\Exceptions\AdmExceptionHandler;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 use Rainsens\Adm\Support\AdmAuth;
 use Rainsens\Adm\Support\Composer;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +16,7 @@ use Rainsens\Adm\Console\InstallCommand;
 use Rainsens\Adm\Console\UninstallCommand;
 use Rainsens\Adm\Contracts\ComposerContract;
 use Rainsens\Adm\Http\Middleware\Authenticate;
+use Rainsens\Rbac\Providers\RbacServiceProvider;
 
 class AdmServiceProvider extends ServiceProvider
 {
@@ -36,6 +39,8 @@ class AdmServiceProvider extends ServiceProvider
 	
 	public function register()
 	{
+		$this->app->singleton(ExceptionHandler::class, AdmExceptionHandler::class);
+		$this->app->register(RbacServiceProvider::class);
 		$this->app->register(RouteServiceProvider::class);
 		$this->app->bind('adm', function () {return new Adm();});
 		$this->app->bind('admauth', function () {return new AdmAuth();});
@@ -55,7 +60,7 @@ class AdmServiceProvider extends ServiceProvider
 		$this->admViews();
 		$this->admComposerShare();
 		
-		$this->admGuards();
+		$this->admGuard();
 		$this->commands($this->commands);
 	}
 	
@@ -138,9 +143,9 @@ class AdmServiceProvider extends ServiceProvider
 		});
 	}
 	
-	protected function admGuards()
+	protected function admGuard()
 	{
-		config(["auth.guards.adm" => config('adm.auth.guards.adm', 'adm')]);
+		config(["auth.guards.adm" => config('adm.auth.guards.adm')]);
 		config(['auth.providers.adm' => config('adm.auth.providers.adm')]);
 		config(['auth.passwords.adm' => config('adm.auth.passwords.adm')]);
 	}
