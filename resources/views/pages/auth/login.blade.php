@@ -1,6 +1,6 @@
 @extends('adm::layouts.adm')
 
-@section('main-content')
+@section('main')
     
     <section id="content_wrapper">
         

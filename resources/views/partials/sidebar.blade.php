@@ -69,78 +69,32 @@
         
         <ul class="nav sidebar-menu">
             <li class="sidebar-label pt20">Menu</li>
-            <li class="active">
-                <a href="{{ route('adm.home') }}">
-                    <span class="glyphicon glyphicon-home"></span>
-                    <span class="sidebar-title">控制页板</span>
-                </a>
-            </li>
-            <li>
-                <a class="accordion-toggle" href="#">
-                    <span class="fa fa-diamond"></span>
-                    <span class="sidebar-title">系统管理</span>
-                    <span class="caret"></span>
-                </a>
-                <ul class="nav sub-nav">
-                    <li>
-                        <a href="{{ route('adm.menus.index') }}"><span class="fa fa-cube"></span>菜单管理</a>
+            
+            @foreach($share['menus'] as $menu)
+                @if(! $menu->parent_id)
+                    <li class="{{ $menu->isActive() ? 'active' : '' }}">
+                        
+                        <a href="{{ $menu->url }}"
+                           class="{{ $menu->hasChildren() ? 'accordion-toggle' : '' }} {{ $menu->isActive() ? 'menu-open' : '' }}">
+                            <span class="fa {{ $menu->icon }}"></span>
+                            <span class="sidebar-title">{{ $menu->name }}</span>
+                            <span class="caret"></span>
+                        </a>
+                        @if($menu->hasChildren())
+                            <ul class="nav sub-nav">
+                                @foreach($menu->children as $child)
+                                    <li class="{{ $child->isActive() ? 'active' : '' }}">
+                                        <a href="{{ $child->url }}">
+                                            <span class="fa {{ $child->icon }}"></span>{{ $child->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </li>
-                    <li>
-                        <a href="widgets_panel.html"><span class="fa fa-desktop"></span> Panel Widgets </a>
-                    </li>
-                    <li>
-                        <a href="widgets_scroller.html"><span class="fa fa-columns"></span> Scroller Widgets </a>
-                    </li>
-                    <li>
-                        <a href="widgets_data.html"><span class="fa fa-dot-circle-o"></span> Admin Widgets</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a class="accordion-toggle" href="#">
-                    <span class="fa fa-diamond"></span>
-                    <span class="sidebar-title">业务字典</span>
-                    <span class="caret"></span>
-                </a>
-                <ul class="nav sub-nav">
-                    <li>
-                        <a href="widgets_tile.html"><span class="fa fa-cube"></span>楼盘总价字典</a>
-                    </li>
-                    <li>
-                        <a href="widgets_panel.html"><span class="fa fa-desktop"></span> Panel Widgets </a>
-                    </li>
-                    <li>
-                        <a href="widgets_scroller.html"><span class="fa fa-columns"></span> Scroller Widgets </a>
-                    </li>
-                    <li>
-                        <a href="widgets_data.html"><span class="fa fa-dot-circle-o"></span> Admin Widgets</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a class="accordion-toggle" href="#">
-                    <span class="fa fa-diamond"></span>
-                    <span class="sidebar-title">楼盘中心</span>
-                    <span class="caret"></span>
-                </a>
-                <ul class="nav sub-nav">
-                    <li>
-                        <a href="widgets_tile.html"><span class="fa fa-cube"></span>楼盘管理</a>
-                    </li>
-                    <li>
-                        <a href="widgets_panel.html">
-                            <span class="fa fa-desktop"></span> Panel Widgets </a>
-                    </li>
-                    <li>
-                        <a href="widgets_scroller.html">
-                            <span class="fa fa-columns"></span> Scroller Widgets </a>
-                    </li>
-                    <li>
-                        <a href="widgets_data.html">
-                            <span class="fa fa-dot-circle-o"></span> Admin Widgets </a>
-                    </li>
-                </ul>
-            </li>
+                @endif
+            @endforeach
+            
             <li>
                 <a class="accordion-toggle" href="#">
                     <span class="glyphicon glyphicon-shopping-cart"></span>

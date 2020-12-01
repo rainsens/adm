@@ -22,11 +22,11 @@
 </head>
 
 <body
-    class="{{ $admAttributes['adm.body.class'] }}"
-    style="{{ $admAttributes['adm.body.style'] }}"
+    class="{{ $share['attributes']['body.class'] }}"
+    style="{{ $share['attributes']['body.style'] }}"
 >
 
-    <div id="adm" class="{{ $admAttributes['adm.div.class'] }}">
+    <div id="adm">
         @yield('main')
         <vue-progress-bar></vue-progress-bar>
     </div>

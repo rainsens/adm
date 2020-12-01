@@ -5,6 +5,7 @@ namespace Rainsens\Adm\Providers;
 use Rainsens\Adm\Adm;
 use Rainsens\Adm\Exceptions\AdmExceptionHandler;
 use Illuminate\Contracts\Debug\ExceptionHandler;
+use Rainsens\Adm\Models\Menu;
 use Rainsens\Adm\Support\AdmAuth;
 use Rainsens\Adm\Support\Composer;
 use Illuminate\Support\Facades\Route;
@@ -119,25 +120,24 @@ class AdmServiceProvider extends ServiceProvider
 		View::composer('*', function (\Illuminate\View\View $view) {
 			switch (Route::currentRouteName()) {
 				case 'adm.login':
-					$admBodyClass = 'external-page sb-l-c sb-r-c';
-					$admBodyStyle = '';
-					$admDivClass = 'animated fadeIn';
+					$bodyClass = 'external-page sb-l-c sb-r-c';
+					$bodyStyle = '';
 					break;
 				case 'adm.home':
-					$admBodyClass = 'sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed';
-					$admBodyStyle = '';
-					$admDivClass = '';
+					$bodyClass = 'sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed';
+					$bodyStyle = '';
 					break;
 				default:
-					$admBodyClass = '';
-					$admBodyStyle = '';
-					$admDivClass = '';
+					$bodyClass = '';
+					$bodyStyle = '';
 			}
 			
-			$view->with('admAttributes', [
-				'adm.body.class' => $admBodyClass,
-				'adm.body.style' => $admBodyStyle,
-				'adm.div.class' => $admDivClass,
+			$view->with('share', [
+				'menus' => Menu::all(),
+				'attributes' => [
+					'body.class' => $bodyClass,
+					'body.style' => $bodyStyle,
+				]
 			]);
 			
 		});

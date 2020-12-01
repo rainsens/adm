@@ -4,6 +4,7 @@ namespace Rainsens\Adm;
 use Illuminate\Support\Facades\Route;
 use Rainsens\Adm\Http\Controllers\AuthController;
 use Rainsens\Adm\Http\Controllers\MenusController;
+use Rainsens\Adm\Http\Controllers\PermitsController;
 use Rainsens\Adm\Support\AdmAuth;
 
 class Adm
@@ -29,11 +30,10 @@ class Adm
 				
 				Route::group([], function () {
 					
-					Route::resources([
-						'menus' => MenusController::class,
-					]);
-					
+					Route::resources(['menus' => MenusController::class]);
 					Route::post('menus/order', [MenusController::class, 'order'])->name('menus.order');
+					
+					Route::resources(['permits' => PermitsController::class]);
 				});
 				
 				Route::get('login', [AuthController::class, 'login'])->name('login');

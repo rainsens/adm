@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rainsens/rbac.git",
-                "reference": "d56eff22848cae93438b4ab4869fc77460d8409f"
+                "reference": "ee36080804e197eb24dd6d9370a50b23e819fb41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rainsens/rbac/zipball/d56eff22848cae93438b4ab4869fc77460d8409f",
-                "reference": "d56eff22848cae93438b4ab4869fc77460d8409f",
+                "url": "https://api.github.com/repos/rainsens/rbac/zipball/ee36080804e197eb24dd6d9370a50b23e819fb41",
+                "reference": "ee36080804e197eb24dd6d9370a50b23e819fb41",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 }
             ],
             "description": "A Laravel RBAC authorization package",
-            "time": "2020-11-30T05:14:15+00:00"
+            "time": "2020-12-01T01:25:43+00:00"
         }
     ],
     "packages-dev": [

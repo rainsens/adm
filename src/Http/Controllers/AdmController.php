@@ -12,4 +12,34 @@ class AdmController extends Controller
 		$guard = AdmAuth::guardName();
 		$this->middleware(['adm', "permits:{$guard}"]);
 	}
+	
+	public function index()
+	{
+	
+	}
+	
+	public function create()
+	{
+	
+	}
+	
+	public function store()
+	{
+	
+	}
+	
+	public function edit()
+	{
+	
+	}
+	
+	public function update()
+	{
+	
+	}
+	
+	public function destroy()
+	{
+	
+	}
 }
