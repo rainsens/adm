@@ -1,10 +1,10 @@
 <header id="topbar" class="alt">
     <div class="topbar-left">
         <ol class="breadcrumb">
-            <li class="crumb-active"><a href="{{ route('adm.home') }}">Dashboard</a></li>
+            <li class="crumb-active"><a href="{{ route('adm.home') }}"><b>{{ $title ?? '' }}</b></a></li>
             <li class="crumb-icon"><a href="{{ route('adm.home') }}"><span class="glyphicon glyphicon-home"></span></a></li>
             <li class="crumb-link"><a href="{{ route('adm.home') }}">Home</a></li>
-            @if(isset($title) && $title) <li class="crumb-trail">{{ $title }}</li>@endif
+            @if($title) <li class="crumb-trail">{{ $title }}</li>@endif
         </ol>
     </div>
     <div class="topbar-right">

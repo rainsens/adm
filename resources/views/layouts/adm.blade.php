@@ -8,7 +8,7 @@
     <link href="{{ adm_asset('skin/css/theme.css') }}" rel="stylesheet">
     <link href="{{ adm_asset('skin/css/admin-form.css') }}" rel="stylesheet">
     
-    @stack('cssfiles')
+    @stack('css-files')
     
     <link rel="shortcut icon" href="{{ adm_asset('adm/skin/img/favicon.ico') }}">
     
@@ -39,7 +39,7 @@
 <script src="{{ adm_asset('skin/js/utility.js') }}"></script>
 <script src="{{ adm_asset('skin/js/pnotify.js') }}"></script>
 
-@stack('scriptfiles')
+@stack('script-files')
 
 <script src="{{ adm_asset('skin/js/adm.js') }}"></script>
 <script src="{{ adm_asset('skin/js/main.js') }}"></script>

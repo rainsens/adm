@@ -30,7 +30,7 @@ class InstallCommand extends Command
 		if (!config('adm.name')) {
 			$errorNote = "Please run: 'php artisan adm:config' first.\n";
 			$this->error($errorNote);
-			exit("ublish the config file and try it again.\n");
+			exit("Publish the config file and try it again.\n");
 		}
 	}
 	

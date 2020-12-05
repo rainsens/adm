@@ -32,10 +32,10 @@ class GridFilter implements Filter
 		return call_user_func($this->builder, $this->model);
 	}
 	
-	public function paginate()
+	public function paginate(int $size = 15)
 	{
 		if ($this->getBuilder() instanceof Builder) {
-			return $this->getBuilder()->paginate();
+			return $this->getBuilder()->paginate($size);
 		}
 		return $this->getBuilder();
 	}

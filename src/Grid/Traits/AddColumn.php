@@ -30,7 +30,7 @@ trait AddColumn
 	public function addRelationColumn(string $name, string $label = ''): Column
 	{
 		list($relation, $column) = explode('.', $name);
-		$model = $this->model();
+		$model = $this->model;
 		
 		if (! method_exists($model, $relation) || !$model->{$relation}() instanceof Relation) {
 			$class = get_class($model);

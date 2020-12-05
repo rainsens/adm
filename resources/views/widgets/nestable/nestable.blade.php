@@ -30,7 +30,7 @@
     
 ------------------------------------------------------------------------------------------------------------------- --}}
 
-@push('cssfiles')
+@push('css-files')
     <link href="{{ adm_asset('skin/css/nestable.css') }}" rel="stylesheet">
 @endpush
 
@@ -80,7 +80,7 @@
         </div>
     </div>
     
-    @push('scriptfiles')
+    @push('script-files')
         <script src="{{ adm_asset('skin/js/jquery.nestable.js') }}"></script>
     @endpush
 

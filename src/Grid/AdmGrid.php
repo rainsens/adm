@@ -109,6 +109,11 @@ class AdmGrid implements Grid
 		$this->filter->setModel($this->model)->setBuilder($builder);
 	}
 	
+	public function columns(): Collection
+	{
+		return $this->columns;
+	}
+	
 	public function items()
 	{
 		return $this->filter->paginate() ?? $this->filter->get();
@@ -119,7 +124,8 @@ class AdmGrid implements Grid
 		return view('adm::pages.grid', [
 			'title' => $this->title,
 			'description' => $this->description,
-			'items' => $this->items()
+			'columns' => $this->columns(),
+			'items' => $this->items(),
 		]);
 	}
 }

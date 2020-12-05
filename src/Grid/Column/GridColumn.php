@@ -52,4 +52,9 @@ class GridColumn implements Column
 		
 		return $this;
 	}
+	
+	public function __get($name)
+	{
+		return $this->$name ?? null;
+	}
 }

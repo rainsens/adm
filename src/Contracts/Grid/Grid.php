@@ -5,6 +5,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 interface Grid
 {
@@ -108,6 +109,13 @@ interface Grid
 	 * @param Closure $builder
 	 */
 	public function query(Closure $builder): void ;
+	
+	/**
+	 * Return expected columns to show.
+	 *
+	 * @return mixed
+	 */
+	public function columns() : Collection;
 	
 	/**
 	 * Return grid data.

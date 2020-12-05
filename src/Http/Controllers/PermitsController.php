@@ -1,8 +1,9 @@
 <?php
 namespace Rainsens\Adm\Http\Controllers;
 
-use Rainsens\Adm\Facades\AdmGrid;
+use Illuminate\Database\Eloquent\Builder;
 use Rainsens\Rbac\Models\Permit;
+use Rainsens\Adm\Facades\AdmGrid;
 
 class PermitsController extends MainController
 {
@@ -22,7 +23,10 @@ class PermitsController extends MainController
 		$grid->column('guard', 'Guard');
 		
 		$grid->query(function ($query) {
-			return $query->orderBy('id', 'desc');
+			/**
+			 * @var Builder $query
+			 */
+			return $query->orderByDesc('id');
 		});
 		
 		return $grid;

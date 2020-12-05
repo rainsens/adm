@@ -17,6 +17,6 @@ interface Filter
 	public function setModel(Model $model): self ;
 	public function setBuilder(Closure $builder): self ;
 	public function getBuilder();
-	public function paginate();
+	public function paginate(int $size = 15);
 	public function get();
 }

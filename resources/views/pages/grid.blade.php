@@ -1,12 +1,11 @@
 @extends('adm::layouts.body')
 
 @section('content')
-
-    {{ $title }}<br>
-    {{ $description }}<br>
     
-    @foreach($items as $item)
-        {{ $item->name }}<br>
-    @endforeach
+    @component('adm::grid.table', [
+        'columns' => $columns,
+        'items' => $items
+    ])
+    @endcomponent
 
 @endsection
