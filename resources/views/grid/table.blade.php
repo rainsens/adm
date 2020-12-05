@@ -29,7 +29,7 @@
                                 <th class="">{{ $column->label ?? $column->name }}</th>
                             @endforeach
                         
-                            <th class="text-right">Action</th>
+                            <th class="text-right">Actions</th>
                             
                         @endif
                     </tr>
@@ -55,17 +55,14 @@
                                 
                                 <td class="text-right">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-system br2 btn-xs fs12 dropdown-toggle" data-toggle="dropdown">
-                                            Active <span class="caret ml5"></span>
+                                        <button type="button" class="btn btn-default br2 btn-sm fs12 dropdown-toggle" data-toggle="dropdown">
+                                            Actions <span class="caret ml5"></span>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
                                             <li><a href="#">Edit</a></li>
-                                            <li><a href="#">Delete</a></li>
-                                            <li><a href="#">Archive</a></li>
+                                            <li><a href="#">Show</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="#">Complete</a></li>
-                                            <li class="active"><a href="#">Pending</a></li>
-                                            <li><a href="#">Canceled</a></li>
+                                            <li><a href="#">Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -90,7 +87,7 @@
 @push('scripts')
     <script>
         jQuery(document).ready(function () {
-            
+        
         });
     </script>
 @endpush
