@@ -16,8 +16,8 @@ class PermitsController extends MainController
 		$grid = AdmGrid::model(new Permit);
 		
 		$grid->column('id', 'ID');
-		$grid->column('name', 'Name');
-		$grid->column('slug', 'Slug');
+		$grid->column('name', '名称');
+		$grid->column('slug', '标记');
 		$grid->column('path', 'Path');
 		$grid->column('method', 'Method');
 		$grid->column('guard', 'Guard');

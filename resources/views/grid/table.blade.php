@@ -1,7 +1,5 @@
 @push('css-files')
-    {{--<link href="{{ adm_asset('skin/css/datatables.bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ adm_asset('skin/css/datatables.editor.css') }}" rel="stylesheet">
-    <link href="{{ adm_asset('skin/css/datatables.colreorder.css') }}" rel="stylesheet">--}}
+    {{--<link href="{{ adm_asset('skin/css/') }}" rel="stylesheet">--}}
 @endpush
 
 <div class="panel">
@@ -86,22 +84,13 @@
 </div>
 
 @push('script-files')
-    {{--<script src="{{ adm_asset('skin/js/jquery.datatables.js') }}"></script>
-    <script src="{{ adm_asset('skin/js/datatables.tabletools.js') }}"></script>
-    <script src="{{ adm_asset('skin/js/datatables.colreorder.js') }}"></script>
-    <script src="{{ adm_asset('skin/js/datatables.bootstrap.js') }}"></script>--}}
+    {{--<script src="{{ adm_asset('skin/js/') }}"></script>--}}
 @endpush
 
 @push('scripts')
     <script>
-        /*jQuery(document).ready(function () {
-            $('.grid-table').DataTable({
-	            "aoColumnDefs": [{
-		            'bSortable': false,
-		            'aTargets': [-1]
-	            }],
-		        "sDom": 'Rt<"dt-panelfooter clearfix"ip>',
-	        });
-        });*/
+        jQuery(document).ready(function () {
+            
+        });
     </script>
 @endpush
