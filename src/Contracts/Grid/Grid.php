@@ -75,6 +75,17 @@ interface Grid
 	
 	
 	/**
+	 * @param string $title
+	 * @return Grid
+	 */
+	public function setTitle(string $title): self ;
+	public function setDescription(string $description): self ;
+	
+	public function title(): string ;
+	public function description(): string ;
+	
+	
+	/**
 	 * Set model for grid.
 	 *
 	 * @param Model|Builder $model

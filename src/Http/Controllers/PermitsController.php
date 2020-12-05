@@ -6,6 +6,10 @@ use Rainsens\Rbac\Models\Permit;
 
 class PermitsController extends MainController
 {
+	protected $title = 'Adm Grid Title';
+	
+	protected $description = 'Adm Grid Description';
+	
 	protected function grid()
 	{
 		$grid = AdmGrid::model(new Permit);

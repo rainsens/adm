@@ -55,12 +55,24 @@ class AdmGrid implements Grid
 		$this->runInit();
 	}
 	
-	public function title()
+	public function setTitle(string $title): Grid
+	{
+		$this->title = $title;
+		return $this;
+	}
+	
+	public function setDescription(string $description): Grid
+	{
+		$this->description = $description;
+		return $this;
+	}
+	
+	public function title(): string
 	{
 		return $this->title;
 	}
 	
-	public function description()
+	public function description(): string
 	{
 		return $this->description;
 	}

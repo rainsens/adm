@@ -1,7 +1,6 @@
 <?php
 namespace Rainsens\Adm\Http\Controllers;
 
-use Illuminate\Support\Facades\View;
 use Rainsens\Adm\Contracts\Grid\Grid;
 
 /**
@@ -13,7 +12,10 @@ trait HasActions
 {
 	public function index()
 	{
-		return $this->grid()->render();
+		return $this->grid()
+			->setTitle($this->title)
+			->setDescription($this->description)
+			->render();
 	}
 	
 	public function create()
