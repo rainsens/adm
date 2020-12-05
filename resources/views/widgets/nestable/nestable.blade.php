@@ -34,7 +34,7 @@
     <link href="{{ adm_asset('skin/css/nestable.css') }}" rel="stylesheet">
 @endpush
 
-@inject('nestable', 'Rainsens\Adm\Widgets\Nestable')
+@inject('nestable', 'Rainsens\Adm\Widgets\Nestable\Nestable')
 
 @if(isset($params))
     <div class="row table-layout">
@@ -71,7 +71,7 @@
                 
                 @php $nestable::$params = $params @endphp
                 
-                @component('adm::widgets.nestablerow', [
+                @component('adm::widgets.nestable.nestablerow', [
                     'data' => isset($nestable::$params['data']) ? $nestable::$params['data'] : []
                 ])
                 @endcomponent

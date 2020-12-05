@@ -1,8 +1,7 @@
 <?php
-namespace Rainsens\Adm\Widgets\Traits;
+namespace Rainsens\Adm\Widgets\Select2;
 
 use Illuminate\Database\Eloquent\Builder;
-use Rainsens\Adm\Widgets\Select2;
 
 /**
  * Trait for being used model.

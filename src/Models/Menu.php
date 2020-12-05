@@ -2,12 +2,12 @@
 
 namespace Rainsens\Adm\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Rainsens\Adm\Widgets\Nestable;
-use Rainsens\Adm\Widgets\Traits\NestableTrait;
-use Rainsens\Adm\Widgets\Traits\Select2Trait;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Rainsens\Adm\Widgets\Nestable\Nestable;
+use Rainsens\Adm\Widgets\Nestable\NestableTrait;
+use Rainsens\Adm\Widgets\Select2\Select2Trait;
 
 class Menu extends Model
 {

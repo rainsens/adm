@@ -1,5 +1,5 @@
 <?php
-namespace Rainsens\Adm\Widgets;
+namespace Rainsens\Adm\Widgets\Nestable;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;

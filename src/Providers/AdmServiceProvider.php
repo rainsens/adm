@@ -3,9 +3,8 @@
 namespace Rainsens\Adm\Providers;
 
 use Rainsens\Adm\Adm;
-use Rainsens\Adm\Exceptions\AdmExceptionHandler;
-use Illuminate\Contracts\Debug\ExceptionHandler;
 use Rainsens\Adm\Models\Menu;
+use Rainsens\Adm\Grid\AdmGrid;
 use Rainsens\Adm\Support\AdmAuth;
 use Rainsens\Adm\Support\Composer;
 use Illuminate\Support\Facades\Route;
@@ -18,9 +17,17 @@ use Rainsens\Adm\Console\UninstallCommand;
 use Rainsens\Adm\Contracts\ComposerContract;
 use Rainsens\Adm\Http\Middleware\Authenticate;
 use Rainsens\Rbac\Providers\RbacServiceProvider;
+use Rainsens\Adm\Exceptions\AdmExceptionHandler;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 
 class AdmServiceProvider extends ServiceProvider
 {
+	protected $contracts = [
+		'Rainsens\Adm\Contracts\Grid\Grid'   => 'Rainsens\Adm\Grid\AdmGrid',
+		'Rainsens\Adm\Contracts\Grid\Column'   => 'Rainsens\Adm\Grid\Column\GridColumn',
+		'Rainsens\Adm\Contracts\Grid\Filter'   => 'Rainsens\Adm\Grid\Filter\GridFilter',
+	];
+	
 	protected $commands = [
 		AdmCommand::class,
 		ConfigCommand::class,
@@ -43,9 +50,16 @@ class AdmServiceProvider extends ServiceProvider
 		$this->app->singleton(ExceptionHandler::class, AdmExceptionHandler::class);
 		$this->app->register(RbacServiceProvider::class);
 		$this->app->register(RouteServiceProvider::class);
-		$this->app->bind('adm', function () {return new Adm();});
-		$this->app->bind('admauth', function () {return new AdmAuth();});
+		
+		$this->app->bind('adm', function () {return new Adm;});
+		$this->app->bind('adm-auth', function () {return new AdmAuth;});
+		$this->app->bind('adm-grid', function () {return new AdmGrid;});
+		
 		$this->app->bind(ComposerContract::class, Composer::class);
+		
+		foreach ($this->contracts as $contract => $implement) {
+			$this->app->bind($contract, $implement);
+		}
 	}
 	
 	public function boot()

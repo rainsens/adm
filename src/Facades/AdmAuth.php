@@ -16,6 +16,6 @@ class AdmAuth extends Facade
 {
 	protected static function getFacadeAccessor()
 	{
-		return 'admauth';
+		return 'adm-auth';
 	}
 }

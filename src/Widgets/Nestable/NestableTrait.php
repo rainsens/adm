@@ -1,5 +1,5 @@
 <?php
-namespace Rainsens\Adm\Widgets\Traits;
+namespace Rainsens\Adm\Widgets\Nestable;
 
 use Illuminate\Database\Eloquent\Builder;
 

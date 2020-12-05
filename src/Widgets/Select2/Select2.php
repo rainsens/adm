@@ -1,5 +1,5 @@
 <?php
-namespace Rainsens\Adm\Widgets;
+namespace Rainsens\Adm\Widgets\Select2;
 
 use Illuminate\Support\Collection;
 

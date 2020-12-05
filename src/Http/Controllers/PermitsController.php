@@ -1,10 +1,36 @@
 <?php
 namespace Rainsens\Adm\Http\Controllers;
 
-class PermitsController extends AdmController
+use Rainsens\Adm\Facades\AdmGrid;
+use Rainsens\Rbac\Models\Permit;
+
+class PermitsController extends MainController
 {
-	public function index()
+	protected function grid()
 	{
-		return view('adm::pages.auth.permits');
+		$grid = AdmGrid::model(new Permit);
+		
+		$grid->column('id', 'ID');
+		$grid->column('name', 'Name');
+		$grid->column('slug', 'Slug');
+		$grid->column('path', 'Path');
+		$grid->column('method', 'Method');
+		$grid->column('guard', 'Guard');
+		
+		$grid->query(function ($query) {
+			return $query->orderBy('id', 'desc');
+		});
+		
+		return $grid;
+	}
+	
+	protected function show()
+	{
+	
+	}
+	
+	protected function form()
+	{
+	
 	}
 }

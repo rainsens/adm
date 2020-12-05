@@ -8,7 +8,7 @@
                 <div class="panel-body">
                     <div class="tray tray-center">
                         
-                        @component('adm::widgets.nestable', [
+                        @component('adm::widgets.nestable.nestable', [
                             'params' => [
                                 'data' => $nestableMenus,
                                 'urlCreate' => 'adm.menus.create',

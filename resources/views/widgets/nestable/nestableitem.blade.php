@@ -1,4 +1,4 @@
-@inject('nestable', 'Rainsens\Adm\Widgets\Nestable')
+@inject('nestable', 'Rainsens\Adm\Widgets\Nestable\Nestable')
 
 @if(isset($data) && isset($datum))
     
@@ -23,7 +23,7 @@
                 </a>
             </div>
             
-            @component('adm::widgets.nestablerow', ['data' => $children])@endcomponent
+            @component('adm::widgets.nestable.nestablerow', ['data' => $children])@endcomponent
         
         </li>
         
