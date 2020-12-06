@@ -7,15 +7,17 @@ use Rainsens\Adm\Contracts\Grid\Grid;
  * Trait HasActions
  * @package Rainsens\Adm\Http\Controllers
  * @method Grid grid()
+ * @property $title
+ * @property $description
  */
 trait HasActions
 {
 	public function index()
 	{
 		return $this->grid()
-			->setTitle($this->title)
-			->setDescription($this->description)
-			->render();
+			->title($this->title)
+			->description($this->description)
+			->render()->response();
 	}
 	
 	public function create()

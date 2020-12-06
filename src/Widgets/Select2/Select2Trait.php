@@ -13,8 +13,8 @@ use Illuminate\Database\Eloquent\Builder;
  */
 trait Select2Trait
 {
-	public function scopeSelect2Data(Builder $builder, string $textField)
+	public function scopeSelect2Data(Builder $builder, string $column)
 	{
-		return app(Select2::class)->select2data($builder->get(), $textField);
+		return app(Select2::class)->select2data($builder->get(), $column);
 	}
 }

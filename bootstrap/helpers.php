@@ -12,16 +12,16 @@ if (! function_exists('adm_auth')) {
 	}
 }
 
-if (! function_exists('recursive_order')) {
+if (! function_exists('adm_recursive_order')) {
 	
-	function recursive_order(array $data, $parentField, $parentId = 0, $level = 0) {
+	function adm_recursive_order(array $data, $parentField, $parentId = 0, $level = 0) {
 		static $orderedData = [];
 		foreach ($data as $key => $value) {
 			if ($value[$parentField] === $parentId) {
 				$value['level'] = $level;
 				$orderedData[] = $value;
 				unset($data[$key]);
-				recursive_order($data, $parentField, $value['id'], $level+1);
+				adm_recursive_order($data, $parentField, $value['id'], $level+1);
 			}
 		}
 		return $orderedData;

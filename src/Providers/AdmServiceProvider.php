@@ -22,12 +22,6 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 
 class AdmServiceProvider extends ServiceProvider
 {
-	protected $contracts = [
-		'Rainsens\Adm\Contracts\Grid\Grid'   => 'Rainsens\Adm\Grid\AdmGrid',
-		'Rainsens\Adm\Contracts\Grid\Column'   => 'Rainsens\Adm\Grid\Column\GridColumn',
-		'Rainsens\Adm\Contracts\Grid\Filter'   => 'Rainsens\Adm\Grid\Filter\GridFilter',
-	];
-	
 	protected $commands = [
 		AdmCommand::class,
 		ConfigCommand::class,
@@ -57,9 +51,12 @@ class AdmServiceProvider extends ServiceProvider
 		
 		$this->app->bind(ComposerContract::class, Composer::class);
 		
-		foreach ($this->contracts as $contract => $implement) {
-			$this->app->bind($contract, $implement);
-		}
+		$this->app->singleton('Rainsens\Adm\Contracts\Grid\Grid', 'Rainsens\Adm\Grid\AdmGrid');
+		$this->app->bind('Rainsens\Adm\Contracts\Grid\Basic', 'Rainsens\Adm\Grid\GridBasic');
+		$this->app->bind('Rainsens\Adm\Contracts\Grid\Column', 'Rainsens\Adm\Grid\GridColumn');
+		$this->app->bind('Rainsens\Adm\Contracts\Grid\Filter', 'Rainsens\Adm\Grid\GridFilter');
+		$this->app->bind('Rainsens\Adm\Contracts\Grid\Tool', 'Rainsens\Adm\Grid\GridTool');
+		$this->app->bind('Rainsens\Adm\Contracts\Grid\Render', 'Rainsens\Adm\Grid\GridRender');
 	}
 	
 	public function boot()

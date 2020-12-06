@@ -2,32 +2,21 @@
 namespace Rainsens\Adm\Grid;
 
 use Closure;
-use Illuminate\Support\Str;
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\View;
-use Rainsens\Adm\Contracts\Grid\Grid;
-use Rainsens\Adm\Contracts\Grid\Column;
-use Rainsens\Adm\Contracts\Grid\Filter;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
-use Rainsens\Adm\Grid\Traits\AddColumn;
-use Rainsens\Adm\Grid\Traits\InitGrid;
+use Rainsens\Adm\Contracts\Grid\Basic;
+use Rainsens\Adm\Contracts\Grid\Column;
+use Rainsens\Adm\Contracts\Grid\Grid;
+use Rainsens\Adm\Contracts\Grid\Filter;
+use Rainsens\Adm\Contracts\Grid\Render;
+use Rainsens\Adm\Contracts\Grid\Tool;
 
 class AdmGrid implements Grid
 {
-	use InitGrid,
-		AddColumn;
-	
-	protected $id;
-	
-	protected $title = 'Adm Title';
-	
-	protected $description = 'Adm Description';
-	
 	/**
-	 * @var Model|Builder
+	 * @var Basic
 	 */
-	protected $model;
+	protected $basic;
 	
 	/**
 	 * @var Filter
@@ -35,97 +24,95 @@ class AdmGrid implements Grid
 	protected $filter;
 	
 	/**
-	 * @var Collection
+	 * @var Tool
 	 */
-	protected $rows;
+	protected $tool;
 	
 	/**
-	 * @var Collection
+	 * @var Render
 	 */
-	protected $columns;
-	
-	/**
-	 * @var array
-	 */
-	protected static $initCallbacks = [];
+	protected $render;
 	
 	
 	public function __construct()
 	{
-		$this->runInit();
+		$this->basic = app(Basic::class);
+		$this->filter = app(Filter::class, ['grid' => $this]);
+		$this->tool = app(Tool::class, ['grid' => $this]);
+		$this->render = app(Render::class, ['grid' => $this]);
 	}
 	
-	public function setTitle(string $title): Grid
+	public function model(Model $model): Grid
 	{
-		$this->title = $title;
+		$this->basic->setModel($model);
 		return $this;
 	}
 	
-	public function setDescription(string $description): Grid
+	public function basic(): Basic
 	{
-		$this->description = $description;
+		return $this->basic;
+	}
+	
+	public function filter(): Filter
+	{
+		return $this->filter;
+	}
+	
+	public function tool(): Tool
+	{
+		return $this->tool;
+	}
+	
+	public function render(): Render
+	{
+		return $this->render;
+	}
+	
+	public function title(string $title): Grid
+	{
+		$this->basic->setTitle($title);
 		return $this;
 	}
 	
-	public function title(): string
+	public function description(string $description): Grid
 	{
-		return $this->title;
-	}
-	
-	public function description(): string
-	{
-		return $this->description;
+		$this->basic->setDescription($description);
+		return $this;
 	}
 	
 	/**
-	 * @param Model $model
+	 * Push initial callback to grid from end user.
+	 *
+	 * @param Closure $callback
 	 * @return Grid
 	 */
-	public function model(Model $model): Grid
+	public function init(Closure $callback): Grid
 	{
-		$this->model = $model;
+		$this->basic->init($callback);
 		return $this;
 	}
 	
-	public function column($name, string $label = ''): Column
+	/**
+	 * Which column expected to show.
+	 *
+	 * @param string $name
+	 * @param string $label
+	 * @return Column
+	 */
+	public function column(string $name, string $label = ''): Column
 	{
-		if (Str::contains($name, '.')) {
-			return $this->addRelationColumn($name, $label);
-		}
-		
-		if (Str::contains($name, '->')) {
-			return $this->addJsonColumn($name, $label);
-		}
-		
-		return $this->addNormalColumn($name, $label);
+		return $this->basic->column($name, $label);
 	}
 	
 	/**
 	 * Setting builder from end user.
+	 *
 	 * @param Closure $builder
+	 * @return Grid
 	 */
-	public function query(Closure $builder): void
+	public function query(Closure $builder): Grid
 	{
-		$this->filter->setModel($this->model)->setBuilder($builder);
-	}
-	
-	public function columns(): Collection
-	{
-		return $this->columns;
-	}
-	
-	public function items()
-	{
-		return $this->filter->paginate() ?? $this->filter->get();
-	}
-	
-	public function render(): View
-	{
-		return view('adm::pages.grid', [
-			'title' => $this->title,
-			'description' => $this->description,
-			'columns' => $this->columns(),
-			'items' => $this->items(),
-		]);
+		$this->filter->setBuilder($builder);
+		return $this;
 	}
 }

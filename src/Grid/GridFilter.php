@@ -1,24 +1,23 @@
 <?php
-namespace Rainsens\Adm\Grid\Filter;
+namespace Rainsens\Adm\Grid;
 
 use Closure;
+use Rainsens\Adm\Contracts\Grid\Grid;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Rainsens\Adm\Contracts\Grid\Filter;
 
 class GridFilter implements Filter
 {
 	/**
-	 * @var Model|Builder
+	 * @var Grid;
 	 */
-	protected $model;
+	protected $grid;
 	
 	protected $builder;
 	
-	public function setModel(Model $model): Filter
+	public function __construct(Grid $grid)
 	{
-		$this->model = $model;
-		return $this;
+		$this->grid = $grid;
 	}
 	
 	public function setBuilder(Closure $builder): Filter
@@ -27,9 +26,9 @@ class GridFilter implements Filter
 		return $this;
 	}
 	
-	public function getBuilder()
+	public function getBuilder(): Builder
 	{
-		return call_user_func($this->builder, $this->model);
+		return call_user_func($this->builder, $this->grid->basic()->model);
 	}
 	
 	public function paginate(int $size = 15)
@@ -46,5 +45,20 @@ class GridFilter implements Filter
 			return $this->getBuilder()->get();
 		}
 		return $this->getBuilder();
+	}
+	
+	public function prepend(string $html): void
+	{
+	
+	}
+	
+	public function append(string $html): void
+	{
+	
+	}
+	
+	public function render()
+	{
+	
 	}
 }

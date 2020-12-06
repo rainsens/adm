@@ -1,9 +1,9 @@
 <?php
 namespace Rainsens\Adm\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Builder;
 use Rainsens\Rbac\Models\Permit;
 use Rainsens\Adm\Facades\AdmGrid;
+use Illuminate\Database\Eloquent\Builder;
 
 class PermitsController extends MainController
 {

@@ -12,8 +12,13 @@
             </div>
         </div>
         <div class="pull-right text-right">
-            <a href="" type="button" class="btn btn-system btn-sm">新增</a>
-            <a href="" type="button" class="btn btn-info btn-sm">导出</a>
+            @if($tools)
+                @foreach($tools as $tool)
+                    {!! $tool !!}
+                @endforeach
+                    {{--<a href="" type="button" class="btn btn-system btn-sm"><span class="fa fa-plus"></span> 新增</a>
+                    <a type="button" class="btn btn-sm btn-default btn-block">Adm Button</a>--}}
+            @endif
         </div>
     </div>
     <div class="panel-body pn">

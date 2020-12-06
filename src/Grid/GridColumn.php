@@ -1,10 +1,8 @@
 <?php
-namespace Rainsens\Adm\Grid\Column;
+namespace Rainsens\Adm\Grid;
 
 use Rainsens\Adm\Contracts\Grid\Grid;
 use Rainsens\Adm\Contracts\Grid\Column;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use Rainsens\Adm\Exceptions\InvalidArgumentException;
 
 /**
  * A single column of a grid.
@@ -19,6 +17,8 @@ class GridColumn implements Column
 	 */
 	protected $grid;
 	
+	protected $columns;
+	
 	protected $name;
 	
 	protected $label;
@@ -27,10 +27,9 @@ class GridColumn implements Column
 	
 	protected $relationColumn;
 	
-	public function grid(Grid $grid): Column
+	public function __construct()
 	{
-		$this->grid = $grid;
-		return $this;
+		$this->grid = app(Grid::class);
 	}
 	
 	public function name(string $name): Column
