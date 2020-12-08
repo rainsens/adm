@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Rainsens\Adm\Contracts\Grid\Column;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Rainsens\Adm\Contracts\Grid\Grid;
 use Rainsens\Adm\Exceptions\InvalidArgumentException;
 
 /**
@@ -126,6 +125,11 @@ class GridBasic implements Basic
 		foreach ($callbacks as $callback) {
 			call_user_func($callback, $this);
 		}
+	}
+	
+	public function getGridRoute(): string
+	{
+		return url(request()->getPathInfo());
 	}
 	
 	/**

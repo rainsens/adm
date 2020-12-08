@@ -46,26 +46,24 @@
                                 
                                 <td class="text-center">
                                     <label class="option block mn">
-                                        <input type="checkbox" name="mobileos" value="FR">
+                                        <input type="checkbox" name="mobileos" value="{{ $item->id }}">
                                         <span class="checkbox mn"></span>
                                     </label>
                                 </td>
                                 
                                 @foreach($columns as $column)
-                                    {{--<td class="w100">
-                                        <img class="img-responsive mw40 ib mr10" title="user" src="assets/img/stock/products/thumb_1.jpg">
-                                    </td>--}}
                                     <td class="">{{ ($name = $column->name) ? $item->$name : '' }}</td>
                                 @endforeach
                                 
                                 <td class="text-right">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default br2 btn-sm fs12 dropdown-toggle" data-toggle="dropdown">
-                                            Actions <span class="caret ml5"></span>
+                                            {{ trans('adm::adm.action') }} <span class="caret ml5"></span>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                                            <li><a href="#">Edit</a></li>
-                                            <li><a href="#">Show</a></li>
+                                            @foreach($item->actions as $action)
+                                                <li><a href="{{ $action->href() }}">{{ $action->name() }}</a></li>
+                                            @endforeach
                                             <li class="divider"></li>
                                             <li><a href="#">Delete</a></li>
                                         </ul>

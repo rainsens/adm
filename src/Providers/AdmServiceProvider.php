@@ -4,7 +4,6 @@ namespace Rainsens\Adm\Providers;
 
 use Rainsens\Adm\Adm;
 use Rainsens\Adm\Models\Menu;
-use Rainsens\Adm\Grid\AdmGrid;
 use Rainsens\Adm\Support\AdmAuth;
 use Rainsens\Adm\Support\Composer;
 use Illuminate\Support\Facades\Route;
@@ -47,15 +46,16 @@ class AdmServiceProvider extends ServiceProvider
 		
 		$this->app->bind('adm', function () {return new Adm;});
 		$this->app->bind('adm-auth', function () {return new AdmAuth;});
-		$this->app->bind('adm-grid', function () {return new AdmGrid;});
 		
 		$this->app->bind(ComposerContract::class, Composer::class);
 		
-		$this->app->singleton('Rainsens\Adm\Contracts\Grid\Grid', 'Rainsens\Adm\Grid\AdmGrid');
+		$this->app->bind('Rainsens\Adm\Contracts\Grid\Grid', 'Rainsens\Adm\Grid\AdmGrid');
 		$this->app->bind('Rainsens\Adm\Contracts\Grid\Basic', 'Rainsens\Adm\Grid\GridBasic');
 		$this->app->bind('Rainsens\Adm\Contracts\Grid\Column', 'Rainsens\Adm\Grid\GridColumn');
 		$this->app->bind('Rainsens\Adm\Contracts\Grid\Filter', 'Rainsens\Adm\Grid\GridFilter');
 		$this->app->bind('Rainsens\Adm\Contracts\Grid\Tool', 'Rainsens\Adm\Grid\GridTool');
+		$this->app->bind('Rainsens\Adm\Contracts\Grid\Action', 'Rainsens\Adm\Grid\GridAction');
+		$this->app->bind('Rainsens\Adm\Contracts\Grid\Actor', 'Rainsens\Adm\Grid\Action\BaseActor');
 		$this->app->bind('Rainsens\Adm\Contracts\Grid\Render', 'Rainsens\Adm\Grid\GridRender');
 	}
 	

@@ -14,6 +14,14 @@ class GridTool implements Tool
 	 * @var Collection
 	 */
 	protected $tools;
+	/**
+	 * @var Collection
+	 */
+	protected $prepends;
+	/**
+	 * @var Collection
+	 */
+	protected $appends;
 	
 	/**
 	 * @var Button
@@ -31,30 +39,28 @@ class GridTool implements Tool
 		$this->button = app(Button::class);
 		
 		$this->tools = collect();
+		$this->prepends = collect();
+		$this->appends = collect();
+		
 		$this->tools->push($this->createButton());
 		$this->tools->push($this->refreshButton());
 	}
 	
 	public function prepend(string $element = ''): Tool
 	{
-		$this->tools->push($element);
+		$this->prepends->push($element);
 		return $this;
 	}
 	
 	public function append(string $element = ''): Tool
 	{
-		$this->tools->push($element);
+		$this->appends->push($element);
 		return $this;
-	}
-	
-	public function getGridRoute()
-	{
-		return url(request()->getPathInfo());
 	}
 	
 	public function getCreateRoute(): string
 	{
-		return sprintf('%s/create', $this->getGridRoute());
+		return sprintf('%s/create', $this->grid->basic()->getGridRoute());
 	}
 	
 	public function createButton()
@@ -64,17 +70,17 @@ class GridTool implements Tool
 			->color('btn-system')
 			->icon('fa fa-plus')
 			->text('新增')
-			->normalBtn();
+			->normalButton();
 	}
 	
 	public function refreshButton()
 	{
 		return $this->button
-			->href($this->getGridRoute())
+			->href($this->grid->basic()->getGridRoute())
 			->color('btn-info')
 			->icon('fa fa-refresh')
 			->text('刷新')
-			->normalBtn();
+			->normalButton();
 	}
 	
 	public function render()

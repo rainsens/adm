@@ -2,18 +2,9 @@
 namespace Rainsens\Adm\Contracts\Grid;
 
 use Closure;
-use Illuminate\Database\Eloquent\Model;
 
 interface Grid
 {
-	/**
-	 * Set grid model.
-	 *
-	 * @param Model $model
-	 * @return Grid
-	 */
-	public function model(Model $model): self ;
-	
 	/**
 	 * Get the grid basic infomation.
 	 *
@@ -34,6 +25,13 @@ interface Grid
 	 * @return Tool
 	 */
 	public function tool(): Tool ;
+	
+	/**
+	 * Add custom action to grid.
+	 *
+	 * @return Action
+	 */
+	public function action(): Action ;
 	
 	/**
 	 * Render current grid.

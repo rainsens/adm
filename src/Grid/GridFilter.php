@@ -8,16 +8,16 @@ use Rainsens\Adm\Contracts\Grid\Filter;
 
 class GridFilter implements Filter
 {
-	/**
-	 * @var Grid;
-	 */
 	protected $grid;
+	
+	protected $model;
 	
 	protected $builder;
 	
 	public function __construct(Grid $grid)
 	{
 		$this->grid = $grid;
+		$this->model = $grid->basic()->model;
 	}
 	
 	public function setBuilder(Closure $builder): Filter
@@ -28,23 +28,37 @@ class GridFilter implements Filter
 	
 	public function getBuilder(): Builder
 	{
-		return call_user_func($this->builder, $this->grid->basic()->model);
+		return call_user_func($this->builder, $this->model);
 	}
 	
 	public function paginate(int $size = 15)
 	{
+		$items = null;
 		if ($this->getBuilder() instanceof Builder) {
-			return $this->getBuilder()->paginate($size);
+			$items = $this->getBuilder()->paginate($size);
+		} else {
+			$items = $this->getBuilder();
 		}
-		return $this->getBuilder();
+		
+		if ($items) {
+			return $this->grid->action()->push($items);
+		}
+		return null;
 	}
 	
 	public function get()
 	{
+		$items = null;
 		if ($this->getBuilder() instanceof Builder) {
-			return $this->getBuilder()->get();
+			$items = $this->getBuilder()->get();
+		} else {
+			$items = $this->getBuilder();
 		}
-		return $this->getBuilder();
+		
+		if ($items) {
+			return $this->grid->action()->push($items);
+		}
+		return null;
 	}
 	
 	public function prepend(string $html): void

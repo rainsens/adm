@@ -2,8 +2,8 @@
 namespace Rainsens\Adm\Grid;
 
 use Closure;
-use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
+use Rainsens\Adm\Contracts\Grid\Action;
 use Rainsens\Adm\Contracts\Grid\Basic;
 use Rainsens\Adm\Contracts\Grid\Column;
 use Rainsens\Adm\Contracts\Grid\Grid;
@@ -29,23 +29,25 @@ class AdmGrid implements Grid
 	protected $tool;
 	
 	/**
+	 * @var Action
+	 */
+	protected $action;
+	
+	/**
 	 * @var Render
 	 */
 	protected $render;
 	
 	
-	public function __construct()
+	public function __construct(Model $model)
 	{
 		$this->basic = app(Basic::class);
+		$this->basic->setModel($model);
+		
 		$this->filter = app(Filter::class, ['grid' => $this]);
 		$this->tool = app(Tool::class, ['grid' => $this]);
+		$this->action = app(Action::class, ['grid' => $this]);
 		$this->render = app(Render::class, ['grid' => $this]);
-	}
-	
-	public function model(Model $model): Grid
-	{
-		$this->basic->setModel($model);
-		return $this;
 	}
 	
 	public function basic(): Basic
@@ -61,6 +63,11 @@ class AdmGrid implements Grid
 	public function tool(): Tool
 	{
 		return $this->tool;
+	}
+	
+	public function action(): Action
+	{
+		return $this->action;
 	}
 	
 	public function render(): Render

@@ -58,7 +58,7 @@ class Button
 		return $this->href ? 'a' : 'button';
 	}
 	
-	public function normalBtn(string $text = '')
+	public function normalButton(string $text = '')
 	{
 		$tag = $this->getTag();
 		
@@ -73,22 +73,22 @@ BUTTON;
 		return $button;
 	}
 	
-	public function loadingBtn()
+	public function loadingButton()
 	{
 		$tag = $this->getTag();
 	}
 	
-	public function iconBtn()
+	public function iconButton()
 	{
 		$tag = $this->getTag();
 	}
 	
-	public function dropdownBtn()
+	public function dropdownButton()
 	{
 		$tag = $this->getTag();
 	}
 	
-	public function socialBtn()
+	public function socialButton()
 	{
 		$tag = $this->getTag();
 	}

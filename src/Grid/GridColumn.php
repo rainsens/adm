@@ -1,7 +1,8 @@
 <?php
 namespace Rainsens\Adm\Grid;
 
-use Rainsens\Adm\Contracts\Grid\Grid;
+use Closure;
+use Illuminate\Support\Collection;
 use Rainsens\Adm\Contracts\Grid\Column;
 
 /**
@@ -12,11 +13,6 @@ use Rainsens\Adm\Contracts\Grid\Column;
  */
 class GridColumn implements Column
 {
-	/**
-	 * @var Grid
-	 */
-	protected $grid;
-	
 	protected $columns;
 	
 	protected $name;
@@ -27,9 +23,21 @@ class GridColumn implements Column
 	
 	protected $relationColumn;
 	
+	/**
+	 * Columns customized to show.
+	 *
+	 * @var Collection
+	 */
+	protected $wantClosures;
+	
+	public static $plugins = [
+		'editing'       => '',
+		'switch'        => ''
+	];
+	
 	public function __construct()
 	{
-		$this->grid = app(Grid::class);
+		$this->wantClosures = collect();
 	}
 	
 	public function name(string $name): Column
@@ -52,8 +60,24 @@ class GridColumn implements Column
 		return $this;
 	}
 	
+	public function want(Closure $closure)
+	{
+		$this->wantClosures->push($closure);
+		return $this;
+	}
+	
 	public function __get($name)
 	{
 		return $this->$name ?? null;
+	}
+	
+	public function callBuiltinPlugin()
+	{
+	
+	}
+	
+	public function callSupportedPlugin()
+	{
+	
 	}
 }

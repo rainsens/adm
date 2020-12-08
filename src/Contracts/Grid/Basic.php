@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Interface Basic
  * @package Rainsens\Adm\Contracts\Grid
+ * @property $model
  * @property $id
  * @property $title
  * @property $description
@@ -64,6 +65,13 @@ interface Basic
 	 * Run initializations.
 	 */
 	public function runInitCallbacks(): void ;
+	
+	/**
+	 * The route of grid.
+	 *
+	 * @return string
+	 */
+	public function getGridRoute(): string ;
 	
 	/**
 	 * Which column expected to show.
