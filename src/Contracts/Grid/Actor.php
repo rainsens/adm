@@ -12,4 +12,5 @@ interface Actor
 	public function name(): string ;
 	public function href(): string ;
 	public function handle(): void ;
+	public function __get($name);
 }

@@ -62,10 +62,17 @@
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
                                             @foreach($item->actions as $action)
-                                                <li><a href="{{ $action->href() }}">{{ $action->name() }}</a></li>
+                                                @if($action->divide)
+                                                    @if($loop->first)
+                                                        <li><a href="{{ $action->href() }}">{{ $action->name() }}</a></li>
+                                                    @else
+                                                        <li class="divider"></li>
+                                                        <li><a href="{{ $action->href() }}">{{ $action->name() }}</a></li>
+                                                    @endif
+                                                @else
+                                                    <li><a href="{{ $action->href() }}">{{ $action->name() }}</a></li>
+                                                @endif
                                             @endforeach
-                                            <li class="divider"></li>
-                                            <li><a href="#">Delete</a></li>
                                         </ul>
                                     </div>
                                 </td>

@@ -19,6 +19,8 @@ abstract class BaseActor implements Actor
 	protected $model;
 	protected $route;
 	
+	protected $divide = false;
+	
 	public function setGrid(Grid $grid): Actor
 	{
 		$this->grid = $grid;
@@ -47,4 +49,9 @@ abstract class BaseActor implements Actor
 	abstract public function href(): string ;
 	
 	public function handle(): void {}
+	
+	public function __get($name)
+	{
+		return $this->$name ?? null;
+	}
 }

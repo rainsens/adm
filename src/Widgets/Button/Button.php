@@ -62,9 +62,14 @@ class Button
 	{
 		$tag = $this->getTag();
 		
+		$hrefAttribute = null;
+		if ($tag === 'a') {
+			$hrefAttribute = "href='{$this->href}'";
+		}
+		
 		$button = <<<BUTTON
 		
-	<$tag type="button" class="btn {$this->size} {$this->color} {$this->block}">
+	<$tag $hrefAttribute type="button" class="btn {$this->size} {$this->color} {$this->block}">
 		<span class="{$this->icon}"></span> {$this->text}
 	</$tag>
 	
